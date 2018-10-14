@@ -9,8 +9,8 @@
 ## Deliverables
 
 ### Deliverable 1: Team Setup
-* [Setup Report](deliverable1/Deliverable_1.pdf)
-* [Team Expectation Agreement](deliverable1/Team_Expectation_Agreement.pdf)
+* [Setup Report](team_setup/Team_Information.pdf)
+* [Team Expectation Agreement](team_setup/Team_Expectation_Agreement.pdf)
 
 ### Deliverable 2: Project Requirements
 (In-Progress...)
