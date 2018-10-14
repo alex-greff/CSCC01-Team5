@@ -13,7 +13,8 @@
 * [Team Expectation Agreement](team_setup/Team_Expectation_Agreement.pdf)
 
 ### Deliverable 2: Project Requirements
-(In-Progress...)
+* [Personas](product_backlog/personas_0.pdf)
+* [User Stories](product_backlog/user_stories_0.pdf)
 
 ### Deliverable 3: Project Planning
 (In-Progress...)
