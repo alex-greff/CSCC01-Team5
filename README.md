@@ -6,6 +6,20 @@
 * Mohammed Osumah
 * Gyeongwon Choi
 
+## Setting Up
+
+### Production
+(TODO...)
+
+### Development Environment
+- Install [Maven 3.5.4](https://maven.apache.org/download.cgi)
+- Compile the project
+``` $ mvn compile ```
+
+
+### Testing
+``` $ mvn test ```
+
 ## Deliverables
 
 ### Deliverable 1: Team Setup
