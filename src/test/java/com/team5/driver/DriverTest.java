@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class DriverTest {
 
     @Test
-    @DisplayName("getWelcomeMessage() is not an empty string")
+    @DisplayName("test")
     void tempTest() {
             assertEquals("", "");
     }
