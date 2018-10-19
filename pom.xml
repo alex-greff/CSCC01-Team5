@@ -15,6 +15,7 @@
 		<junit.jupiter.version>5.2.0</junit.jupiter.version>
 		<junit.platform.version>1.2.0</junit.platform.version>
 		<apache.poi.version>3.7</apache.poi.version>
+		<org.json.version>20180813</org.json.version>
 	</properties>
 
 	<dependencies>
@@ -45,6 +46,15 @@
 			<artifactId>poi</artifactId>
 			<version>${apache.poi.version}</version>
 		</dependency>
+
+		<!-- JSON -->
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>${org.json.version}</version>
+		</dependency>
+
 
 	</dependencies>
 
