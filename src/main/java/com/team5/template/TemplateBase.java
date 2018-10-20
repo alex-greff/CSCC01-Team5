@@ -1,45 +1,28 @@
 package com.team5.template;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.NotDirectoryException;
 import java.util.ArrayList;
+
+import com.team5.utilities.JSONLoader;
+
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public abstract class TemplateBase {
-  private File rootFolder;
+public abstract class TemplateBase implements ITemplate {
+  private String rootDirPath;
 
-  public TemplateBase(String rootFolderPath) {
-    this.rootFolder = new File(rootFolderPath);
+  protected TemplateBase(String rootDirPath) {
+    this.rootDirPath = rootDirPath;
   }
 
-  private String fileExtension(File file) {
-    String fileName = file.getName();
-    int i = fileName.lastIndexOf('.');
-    String extension = (i > 0) ? fileName.substring(i + 1) : "";
-    return extension;
+  public JSONObject parseTemplate(String filePath) throws FileNotFoundException, IOException, ParseException  {
+    return JSONLoader.parseJSONFile(rootDirPath + "/" + filePath);
   }
 
-  protected ArrayList<JSONObject> parseAllTemplateFiles()
-      throws FileNotFoundException, IOException, ParseException {
-    
-    ArrayList<JSONObject> return_arr = new ArrayList<JSONObject>();
-
-    for (File subFile : rootFolder.listFiles()) {
-      boolean isFile = subFile.isFile();
-      boolean isJSON = fileExtension(subFile).toLowerCase().equals("json");
-
-      if (isFile && isJSON) {
-        JSONParser parser = new JSONParser();
-        JSONObject j_obj = (JSONObject) parser.parse(new FileReader(subFile));
-        return_arr.add(j_obj);
-      }
-    }
-
-    return return_arr;
+  public ArrayList<JSONObject> parseAllTemplates() throws NotDirectoryException {
+    return JSONLoader.parseAllJSONFiles(rootDirPath, true);
   }
 
 }
