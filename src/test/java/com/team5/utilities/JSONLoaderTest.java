@@ -21,13 +21,6 @@ public class JSONLoaderTest {
   final String invalidJSONPath = rootPath + "/testJSONFile_invalid.json";
   final String file3Path = rootPath + "/dir2/testJSONFile_valid3.json";
   final String file3Contents = "{\"field1\":\"cat\",\"field3\":-1000,\"field2\":\"abc\",\"field4\":1050}";
-
- public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
-  //  JSONObject obj = JSONLoader.parseJSONFile(new File("src/test/java/com/team5/utilities/testJSONFile_valid2.json"));
-  //  System.out.println(obj.toString());
-  ArrayList<JSONObject> objs = JSONLoader.parseAllJSONFiles(new File("testFiles/JSONTestFiles/testJSONFile_valid1.json"), false);
-  System.out.println(objs);
- }
   
   @Test
   @DisplayName("Parse valid JSON file from file")
@@ -94,6 +87,14 @@ public class JSONLoaderTest {
   void testParseAllJSONGivenFile()  {
     assertThrows(NotDirectoryException.class, ()->{
       JSONLoader.parseAllJSONFiles(file1Path, false);
+    },  "exception was thrown for the base file not being a directory");
+  }
+
+  @Test
+  @DisplayName("Parse all JSON files given a non-existent directory")
+  void testParseAllJSONGivenNonExistentDir()  {
+    assertThrows(NotDirectoryException.class, ()->{
+      JSONLoader.parseAllJSONFiles(rootPath + "/DNE.json", false);
     },  "exception was thrown for the base file not being a directory");
   }
 }
