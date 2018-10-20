@@ -26,7 +26,7 @@ public final class ConfigurationLoader {
      * @return Returns a JSONObject of the project configuration.
      * @throws ConfigurationNotFoundException Thrown if the project configuration is not found.
      */
-    public JSONObject loadConfiguration (String configurationName) throws ConfigurationNotFoundException {
+    public static JSONObject loadConfiguration (String configurationName) throws ConfigurationNotFoundException {
         JSONObject mc = getMasterConfigFile(false); // Get a reference to the master config file
 
         Object systemConfig_obj = mc.get(configurationName); // Attempt to get the configuration name form the config file
