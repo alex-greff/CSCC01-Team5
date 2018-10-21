@@ -1,0 +1,120 @@
+{
+    "processing-details":["A", false],
+    "update-record-ID":["B", false],
+    "identifier": {
+        "category":["C", true],
+        "value":["D", true]
+    },    "dob":["E", true],
+    "service-postal-code":["F", true],
+    "service-start-date":["G", true],
+    "language-of-service":["H", true],
+    "language-of-preference":["I", true],
+    "institution-or-organziation-type":["J", true],
+    "referred-by":["K", true],
+    "services-received":["L", true],
+    "total-length-of-orientation":{
+    	"total":["M", false],
+    	"hours":["N", false],
+    	"minutes":["O", false]
+    },
+    "number-of-clients-in-group":["P", false],
+    "directed-at-specific-target-group":["Q", false],
+    "target-group":{
+    	"children":["R", false],
+    	"youth":["S", false],
+    	"seniors":["T", false],
+    	"gender-specific":["U", false],
+    	"refugees":["V", false],
+    	"ethnic-cultural-linguistic-group":["W", false],
+    	"deaf-or-hard-of-hearing":["X", false],
+    	"blind-or-partially-sighted":["Y", false],
+    	"lgbtq":["Z", false],
+    	"families-parents":["AA", false],
+    	"clients-with-other-impairments":["AB", false],
+    	"clients-with-international-training-in-a-regulated-profession":["AC", false],
+    	"clients-with-international-traning-in-a-regulated-trade":["AD", false],
+    	"official-language-minorities":["AE", false]
+    },
+	"overview-of-canada":["AF", false],
+	"overview-of-canada-referrals":["AG", false],
+	"sources-of-information":["AH", false],
+	"sources-of-information-referrals":["AI", false],
+	"rights-and-freedoms":["AJ", false],
+	"rights-and-freedoms-referrals":["AK", false],
+	"canadian-law-and-justice":["AL", false],
+	"canadian-law-and-justice-referrals":["AM", false],
+	"important-documents":["AN", false],
+	"important-documents-referrals":["AO", false],
+	"improving-english-or-french":["AP", false],
+	"improving-english-or-french-referrals":["AQ", false],
+	"employment-and-income":["AR", false],
+	"employment-and-income-referrals":["AS", false],
+	"education":["AT", false],
+	"education-referrals":["AU", false],
+	"housing":["AV", false],
+	"housing-referrals":["AW", false],
+	"health":["AX", false],
+	"health-referrals":["AY", false],
+	"money-and-finances":["AZ", false],
+	"money-and-finances-referrals":["BA", false],
+	"transportation":["BB", false],
+	"transportation-referrals":["BC", false],
+	"communications-and-media":["BD", false],
+	"communications-and-media-referrals":["BE", false],
+	"community-engagement":["BF", false],
+	"community-engagement-referrals":["BG", false],
+	"becoming-a-canadian-citizen":["BH", false],
+	"becoming-a-canadian-citizen-referrals":["BI", false],
+	"interpersonal-conflict":["BJ", false],
+	"interpersonal-conflict-referrals":["BK", false],
+	"was-essential-skills-and-aptitude-training-received-as-part-of-this-service":["BL", true],
+	"computer-skills":["BM", false],
+	"document-use":["BN", false],
+	"interpersonal-skills-and-workplace-culture":["BO", false],
+	"leadership-training":["BP", false],
+	"numeracy":["BQ", false],
+	"was-life-skills-or-responsibilities-of-citizenship-information-received-as-part-of-this-service":["BR", true],
+	"life-skills":["BS", false],
+	"rights-and-responsibilities-of-citizenship":["BT", false],
+	"support-services-received":["BU", true],
+	"care-for-newcomer-children":["BV", false],
+	"children-care": {
+        "care-for-newcomer-children":["BV", false],
+        "children":[
+            {
+                "age":["BW", false],
+                "type-of-care":["BX", false]
+            }, 
+            {
+                "age":["BY", false],
+                "type-of-care":["BZ", false]
+            }, 
+            {
+                "age":["CA", false],
+                "type-of-care":["CB", false]
+            }, 
+            {
+                "age":["CC", false],
+                "type-of-care":["CD", false]
+            },
+            {
+                "age":["CE", false],
+                "type-of-care":["CF", false]
+            }
+        ],
+        "transportation":["CG", false]
+    },
+    "provisions-for-disabilities":["CH", false],
+    "translation":{
+    	"lang1":["CJ", false],
+    	"lang2":["CK", false]
+	},
+    "interpretation":{
+    	"lang1":["CM", false], 
+    	"lang2":["CN", false]
+    },
+    "crisis-counseling":["CO", false],
+    "end-date-of-service":["CP", true],
+    "reason-for-update":["CQ", true]
+    }
+}
