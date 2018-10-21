@@ -1,0 +1,16 @@
+Known errors in the templates:
+
+NARS:
+1. Column AP and BR are both "Care for Newcomer Children"
+	Solution: We're using the value from AP
+2. Column AQ and CC are both "Transportation"
+	Solution: We're using the value from AQ
+3. Column AR and CD are both "Provisions for Disabilities"
+	Solution: We're using the value from AR
+4. Column AS and CE are both "Translation"
+	Solution: We're using the value from AS
+5. Column AT and CH are both "Interpretation"
+	Solution: We're using the value from AT
+6. Column AU and CK are both "Crisis Councelling"
+	Solution: We're using the value from AU
+   
