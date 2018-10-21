@@ -106,7 +106,8 @@
     },
     "provisions-for-disabilities":["CH", false],
     "translation":{
-    	"lang1":["CJ", false], "lang2":["CK", false]
+    	"lang1":["CJ", false],
+    	"lang2":["CK", false]
 	},
     "interpretation":{
     	"lang1":["CM", false], 
