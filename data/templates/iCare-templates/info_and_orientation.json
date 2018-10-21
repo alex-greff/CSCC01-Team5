@@ -105,8 +105,13 @@
         "transportation":["CG", false]
     },
     "provisions-for-disabilities":["CH", false],
-    "translation":[["CJ", false], ["CK", false]],
-    "interpretation":[["CM", false], ["CN", false]],
+    "translation":{
+    	"lang1":["CJ", false], "lang2":["CK", false]
+	},
+    "interpretation":{
+    	"lang1":["CM", false], 
+    	"lang2":["CN", false]
+    },
     "crisis-counseling":["CO", false],
     "end-date-of-service":["CP", true],
     "reason-for-update":["CQ", true]
