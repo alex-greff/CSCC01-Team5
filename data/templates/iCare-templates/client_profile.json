@@ -16,5 +16,5 @@
         "postal-code":["O", true]
     },
     "language-of-preference":["P", true],
-    "future-research-consultation-consent":["Q", true]
+    "future-research-or-consultation-consent":["Q", true]
 }
