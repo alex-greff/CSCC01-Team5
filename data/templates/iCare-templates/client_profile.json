@@ -1,0 +1,20 @@
+{
+    "identifier": {
+        "category":["B", true],
+        "value":["C", true]
+    },
+    "dob":["D", true],
+    "phone-number":["E", false],
+    "email":["G", false],
+    "address":{
+        "street-number":["H", false],
+        "steet-name":["I", false],
+        "street-type":["J", false],
+        "unit-suit-apt":["L", false],
+        "city":["M", false],
+        "province":["N", false],
+        "postal-code":["O", true]
+    },
+    "language-of-preference":["P", true],
+    "future-research-consultation-consent":["Q", true]
+}
