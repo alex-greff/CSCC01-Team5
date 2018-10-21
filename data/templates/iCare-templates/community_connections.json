@@ -18,22 +18,22 @@
     "service-received":["O", true],
     "number-of-unique-participants":["P", false],
     "volunteers-from-host-community-participated-in-activity":["Q", false],
+    "directed-at-specific-target-group":["R", false],
     "target-group":{
-        "directed-at-specific-target-group":["R", false],
-        "targetted-children":["S", false],
-        "targetted-youth":["T", false],
-        "targetted-seniors":["U", false],
-        "targetted-gender-specific":["V", false],
-        "targetted-refugees":["W", false],
-        "targetted-ethnic-or-cultural-or-linguistic-group":["X", false],
-        "targetted-deaf-or-hard-of-hearing":["Y", false],
-        "targetted-bind-or-partially-sighted":["Z", false],
-        "targetted-LGBTQ":["AA", false],
-        "targetted-familties":["AB", false],
-        "targetted-other-imparements":["AC", false],
-        "targetted-clients-with-international-training-in-a-regulated-profession":["AD", false],
-        "targetted-clients-with-international-training-in-a-regulated-trade":["AE", false],
-        "targetted-official-language-minorities":["AF", false]
+        "children":["S", false],
+        "youth":["T", false],
+        "seniors":["U", false],
+        "gender-specific":["V", false],
+        "refugees":["W", false],
+        "ethnic-or-cultural-or-linguistic-group":["X", false],
+        "deaf-or-hard-of-hearing":["Y", false],
+        "bind-or-partially-sighted":["Z", false],
+        "LGBTQ":["AA", false],
+        "familties":["AB", false],
+        "other-imparements":["AC", false],
+        "clients-with-international-training-in-a-regulated-profession":["AD", false],
+        "clients-with-international-training-in-a-regulated-trade":["AE", false],
+        "official-language-minorities":["AF", false]
     },
     "status-of-service":["AG", true],
     "reason-for-leading-service":["AH", false],
@@ -76,12 +76,12 @@
     "transportation":["BE", false], 
     "provisions-for-disabilities":["BF", false], 
     "translation":{
-        "translation-needed":["BG", false],
-        "between":[["BH", false], ["BI", false]]
+        "language-1":["BH", false],
+        "language-2":["BI", false]
     },
     "interpretation":{
-        "interpretation-needed":["BJ", false],
-        "between":[["BK", false], ["BL", false]]
+        "language-1":["BK", false],
+        "language-2":["BL", false]
     },
     "crisis-counselling":["BM", false],
     "length-of-service":{

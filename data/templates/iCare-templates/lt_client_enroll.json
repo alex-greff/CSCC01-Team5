@@ -39,12 +39,12 @@
     "transportation":["V", false], 
     "provisions-for-disabilities":["W", false], 
     "translation":{
-        "translation-needed":["X", false],
-        "between":[["Y", false], ["Z", false]]
+        "language-1":["Y", false],
+        "language-2":["Z", false]
     },
     "interpretation":{
-        "interpretation-needed":["AA", false],
-        "between":[["AB", false], ["AC", false]]
+        "language-1":["AB", false],
+        "language-2":["AC", false]
     },
     "crisis-counselling":["AD", false],
     "reason-for-update":["AE", false]

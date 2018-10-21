@@ -53,12 +53,12 @@
     "transportation":["AQ", false], 
     "provisions-for-disabilities":["AR", false], 
     "translation":{
-        "translation-needed":["AS", false],
-        "between":[["CF", false], ["CG", false]]
+        "language-1":["CF", false],
+        "language-2":["CG", false]
     },
     "interpretation":{
-        "interpretation-needed":["AT", false],
-        "between":[["CI", false], ["CJ", false]]
+        "language-1":["CI", false],
+        "language-2":["CJ", false]
     },
     "crisis-counselling":["AU", false],
     "non-IRCC-program-services-needed":["AV", true],

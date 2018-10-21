@@ -4,7 +4,8 @@
     "identifier": {
         "category":["C", true],
         "value":["D", true]
-    },    "dob":["E", true],
+    },
+    "dob":["E", true],
     "service-postal-code":["F", true],
     "service-start-date":["G", true],
     "language-of-service":["H", true],
@@ -77,7 +78,6 @@
 	"life-skills":["BS", false],
 	"rights-and-responsibilities-of-citizenship":["BT", false],
 	"support-services-received":["BU", true],
-	"care-for-newcomer-children":["BV", false],
 	"children-care": {
         "care-for-newcomer-children":["BV", false],
         "children":[
@@ -106,15 +106,14 @@
     },
     "provisions-for-disabilities":["CH", false],
     "translation":{
-    	"lang1":["CJ", false],
-    	"lang2":["CK", false]
+    	"language-1":["CJ", false],
+    	"language-2":["CK", false]
 	},
     "interpretation":{
-    	"lang1":["CM", false], 
-    	"lang2":["CN", false]
+    	"language-1":["CM", false], 
+    	"language-2":["CN", false]
     },
     "crisis-counseling":["CO", false],
     "end-date-of-service":["CP", true],
     "reason-for-update":["CQ", true]
-    }
 }
