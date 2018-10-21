@@ -105,8 +105,8 @@
         "transportation":["CG", false]
     },
     "provisions-for-disabilities":["CH", false],
-    "translation":[["CJ", false], ["CK", false]], //skips col CI which is a yes/no field stating whether client can translate or not
-    "interpretation":[["CM", false], ["CN", false]], //skips col CL which is a yes/no field stating whether client can interpret or not
+    "translation":[["CJ", false], ["CK", false]],
+    "interpretation":[["CM", false], ["CN", false]],
     "crisis-counseling":["CO", false],
     "end-date-of-service":["CP", true],
     "reason-for-update":["CQ", true]
