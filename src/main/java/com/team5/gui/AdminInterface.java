@@ -9,12 +9,19 @@ import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+/**
+ * The Interface for the admin user
+ */
 @SuppressWarnings("serial")
 public class AdminInterface extends JFrame {
 
 	// Uploading iCare file | Generating report | Managing templates in template editor
 	private JButton upload, generate, manage;
 
+	/**
+	 * Constructs admin interface
+	 * @param title The title of the interface window.
+	 */
 	public AdminInterface(String title) {
 		super(title);
 		setSize(getScreenDimension().width/2, getScreenDimension().height/2);
@@ -32,11 +39,18 @@ public class AdminInterface extends JFrame {
 		manage.addActionListener(new EventHandler());
 	}
 
+	/**
+	 * Gets the screen size of the monitor that interface is being run on.
+	 * @return Returns the dimension of the screen.
+	 */
 	public Dimension getScreenDimension() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		return dim;
 	}
 
+	/**
+	 * Loads the contents on the interface i.e., the buttons and layouts. 
+	 */
 	private void loadContent() {
 		GridBagConstraints constraint = new GridBagConstraints();
 		// Internal button padding
@@ -54,6 +68,9 @@ public class AdminInterface extends JFrame {
 		add(manage, constraint);
 	}
 
+	/**
+	 * Shows the interface and its contents.
+	 */
 	public void load() {
 		setVisible(true);
 		loadContent();
