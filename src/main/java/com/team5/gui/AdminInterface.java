@@ -23,8 +23,13 @@ public class AdminInterface extends JFrame {
 		setLayout(new GridBagLayout());
 		
 		upload = new JButton("Upload iCare File");
+		upload.addActionListener(new EventHandler());
+		
 		generate = new JButton("Generate Report");
+		generate.addActionListener(new EventHandler());
+		
 		manage = new JButton("Manage Templates");
+		manage.addActionListener(new EventHandler());
 	}
 
 	public Dimension getScreenDimension() {
