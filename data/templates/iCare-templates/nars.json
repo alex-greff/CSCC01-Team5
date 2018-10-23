@@ -22,7 +22,7 @@
         "education-in-canada":["R", false],
         "education-in-canada-referrals":["S", false]
     },
-    "increase-of":{
+    "increased-knowledge-of":{
         "social-networks":["T", false],
         "social-networks-referrals":["U", false],
         "professional-networks":["V", false],
@@ -49,65 +49,84 @@
         "intends-to-obtain-credential-recognition-or-license-to-work-in-canada":["AM", false]
     }, 
     "intention-to-gain-canadian-citizenship":["AN", true], 
-    "support-services-may-be-required":["AO", true],
-    "transportation":["AQ", false], 
-    "provisions-for-disabilities":["AR", false], 
-    "translation":{
-        "language-1":["CF", false],
-        "language-2":["CG", false]
-    },
-    "interpretation":{
-        "language-1":["CI", false],
-        "language-2":["CJ", false]
-    },
-    "crisis-counselling":["AU", false],
-    "non-IRCC-program-services-needed":["AV", true],
-    "food-or-clothing-or-other-material-needs":["AW", false],
-    "food-or-clothing-or-other-material-needs-referrals":["AX", false],
-    "housing-or-accommodation":["AY", false],
-    "housing-or-accommodation-referrals":["AZ", false],
-    "health-or-mental-health-or-well-being":["BA", false],
-    "health-or-mental-health-or-well-being-referrals":["BB", false],
-    "financial":["BC", false],
-    "financial-referrals":["BD", false],
-    "family-support":["BE", false],
-    "family-support-referrals":["BF", false],
-    "language-non-IRCC":["BG", false],
-    "language-non-IRCC-referrals":["BH", false],
-    "education-or-skills-development":["BI", false],
-    "education-or-skills-development-referrals":["BJ", false],
-    "employment-related":["BK", false],
-    "employment-related-referrals":["BL", false],
-    "legal-information-and-services":["BM", false],
-    "legal-information-and-services-referrals":["BN", false],
-    "community-services":["BO", false],
-    "community-services-referrals":["BP", false],
-    "support-services-received":["BQ", true],
-    "children-care": {
+    "support-services": {
+        "support-services-required":["AO", true],
+        
         "care-for-newcomer-children":["AP", false],
-        "children":[
-            {
-                "age":["BS", false],
-                "type-of-care":["BT", false]
-            }, 
-            {
-                "age":["BU", false],
-                "type-of-care":["BV", false]
-            }, 
-            {
-                "age":["BW", false],
-                "type-of-care":["BX", false]
-            }, 
-            {
-                "age":["BY", false],
-                "type-of-care":["BZ", false]
-            },
-            {
-                "age":["CA", false],
-                "type-of-care":["CB", false]
-            }
-        ]
+        "transportation":["AQ", false], 
+        "provisions-for-disabilities":["AR", false], 
+        "translation":["AS", true],
+        "interpretation":["AT", false],
+        "crisis-counselling":["AU", false]
+    }, 
+    "non-IRCC-program-services": {
+        "non-IRCC-program-services-needed":["AV", true],
+
+        "food-or-clothing-or-other-material-needs":["AW", false],
+        "food-or-clothing-or-other-material-needs-referrals":["AX", false],
+        "housing-or-accommodation":["AY", false],
+        "housing-or-accommodation-referrals":["AZ", false],
+        "health-or-mental-health-or-well-being":["BA", false],
+        "health-or-mental-health-or-well-being-referrals":["BB", false],
+        "financial":["BC", false],
+        "financial-referrals":["BD", false],
+        "family-support":["BE", false],
+        "family-support-referrals":["BF", false],
+        "language-non-IRCC":["BG", false],
+        "language-non-IRCC-referrals":["BH", false],
+        "education-or-skills-development":["BI", false],
+        "education-or-skills-development-referrals":["BJ", false],
+        "employment-related":["BK", false],
+        "employment-related-referrals":["BL", false],
+        "legal-information-and-services":["BM", false],
+        "legal-information-and-services-referrals":["BN", false],
+        "community-services":["BO", false],
+        "community-services-referrals":["BP", false],
     },
+
+    "support-services-received":{
+        "support-services-received":["BQ", true],
+        
+        "care-for-newcomer-children":{
+            "care-for-newcomer-children-received":["BR", false],
+            "children":[
+                {
+                    "age":["BS", false],
+                    "type-of-care":["BT", false]
+                }, 
+                {
+                    "age":["BU", false],
+                    "type-of-care":["BV", false]
+                }, 
+                {
+                    "age":["BW", false],
+                    "type-of-care":["BX", false]
+                }, 
+                {
+                    "age":["BY", false],
+                    "type-of-care":["BZ", false]
+                },
+                {
+                    "age":["CA", false],
+                    "type-of-care":["CB", false]
+                }
+            ]
+        },
+        "transportation-received":["CC", false],
+        "provisions-for-disabilities-received":["CD", false],
+        "translation":{
+            "translation-received":["CE", false],
+            "language-1":["CF", false],
+            "language-2":["CG", false]
+        },
+        "interpretation":{
+            "interpretation-received":["CH", false],
+            "language-1":["CI", false],
+            "language-2":["CJ", false]
+        },
+        "crisis-counselling-received":["CK", false]
+    },
+    
     "settlement-plan-completed-and-shared-with-client":["CL", true],
     "end-date-of-assessment":["CM", false],
     "reason-for-update":["CN", false]
