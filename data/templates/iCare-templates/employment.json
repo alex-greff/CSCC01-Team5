@@ -1,0 +1,107 @@
+{
+    "processing-details":["A", false],
+    "update-record-ID":["B", false],
+    "identifier": {
+        "category":["C", true],
+        "value":["D", true]
+    },
+    "dob":["E", true],
+    "service-postal-code":["F", true],
+    "registration":["G", true],
+	"referral":["H", false],
+	"language-of-service":["I", true],
+	"language-of-preference":["J", true],
+	"type-of-institution-organization":["K", true],
+	"referred-by":["L", true],
+	"referral-date":["M", false],
+	"employment-status":["N", false],
+	"education-status":["O", false],
+	"occupation-in-canada":["P", false],
+	"intended-occupation":["Q", false],
+	"intervention-type":["R", false],
+	"long-term-intervention":{
+		"received":["S", false],
+		"status":["T", false],
+		"reason-for-leaving":["U", false],
+		"start-date":["V", false],
+		"end-date":["W", false],
+		"size-of-employer":["X", false],
+		"placement-was":["Y", false],
+		"hours-per-week":["Z", false],
+		"client-met-mentor-regularly-at":["AA", false],
+		"average-hours-week-in-contact-with-mentor":["AB", false],
+		"profession-trade-for-which-services-were-received":["AC", false],
+	},
+	"essential-skills-and-aptitude-training-received":["AD", false],
+	"computer-skills":["AE", false],
+	"document-use":["AF", false],
+	"interpersonal-skills-and-workplace-culture":["AG", false],
+	"leadership-training":["AH", false],
+	"numeracy":["AI", false],
+	"short-term-intervention":{
+		"services":[
+			{
+				"received":["AJ", false],
+				"date":["AK", false]
+			},
+			{
+				"received":["AL", false],
+				"date":["AM", false]
+			},
+			{
+				"received":["AN", false],
+				"date":["AO", false]
+			},
+			{
+				"received":["AP", false],
+				"date":["AQ", false]
+			},
+			{
+				"received":["AR", false],
+				"date":["AS", false]
+			}
+		]
+	},
+	"support-services-received":["AT", false],
+	"children-care": {
+        "care-for-newcomer-children":["AU", false],
+        "children":[
+            {
+                "age":["AV", false],
+                "type-of-care":["AW", false]
+            }, 
+            {
+                "age":["AX", false],
+                "type-of-care":["AY", false]
+            }, 
+            {
+                "age":["AZ", false],
+                "type-of-care":["BA", false]
+            }, 
+            {
+                "age":["BB", false],
+                "type-of-care":["BC", false]
+            },
+            {
+                "age":["BD", false],
+                "type-of-care":["BE", false]
+            }
+        ],
+        "transportation":["BF", false]
+    },
+    "provisions-for-disabilities":["BG", false],
+        "translation":{
+    	"lang1":["BI", false],
+    	"lang2":["BJ", false]
+	},
+    "interpretation":{
+    	"lang1":["BL", false], 
+    	"lang2":["BM", false]
+    },
+    "crisis-counselling":["BN", false],
+    "time-spent-with-client":{
+    	"hours":["BO", false],
+    	"minutes":["BP", false]
+    },
+	"reason-for-update":["BQ", false]
+}

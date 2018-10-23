@@ -1,0 +1,114 @@
+{
+    "processing-details":["A", false],
+    "update-record-ID":["B", false],
+    "identifier": {
+        "category":["C", true],
+        "value":["D", true]
+    },
+    "dob":["E", true],
+    "service-postal-code":["F", true],
+    "assessment-start-date":["G", true],
+    "language-of-service":["H", true],
+    "language-of-preference":["I", true],
+    "institution-or-organziation-type":["J", true],
+    "referred-by":["K", true],
+    "increase-knowledge-of":{
+        "life-in-canda":["L", false],
+        "life-in-canada-referrals":["M", false],
+        "community-and-government-services":["N", false],
+        "community-and-government-services-referrals":["O", false],
+        "working-in-canada":["P", false],
+        "working-in-canada-referrals":["Q", false],
+        "education-in-canada":["R", false],
+        "education-in-canada-referrals":["S", false]
+    },
+    "increase-of":{
+        "social-networks":["T", false],
+        "social-networks-referrals":["U", false],
+        "professional-networks":["V", false],
+        "professional-networks-referrals":["W", false],
+        "access-to-local-community-services":["X", false],
+        "access-to-local-community-services-referrals":["Y", false],
+        "level-of-community-involvement":["Z", false],
+        "level-of-community-involvement-referrals":["AA", false]
+    },
+    "improve": {
+        "language-skills":["AB", false],
+        "language-skills-referrals":["AC", false],
+        "language-skills-reason":["AD", false],
+        "other-skills":["AE", false],
+        "other-skills-referrals":["AF", false],
+        "other-skills-reason":["AG", false]
+    }, 
+    "employment":{
+        "find-employment":["AH", false],
+        "find-employment-referrals":["AI", false], 
+        "find-employment-timeframe":["AJ", false],
+        "minimum-one-year-work-experience":["AK", false], 
+        "intended-national-occupation-classification-skill-level-of-work":["AL", false],
+        "intends-to-obtain-credential-recognition-or-license-to-work-in-canada":["AM", false]
+    }, 
+    "intention-to-gain-canadian-citizenship":["AN", true], 
+    "support-services-may-be-required":["AO", true],
+    "transportation":["AQ", false], 
+    "provisions-for-disabilities":["AR", false], 
+    "translation":{
+        "language-1":["CF", false],
+        "language-2":["CG", false]
+    },
+    "interpretation":{
+        "language-1":["CI", false],
+        "language-2":["CJ", false]
+    },
+    "crisis-counselling":["AU", false],
+    "non-IRCC-program-services-needed":["AV", true],
+    "food-or-clothing-or-other-material-needs":["AW", false],
+    "food-or-clothing-or-other-material-needs-referrals":["AX", false],
+    "housing-or-accommodation":["AY", false],
+    "housing-or-accommodation-referrals":["AZ", false],
+    "health-or-mental-health-or-well-being":["BA", false],
+    "health-or-mental-health-or-well-being-referrals":["BB", false],
+    "financial":["BC", false],
+    "financial-referrals":["BD", false],
+    "family-support":["BE", false],
+    "family-support-referrals":["BF", false],
+    "language-non-IRCC":["BG", false],
+    "language-non-IRCC-referrals":["BH", false],
+    "education-or-skills-development":["BI", false],
+    "education-or-skills-development-referrals":["BJ", false],
+    "employment-related":["BK", false],
+    "employment-related-referrals":["BL", false],
+    "legal-information-and-services":["BM", false],
+    "legal-information-and-services-referrals":["BN", false],
+    "community-services":["BO", false],
+    "community-services-referrals":["BP", false],
+    "support-services-received":["BQ", true],
+    "children-care": {
+        "care-for-newcomer-children":["AP", false],
+        "children":[
+            {
+                "age":["BS", false],
+                "type-of-care":["BT", false]
+            }, 
+            {
+                "age":["BU", false],
+                "type-of-care":["BV", false]
+            }, 
+            {
+                "age":["BW", false],
+                "type-of-care":["BX", false]
+            }, 
+            {
+                "age":["BY", false],
+                "type-of-care":["BZ", false]
+            },
+            {
+                "age":["CA", false],
+                "type-of-care":["CB", false]
+            }
+        ]
+    },
+    "settlement-plan-completed-and-shared-with-client":["CL", true],
+    "end-date-of-assessment":["CM", false],
+    "reason-for-update":["CN", false]
+}

@@ -1,0 +1,58 @@
+{
+    "processing-details":["A", false],
+    "update-record-ID":["B", false],
+    "identifier": {
+        "category":["C", true],
+        "value":["D", true]
+    },
+    "dob":["E", true],
+    "course-code":["F", true],
+	"client's-training-status":["G", true],
+	"date-client-exited-course":["H", false],
+	"reason-for-exiting-course":["I", false],
+	"listening-clb-level":["J", false],
+	"speaking-clb-level":["K", false],
+	"reading-clb-level":["L", false],
+	"writing-clb-level":["M", false],
+	"certificate-issued":["N", true],
+	"listening-level":["O", false],
+	"speaking-level":["P", false],
+	"support-services-received":["Q", true],
+	"children-care": {
+        "care-for-newcomer-children":["R", false],
+        "children":[
+            {
+                "age":["S", false],
+                "type-of-care":["T", false]
+            }, 
+            {
+                "age":["U", false],
+                "type-of-care":["V", false]
+            }, 
+            {
+                "age":["W", false],
+                "type-of-care":["X", false]
+            }, 
+            {
+                "age":["Y", false],
+                "type-of-care":["Z", false]
+            },
+            {
+                "age":["aA", false],
+                "type-of-care":["aB", false]
+            }
+        ]
+    },
+    "transportation":["AC", false],
+	"provisions-for-disabilities":["AD", false],
+	"translation":{
+        "language-1":["AF", false],
+        "language-2":["AG", false]
+    },
+    "interpretation":{
+        "language-1":["AI", false],
+        "language-2":["AJ", false]
+    },
+    "crisis-counselling":["AK", false],
+	"reason-for-update":["AL", false]
+}

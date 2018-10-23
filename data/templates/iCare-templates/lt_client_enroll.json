@@ -1,0 +1,51 @@
+{
+    "processing-details":["A", false],
+    "update-record-ID":["B", false],
+    "identifier": {
+        "category":["C", true],
+        "value":["D", true]
+    },
+    "dob":["E", true],
+    "service-postal-code":["F", true],
+    "course-code":["G", true],
+    "date-of-first-class":["H", true],
+    "language-of-preference":["I", true],
+    "support-services-received":["J", true],
+    "children-care": {
+        "care-for-newcomer-children":["K", false],
+        "children":[
+            {
+                "age":["L", false],
+                "type-of-care":["M", false]
+            }, 
+            {
+                "age":["N", false],
+                "type-of-care":["O", false]
+            }, 
+            {
+                "age":["P", false],
+                "type-of-care":["Q", false]
+            }, 
+            {
+                "age":["R", false],
+                "type-of-care":["S", false]
+            },
+            {
+                "age":["T", false],
+                "type-of-care":["U", false]
+            }
+        ]
+    },
+    "transportation":["V", false], 
+    "provisions-for-disabilities":["W", false], 
+    "translation":{
+        "language-1":["Y", false],
+        "language-2":["Z", false]
+    },
+    "interpretation":{
+        "language-1":["AB", false],
+        "language-2":["AC", false]
+    },
+    "crisis-counselling":["AD", false],
+    "reason-for-update":["AE", false]
+}

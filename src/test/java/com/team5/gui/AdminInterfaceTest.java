@@ -1,15 +1,15 @@
-package com.team5.driver;
+package com.team5.gui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class DriverTest {
+public class AdminInterfaceTest {
 
     @Test
-    @DisplayName("test")
-    void tempTest() {
+    @DisplayName("")
+    void Test1() {
             assertEquals("", "");
     }
 }
