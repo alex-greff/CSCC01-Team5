@@ -7,7 +7,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.NotDirectoryException;
 import java.util.ArrayList;
+import java.util.HashSet;
+
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,11 +25,13 @@ public class JSONLoaderTest {
   final String file3Path = rootPath + "/dir2/testJSONFile_valid3.json";
   final String file3Contents = "{\"field1\":\"cat\",\"field3\":-1000,\"field2\":\"abc\",\"field4\":1050}";
   
+  JSONParser parser = new JSONParser();
+
   @Test
   @DisplayName("Parse valid JSON file from file")
   void testParseValidJSONFileFromFile() throws FileNotFoundException, IOException, ParseException {
     JSONObject obj = JSONLoader.parseJSONFile(new File(file1Path));
-    assertEquals(file1Contents, obj.toJSONString());
+    assertEquals(parser.parse(file1Contents), obj);
   }
   
   @Test
@@ -49,7 +54,7 @@ public class JSONLoaderTest {
   @DisplayName("Parse valid JSON file from path")
   void testParseValidJSONFileFromPath() throws FileNotFoundException, IOException, ParseException {
     JSONObject obj = JSONLoader.parseJSONFile(file1Path);
-    assertEquals(file1Contents, obj.toJSONString());
+    assertEquals(parser.parse(file1Contents), obj);
   }
   
   @Test
@@ -70,16 +75,29 @@ public class JSONLoaderTest {
   
   @Test
   @DisplayName("Parse all JSON files in directory non recursive")
-  void testParseAllJSONInDirNonRecursive() throws NotDirectoryException {
+  void testParseAllJSONInDirNonRecursive() throws NotDirectoryException, ParseException {
     ArrayList<JSONObject> objs = JSONLoader.parseAllJSONFiles(rootPath, false);
-    assertEquals("[" + file1Contents + ", " + file2Contents + "]", objs.toString());
+    HashSet<JSONObject> objs_set = new HashSet<JSONObject>(objs);
+
+    HashSet<JSONObject> parsedObjs = new HashSet<JSONObject>();
+    parsedObjs.add((JSONObject)parser.parse(file1Contents));
+    parsedObjs.add((JSONObject)parser.parse(file2Contents));
+
+    assertEquals(parsedObjs, objs_set);
   }
 
   @Test
   @DisplayName("Parse all JSON files in directory recursive")
-  void testParseAllJSONInDirRecursive() throws NotDirectoryException {
+  void testParseAllJSONInDirRecursive() throws NotDirectoryException, ParseException {
     ArrayList<JSONObject> objs = JSONLoader.parseAllJSONFiles(rootPath, true);
-    assertEquals("[" + file3Contents + ", " + file1Contents + ", " + file2Contents + "]", objs.toString());
+    HashSet<JSONObject> objs_set = new HashSet<JSONObject>(objs);
+
+    HashSet<JSONObject> parsedObjs = new HashSet<JSONObject>();
+    parsedObjs.add((JSONObject)parser.parse(file1Contents));
+    parsedObjs.add((JSONObject)parser.parse(file2Contents));
+    parsedObjs.add((JSONObject)parser.parse(file3Contents));
+
+    assertEquals(parsedObjs, objs_set);
   }
 
   @Test

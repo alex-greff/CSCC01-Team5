@@ -5,16 +5,21 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class ConfigurationLoaderTest {
     final String config1 = "iCare-template-system";
     final String config1_data = "{\"root-template-directory\":\"data\\/templates\\/iCare-templates\"}";
 
+    JSONParser parser = new JSONParser();
+
     @Test
     @DisplayName("Load existent configuration")
-    void testLoadExistentConfiguration() throws ConfigurationNotFoundException {
+    void testLoadExistentConfiguration() throws ConfigurationNotFoundException, ParseException {
         JSONObject c_data = ConfigurationLoader.loadConfiguration(config1);
-        assertEquals(config1_data, c_data.toJSONString());
+        
+        assertEquals(parser.parse(config1_data), c_data);
     }
 
     @Test
