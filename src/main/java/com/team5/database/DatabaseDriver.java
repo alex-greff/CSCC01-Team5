@@ -38,10 +38,12 @@ public class DatabaseDriver {
 	}
 	
 	/**
-	 * Accesses a collection in the database.
+	 * Accesses a collection in the database. (NOTE: if collection doesn't exist
+	 * and you specify it, then inserting will create a new collection with the name
+	 * specified).
 	 * @param collection The collection to be accessed.
 	 */
-	public void changeCollection(String collection) {
+	public void useCollection(String collection) {
 		this.collection = database.getCollection(collection);
 	}
 	
@@ -70,4 +72,23 @@ public class DatabaseDriver {
 		
 		collection.insertMany(docs); // Add the list of documents to database collection
 	}
+	
+	/*public static void main(String[] args) {
+		DatabaseDriver db = new DatabaseDriver("mongodb://Mohammed:1234@localhost:27017/javatest", "javatest", "customers");
+		JSONObject jsonObject = null;
+		List<JSONObject> ob = new ArrayList<>();
+		try {
+			jsonObject = JSONLoader.parseJSONFile("testFiles/JSONTestFiles/testJSONFile_valid1.json");
+			ob.add(jsonObject);
+			jsonObject = JSONLoader.parseJSONFile("testFiles/JSONTestFiles/testJSONFile_valid2.json");
+			ob.add(jsonObject);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		db.insertMany(ob);
+	}*/
 }
