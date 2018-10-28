@@ -11,7 +11,7 @@ import org.json.simple.parser.ParseException;
 /**
  * The base template system class.
  */
-public abstract class TemplateBase implements ITemplate {
+public class TemplateLoader implements ITemplate {
   /**
    * The root directory.
    */
@@ -22,7 +22,7 @@ public abstract class TemplateBase implements ITemplate {
    * 
    * @param rootDirPath The root directory.
    */
-  protected TemplateBase(String rootDirPath) {
+  public TemplateLoader(String rootDirPath) {
     this.rootDirPath = rootDirPath;
   }
 
