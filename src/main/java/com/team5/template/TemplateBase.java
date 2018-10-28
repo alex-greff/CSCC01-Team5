@@ -17,8 +17,8 @@ import org.json.simple.parser.ParseException;
 public class TemplateBase implements ITemplate {
 
   private String rootDirPath; // The root directory
-  protected static String config; // Name of the config to load
-  protected static String configItem; // Name of the config item to load from config
+  protected static String config = "iCare-template-system"; // Name of the config to load
+  protected static String configItem = "root-template-directory"; // Name of the config item to load from config
   
   /**
    * Gets the root directory path from the config file for use with constructor
@@ -33,8 +33,8 @@ public class TemplateBase implements ITemplate {
   }
   
   /**
-   * Unimplemented constructor class with no parameters to be implemented in subclasses
-   * @throws ConfigurationNotFoundException 
+   * Default constructor class uses iCare template directory
+   * @throws ConfigurationNotFoundException raises if config item not found
    */
   protected TemplateBase() throws ConfigurationNotFoundException {
 		this(getRootDirPath());
