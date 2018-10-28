@@ -1,11 +1,11 @@
-package com.team5.storage;
+package com.team5.database;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class DatabaseStorageTest {
+public class DatabaseDriverTest {
 
     @Test
     @DisplayName("test")
