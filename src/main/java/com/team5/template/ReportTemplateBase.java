@@ -24,25 +24,17 @@ import org.json.simple.parser.ParseException;
  */
 public class ReportTemplateBase extends TemplateBase{
 	
-	/**
-	 * Creates a ReportTemplateBase object with the root directory set to the iCare template directory
-	 * 
-	 * @return Returns a ReportTemplateBase object with root directory
-	 * @throws ConfigurationNotFoundException
-	 */
-	public static ReportTemplateBase create() throws ConfigurationNotFoundException {		
-		JSONObject configJSON = ConfigurationLoader.loadConfiguration("iCare-template-system");
-		String rootDirPath = (String) configJSON.get("root-template-directory");
-		
-		return new ReportTemplateBase(rootDirPath);
+	static	{
+	config = "iCare-template-system";
+	configItem = "root-template-directory";
 	}
 	
 	/**
-	 * Constructs the ReportTemplateBase object
+	 * Constructs a ReportTemplateBase object with the root directory set to the iCare template directory
 	 * 
-	 * @param rootDirPath
+	 * @throws ConfigurationNotFoundException if iCare template system config file is not found
 	 */
-	private ReportTemplateBase(String rootDirPath) {
-		super(rootDirPath);
+	public ReportTemplateBase() throws ConfigurationNotFoundException {
+		super();
 	}
 }
