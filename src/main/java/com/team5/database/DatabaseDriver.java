@@ -5,17 +5,12 @@ import com.mongodb.MongoClientException;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.team5.utilities.JSONLoader;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.Document;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
 
 /**
  * Database driver class that deals with modifying database.
