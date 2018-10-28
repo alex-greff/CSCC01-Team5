@@ -1,0 +1,11 @@
+{
+    "source-file":"BasicBarGraph.xlsm",
+    "data-sheet":"Data",
+    "data-locations":{
+        "chart-title":"A1",
+        "vertical-axis-title":"B1",
+        "horizontal-axis-title":"C1",
+        "series-start":"A3",
+        "blocks-start":"B2"
+    }
+}
