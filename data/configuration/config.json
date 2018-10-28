@@ -1,5 +1,8 @@
 {
     "iCare-template-system": {
         "root-template-directory": "data/templates/iCare-templates"
+    },
+    "report-template-system":{
+        "root-template-directory": "data/templates/report-templates"
     }
 }
