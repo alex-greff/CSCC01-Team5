@@ -18,7 +18,7 @@ class ReportTemplateBaseTest {
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		RTB = ReportTemplateBase.create();
+		RTB = new ReportTemplateBase();
 	}
 
 	@Test
