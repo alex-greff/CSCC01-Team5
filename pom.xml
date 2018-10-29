@@ -97,12 +97,12 @@
 							<mainClass>com.team5.gui.AdminInterface</mainClass>
 						</configuration>
 					</execution>
-					<!-- <execution>
+					<execution>
 						<id>database-driver-demo</id>
 						<configuration>
 							<mainClass>com.team5.database.DatabaseDriver</mainClass>
 						</configuration>
-					</execution> -->
+					</execution>
 					<execution>
 						<id>config-loader-demo</id>
 						<configuration>

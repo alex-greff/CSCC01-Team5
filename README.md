@@ -63,9 +63,9 @@ Run these commands from the project root or compile each java file in an IDE:
 
 ``` $ mvn compile ```
 
-<!-- * **Uploader GUI Interface:** 
+* **Uploader GUI Interface:** 
 
-    ``` $ mvn exec:java@uploader-interface-demo ``` -->
+    ``` $ mvn exec:java@uploader-interface-demo ```
 
 * **Admin GUI Interface:**
 
@@ -73,7 +73,7 @@ Run these commands from the project root or compile each java file in an IDE:
 
 * **Database Driver:**
 
-    ``` $ mvn exec:java@databse-driver-demo ```
+    ``` $ mvn exec:java@database-driver-demo ```
 
 * **Configuration Loader:** 
 

@@ -90,9 +90,13 @@ public class DatabaseDriver {
 		List<JSONObject> ob = new ArrayList<>();
 		try {
 			jsonObject = JSONLoader.parseJSONFile("testFiles/JSONTestFiles/testJSONFile_valid1.json");
+			System.out.println(jsonObject.toJSONString());
 			ob.add(jsonObject);
+			
 			jsonObject = JSONLoader.parseJSONFile("testFiles/JSONTestFiles/testJSONFile_valid2.json");
+			System.out.println(jsonObject.toJSONString());
 			ob.add(jsonObject);
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -100,8 +104,9 @@ public class DatabaseDriver {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Inserting JSON objects into database...");
 		db.insertMany(ob);
-		System.out.println("Our JSONObjects have been added to the database.");
+		System.out.println("JSON objects inserted.");
 	}
 
 }
