@@ -80,7 +80,12 @@ public class DatabaseDriver {
 	
 	// Demo
 	public static void main(String[] args) {
-		DatabaseDriver db = new DatabaseDriver("mongodb://Mohammed:1234@localhost:27017/javatest", "javatest", "customers");
+		System.out.println("The DatabaseDriver is the driver that connects, and allows us to populate our database.");
+		System.out.println("Initializing a new DatabaseDriver with the specified fields will connect us to the database.");
+		DatabaseDriver db = new DatabaseDriver("mongodb://mo:ProficiousF18@ds031088.mlab.com:31088/icare_db",
+												"icare_db", "client_profile");
+		System.out.println("We are now connected to the database icare_db on the cloud server.");
+		System.out.println("We are now going to insert two JSONObjects into the database collection, \'client_profile\'.");
 		JSONObject jsonObject = null;
 		List<JSONObject> ob = new ArrayList<>();
 		try {
@@ -96,6 +101,7 @@ public class DatabaseDriver {
 			e.printStackTrace();
 		}
 		db.insertMany(ob);
+		System.out.println("Our JSONObjects have been added to the database.");
 	}
 
 }
