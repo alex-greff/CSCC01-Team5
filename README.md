@@ -61,39 +61,29 @@ For the convenience of the grader we have compiled small demos of each system in
 
 Run these commands from the project root or compile each java file in an IDE:
 
-``` $ mkdir build ```
+``` $ mvn compile ```
 
-* **Uploader GUI Interface:**
+<!-- * **Uploader GUI Interface:** 
 
-    ``` $  javac -d build src/main/java/com/team5/gui_user/UserInterface.java```
-
-    ``` $  java -cp build com.team5.gui_user.UserInterface```
+    ``` $ mvn exec:java@uploader-interface-demo ``` -->
 
 * **Admin GUI Interface:**
 
-    ``` $  javac -d build src/main/java/com/team5/gui/AdminInterface.java```
-
-    ``` $  java -cp build com.team5.gui.AdminInterface```
+    ``` $ mvn exec:java@admin-interface-demo ```
 
 * **Database Driver:**
 
-    ``` $  javac -d build src/main/java/com/team5/database/DatavaseDriver.java```
-
-    ``` $  java -cp build com.team5.database.DatabaseDriver```
+    ``` $ mvn exec:java@databse-driver-demo ```
 
 * **Configuration Loader:** 
 
-    ``` $  javac -d build src/main/java/com/team5/utilities/ConfigurationLoader.java```
-
-    ``` $  java -cp build com.team5.utilities.ConfigurationLoader```
+    ``` $ mvn exec:java@config-loader-demo ```
 
 * **JSON Loader:** 
 
-    ``` $  javac -d build src/main/java/com/team5/utilities/JSONLoader.java```
+    ``` $ mvn exec:java@json-loader-demo ```
 
-    ``` $  java -cp build com.team5.utilities.JSONLoader```
-
-* **Template System:** TODO
+<!-- * **Template System:** TODO -->
 
 
 
