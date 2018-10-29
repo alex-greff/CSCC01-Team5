@@ -4,6 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.NotDirectoryException;
 import java.util.ArrayList;
+
+import com.team5.utilities.ConfigurationLoader;
+import com.team5.utilities.ConfigurationNotFoundException;
 import com.team5.utilities.JSONLoader;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -11,11 +14,31 @@ import org.json.simple.parser.ParseException;
 /**
  * The base template system class.
  */
-public abstract class TemplateBase implements ITemplate {
+public class TemplateBase implements ITemplate {
+
+  private String rootDirPath; // The root directory
+  protected static String config = "iCare-template-system"; // Name of the config to load
+  protected static String configItem = "root-template-directory"; // Name of the config item to load from config
+  
   /**
-   * The root directory.
+   * Gets the root directory path from the config file for use with constructor
+   * 
+   * @return rootDirPath the directory path to the iCare template files
+   * @throws ConfigurationNotFoundException if config file is not found
    */
-  private String rootDirPath;
+  private static String getRootDirPath() throws ConfigurationNotFoundException {
+		JSONObject jsonConfig = ConfigurationLoader.loadConfiguration(config);
+		String rootDirPath = (String) jsonConfig.get(configItem);
+		return rootDirPath;
+  }
+  
+  /**
+   * Default constructor class uses iCare template directory
+   * @throws ConfigurationNotFoundException raises if config item not found
+   */
+  protected TemplateBase() throws ConfigurationNotFoundException {
+		this(getRootDirPath());
+  }
 
   /**
    * Constructs the template object.
