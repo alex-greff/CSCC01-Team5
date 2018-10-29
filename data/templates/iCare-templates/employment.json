@@ -18,6 +18,7 @@
 	"education-status":["O", false],
 	"occupation-in-canada":["P", false],
 	"intended-occupation":["Q", false],
+
 	"intervention-type":["R", false],
 	"long-term-intervention":{
 		"received":["S", false],
@@ -30,75 +31,85 @@
 		"hours-per-week":["Z", false],
 		"client-met-mentor-regularly-at":["AA", false],
 		"average-hours-week-in-contact-with-mentor":["AB", false],
-		"profession-trade-for-which-services-were-received":["AC", false],
+		"profession-trade-for-which-services-were-received":["AC", false]
 	},
-	"essential-skills-and-aptitude-training-received":["AD", false],
-	"computer-skills":["AE", false],
-	"document-use":["AF", false],
-	"interpersonal-skills-and-workplace-culture":["AG", false],
-	"leadership-training":["AH", false],
-	"numeracy":["AI", false],
 	"short-term-intervention":{
 		"services":[
 			{
-				"received":["AJ", false],
+				"service-received":["AJ", false],
 				"date":["AK", false]
 			},
 			{
-				"received":["AL", false],
+				"service-received":["AL", false],
 				"date":["AM", false]
 			},
 			{
-				"received":["AN", false],
+				"service-received":["AN", false],
 				"date":["AO", false]
 			},
 			{
-				"received":["AP", false],
+				"service-received":["AP", false],
 				"date":["AQ", false]
 			},
 			{
-				"received":["AR", false],
+				"service-received":["AR", false],
 				"date":["AS", false]
 			}
 		]
 	},
-	"support-services-received":["AT", false],
-	"children-care": {
-        "care-for-newcomer-children":["AU", false],
-        "children":[
-            {
-                "age":["AV", false],
-                "type-of-care":["AW", false]
-            }, 
-            {
-                "age":["AX", false],
-                "type-of-care":["AY", false]
-            }, 
-            {
-                "age":["AZ", false],
-                "type-of-care":["BA", false]
-            }, 
-            {
-                "age":["BB", false],
-                "type-of-care":["BC", false]
-            },
-            {
-                "age":["BD", false],
-                "type-of-care":["BE", false]
-            }
-        ],
-        "transportation":["BF", false]
-    },
-    "provisions-for-disabilities":["BG", false],
-        "translation":{
-    	"lang1":["BI", false],
-    	"lang2":["BJ", false]
+
+	"essential-skills-and-aptitude-training":{
+		"essential-skills-and-aptitude-training-received":["AD", false],
+		"computer-skills":["AE", false],
+		"document-use":["AF", false],
+		"interpersonal-skills-and-workplace-culture":["AG", false],
+		"leadership-training":["AH", false],
+		"numeracy":["AI", false]
 	},
-    "interpretation":{
-    	"lang1":["BL", false], 
-    	"lang2":["BM", false]
-    },
-    "crisis-counselling":["BN", false],
+
+	"support-services":{
+		"support-services-received":["AT", false],
+		"children-care": {
+			"care-for-newcomer-children":["AU", false],
+			"children":[
+				{
+					"age":["AV", false],
+					"type-of-care":["AW", false]
+				}, 
+				{
+					"age":["AX", false],
+					"type-of-care":["AY", false]
+				}, 
+				{
+					"age":["AZ", false],
+					"type-of-care":["BA", false]
+				}, 
+				{
+					"age":["BB", false],
+					"type-of-care":["BC", false]
+				},
+				{
+					"age":["BD", false],
+					"type-of-care":["BE", false]
+				}
+			]
+		},
+		"transportation":["BF", false],
+		"provisions-for-disabilities":["BG", false],
+		"translation":{
+			"translation-received":["BH", false],
+			"lang1":["BI", false],
+			"lang2":["BJ", false]
+		},
+		"interpretation":{
+			"interpretation-received":["BK", false],
+			"lang1":["BL", false], 
+			"lang2":["BM", false]
+		},
+		"crisis-counselling":["BN", false]
+	},
+	
+	
     "time-spent-with-client":{
     	"hours":["BO", false],
     	"minutes":["BP", false]

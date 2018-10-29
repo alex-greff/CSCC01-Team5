@@ -77,4 +77,10 @@ public class AdminInterface extends JFrame {
 		revalidate();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+
+	// DEMO
+	public static void main(String[] args) {
+		AdminInterface admin_gui = new AdminInterface("Admin");
+		admin_gui.load();
+	}
 }

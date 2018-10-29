@@ -55,12 +55,72 @@
 			<version>${json-simple.version}</version>
 		</dependency>
 
+    		<dependency>
+        		<groupId>org.mongodb</groupId>
+        		<artifactId>mongo-java-driver</artifactId>
+        		<version>3.4.3</version>
+    		</dependency>
 
 
 	</dependencies>
 
 	<build>
 		<plugins>
+			<!-- Maven Exec Plugin -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-cli</id>
+						<configuration>
+							<mainClass>com.team5.driver.Driver</mainClass>
+						</configuration>
+					</execution>
+
+					<!-- Demos -->
+					<execution>
+						<id>uploader-interface-demo</id>
+						<configuration>
+							<mainClass>com.team5.gui_user.UserInterface</mainClass>
+						</configuration>
+					</execution>
+					<execution>
+						<id>admin-interface-demo</id>
+						<configuration>
+							<mainClass>com.team5.gui.AdminInterface</mainClass>
+						</configuration>
+					</execution>
+					<!-- <execution>
+						<id>database-driver-demo</id>
+						<configuration>
+							<mainClass>com.team5.database.DatabaseDriver</mainClass>
+						</configuration>
+					</execution> -->
+					<execution>
+						<id>config-loader-demo</id>
+						<configuration>
+							<mainClass>com.team5.utilities.ConfigurationLoader</mainClass>
+						</configuration>
+					</execution>
+					<execution>
+						<id>json-loader-demo</id>
+						<configuration>
+							<mainClass>com.team5.utilities.JSONLoader</mainClass>
+						</configuration>
+					</execution>
+				</executions>
+				<!-- <configuration>
+					<mainClass>com.team5.driver.Driver</mainClass>
+				</configuration> -->
+			</plugin>
+
 			<!-- JUnit 5 requires Surefire version 2.22.0 or higher -->
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>

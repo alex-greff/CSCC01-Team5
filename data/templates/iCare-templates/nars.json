@@ -81,7 +81,7 @@
         "legal-information-and-services":["BM", false],
         "legal-information-and-services-referrals":["BN", false],
         "community-services":["BO", false],
-        "community-services-referrals":["BP", false],
+        "community-services-referrals":["BP", false]
     },
 
     "support-services-received":{

@@ -87,4 +87,17 @@ public final class JSONLoader {
   public static ArrayList<JSONObject> parseAllJSONFiles(String directoryPath, boolean recursive) throws NotDirectoryException {
     return parseAllJSONFiles(new File(directoryPath), recursive);
   }
+
+  // DEMO
+  public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
+    System.out.println("The JSON Loader system is pretty self-explainatory, it manages the loading and parsing of JSON files");
+    System.out.println("This system is used wherever there is a need for a JSON file to be loading from the file system.");
+    System.out.println("Single JSON files can be loaded and whole directories can be parsed as well (recursively too).");
+    System.out.println("Example 1: Single JSON File");
+    System.out.println("> JSONLoader.parseJSONFile(\"testFiles/testJSONFile_valid1.json\"");
+    System.out.println(JSONLoader.parseJSONFile("testFiles/JSONTestFiles/testJSONFile_valid1.json"));
+    System.out.println("Example 1: All JSON Files from Directory");
+    System.out.println("> JSONLoader.parseAllJSONFiles(\"testFiles/JSONTestFiles\", false)");
+    System.out.println(JSONLoader.parseAllJSONFiles("testFiles/JSONTestFiles", false));
+  }
 }
