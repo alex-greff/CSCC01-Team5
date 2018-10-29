@@ -78,6 +78,13 @@ public class DatabaseDriver {
 		collection.insertMany(docs); // Add the list of documents to database collection
 	}
 	
+	/**
+	 * Closes the connection to the database.
+	 */
+	public void closeConnection() {
+		client.close(); // close the connection
+	}
+	
 	// Demo
 	public static void main(String[] args) {
 		System.out.println("The DatabaseDriver is the driver that connects, and allows us to populate our database.");
@@ -107,6 +114,9 @@ public class DatabaseDriver {
 		System.out.println("Inserting JSON objects into database...");
 		db.insertMany(ob);
 		System.out.println("JSON objects inserted.");
+		System.out.println("Closing connection.");
+		db.closeConnection();
+		System.out.println("Connection to database closed.");
 	}
 
 }
