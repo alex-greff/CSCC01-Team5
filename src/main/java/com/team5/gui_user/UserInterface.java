@@ -23,9 +23,8 @@ public class UserInterface extends JFrame {
 		filename = new JTextField();
 		submit = new JButton("Upload iCare File");
 		submit.addActionListener(new EventHandler());
-		
-
 	}
+
 	/**
 	 * Gets the screen size of the monitor that interface is being run on.
 	 * @return Returns the dimension of the screen.
@@ -64,8 +63,10 @@ public class UserInterface extends JFrame {
 		revalidate();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+
+	// DEMO
 	public static void main(String[] args) {    
 		UserInterface gui_userexample = new UserInterface();
 		gui_userexample.load();
-	}    
+	}
  }

@@ -1,16 +1,21 @@
 package com.team5.database;
 
+import com.team5.utilities.JSONLoader;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientException;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.Document;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 
 /**
  * Database driver class that deals with modifying database.
@@ -73,7 +78,8 @@ public class DatabaseDriver {
 		collection.insertMany(docs); // Add the list of documents to database collection
 	}
 	
-	/*public static void main(String[] args) {
+	// Demo
+	public static void main(String[] args) {
 		DatabaseDriver db = new DatabaseDriver("mongodb://Mohammed:1234@localhost:27017/javatest", "javatest", "customers");
 		JSONObject jsonObject = null;
 		List<JSONObject> ob = new ArrayList<>();
@@ -90,5 +96,6 @@ public class DatabaseDriver {
 			e.printStackTrace();
 		}
 		db.insertMany(ob);
-	}*/
+	}
+
 }

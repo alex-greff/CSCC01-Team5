@@ -61,4 +61,15 @@ public final class ConfigurationLoader {
     public static void reloadMasterConfigurationFile() {
         getMasterConfigFile(true);
     }
+
+    // DEMO
+    public static void main(String[] args) throws ConfigurationNotFoundException {
+        System.out.println("The Configuration Loader is a system responsbile for loading configuration settings for other systems.");
+        System.out.println("This system's main purpose is to stop the use of hard-coded constants in our code for things like file paths.");
+        System.out.println("Configurations can be accessed by calling ConfigurationLoader.loadConfiguration(<configName>) which returns a JSON object pulled from data/configuration/config.json");
+        System.out.println("For example:");
+        System.out.println("Calling ConfigurationLoader.loadConfiguration(\"iCare-template-system\") gives us the configuration for the iCare template system");
+        System.out.println("> ConfigurationLoader.loadConfiguration(\"iCare-template-system\")");
+        System.out.println(ConfigurationLoader.loadConfiguration("iCare-template-system"));
+    }
 }
