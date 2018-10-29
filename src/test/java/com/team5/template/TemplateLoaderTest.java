@@ -13,26 +13,25 @@ import org.junit.jupiter.api.Test;
 
 import com.team5.utilities.JSONLoader;
 
-public class TemplateBaseTest {
+public class TemplateLoaderTest {
 
-	static TemplateBase TB;
+	static TemplateLoader tl;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		TB = new TemplateBase();
+		tl = new TemplateLoader("data/templates/iCare-templates");
 	}
 
 	@Test
 	void parseTest() throws FileNotFoundException, IOException, ParseException {
 		JSONObject jsonFile = JSONLoader.parseJSONFile(System.getProperty("user.dir") + "/data/templates/iCare-templates/client_profile.json");
-		JSONObject TBjson = TB.parseTemplate("client_profile.json");
+		JSONObject tlJSON = tl.parseTemplate("client_profile.json");
 		
-		assertEquals(jsonFile, TBjson);
+		assertEquals(jsonFile, tlJSON);
 	}
 	
 	@Test
 	void parseAllTest() {
 		// fail("Not yet implemented.");
-		
 	}
 }
