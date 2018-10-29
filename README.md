@@ -31,7 +31,7 @@
 * [Personas v0](product_backlog/v0/personas_0.pdf)
 * [User Stories v0](product_backlog/v0/user_stories_0.pdf)
 
-### Deliverable 3: Project Planning
+### Deliverable 3: Project Planning and Execution
 #### Product Backlog
 * [Personas v1](product_backlog/v1/personas_1.pdf)
 * [User Stories v1](product_backlog/v1/user_stories_1.pdf)
@@ -85,14 +85,8 @@ Run these commands from the project root or compile each java file in an IDE:
 
 <!-- * **Template System:** TODO -->
 
-
-
-
-### Deliverable 4: Project Execution
+### Deliverable 4: Product Validation
 (In-Progress...)
 
-### Deliverable 5: Project Validation
-(In-Progress...)
-
-### Deliverable 6: Final Deliverable
+### Deliverable 5: Final Deliverable
 (In-Progress...)
