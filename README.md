@@ -59,7 +59,7 @@ As of sprint 2 our systems are still indepentent of each other so they must all 
 
 For the convenience of the grader we have compiled small demos of each system in their respective main functions. 
 
-Run these commands from the project root or compile each java file in an IDE:
+Run these commands from the project root:
 
 ``` $ mvn compile ```
 
