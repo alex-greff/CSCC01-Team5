@@ -2,29 +2,73 @@ package com.team5.report;
 
 import java.util.ArrayList;
 
+/**
+ * The data container for the reports.
+ * 
+ * @param <T> The generic type of the data stored.
+ */
 public class ReportData<T> {
+    /**
+     * Private class representing a series (row) on the table.
+     */
     private class Series {
+        /**
+         * The name of the series.
+         */
         private String name;
+        /**
+         * The list of blocks (columns) in the series.
+         */
         private ArrayList<Block> blocks = new ArrayList<>();
+        /**
+         * The list of cells in the current series. Size(cells) == Size(blocks) always.
+         */
         private ArrayList<T> cells = new ArrayList<>();
 
+        /**
+         * Constructs the series with the given name.
+         * 
+         * @param name The name of the series.
+         */
         public Series (String name) {
             this.name = name;
         }
 
+        /**
+         * Sets the name of the series to a new name.
+         * 
+         * @param newName The new name.
+         */
         public void setName(String newName) {
             this.name = newName;
         }
 
+        /**
+         * Gets the name of the series.
+         * 
+         * @return Returns the name of the series.
+         */
         public String getName() {
             return this.name;
         }
 
+        /**
+         * Inserts a block at the end of this series.
+         * 
+         * @param newBlock The new block.
+         */
         public void addBlock(Block newBlock) {
             this.blocks.add(newBlock);
             this.cells.add(null);
         }
 
+        /**
+         * Sets the contents of the cell at the given index.
+         * 
+         * @param index The index of the wanted cell.
+         * @param data The data to be inserted into the cell.
+         * @throws IndexOutOfBoundsException Thrown if the index beyond the bounds of the series.
+         */
         public void setCell(int index, T data) throws IndexOutOfBoundsException {
             // Upper bound check
             if (index >= this.blocks.size())
@@ -36,6 +80,13 @@ public class ReportData<T> {
             this.cells.set(index, data);
         }
 
+        /**
+         * Sets the block at the given index to a new block.
+         * 
+         * @param index The index.
+         * @param block The new block.
+         * @throws IndexOutOfBoundsException Thrown if the index is out of bounds.
+         */
         public void setBlock(int index, Block block) throws IndexOutOfBoundsException {
             if (index < 0 || index >= this.blocks.size())
                 throw new IndexOutOfBoundsException("Index '" + index + "'' is out of bounds");
@@ -43,6 +94,13 @@ public class ReportData<T> {
             this.blocks.set(index, block);
         }
 
+        /**
+         * Sets the block name at the given index.
+         * 
+         * @param index The index.
+         * @param name The new name of the block.
+         * @throws IndexOutOfBoundsException Thrown if the index is out of bounds.
+         */
         public void setBlockName(int index, String name) throws IndexOutOfBoundsException {
             if (index < 0 || index >= this.blocks.size())
                 throw new IndexOutOfBoundsException("Index '" + index + "'' is out of bounds");
@@ -50,6 +108,12 @@ public class ReportData<T> {
             this.blocks.get(index).setName(name);
         }
 
+        /**
+         * Removes the block at the given index. Will also remove the cells associated with that block and cascade everything.
+         * 
+         * @param index The index.
+         * @throws IndexOutOfBoundsException Thrown if the index is out of bounds.
+         */
         public void removeBlock(int index) throws IndexOutOfBoundsException {
             if (index < 0 || index >= this.blocks.size())
                 throw new IndexOutOfBoundsException("Index '" + index + "'' is out of bounds");
@@ -58,6 +122,12 @@ public class ReportData<T> {
             this.cells.remove(index);
         }
 
+        /**
+         * Clears the contents of the cell at the given index (i.e. set its value to null).
+         * 
+         * @param index The index
+         * @throws IndexOutOfBoundsException Thrown if the index is out of bounds.
+         */
         public void clearCell(int index) throws IndexOutOfBoundsException {
             if (index < 0 || index >= this.blocks.size())
                 throw new IndexOutOfBoundsException("Index " + index + "'' is out of bounds");
@@ -65,78 +135,171 @@ public class ReportData<T> {
             this.cells.set(index, null);
         }
 
+        /**
+         * The string representation of the series.
+         */
         public String toString() {
             return this.getName() + ": " + this.cells.toString();
         }
     }
 
+    /**
+     * Private class reprsenting a block (column) on the table.
+     */
     private class Block {
+        /**
+         * The name of the block.
+         */
         private String name;
 
+        /**
+         * Constructs the block with the given name.
+         * 
+         * @param name The name of the block.
+         */
         public Block(String name) {
             this.name = name;
         }
 
+        /**
+         * Sets the name of the block to a new name.
+         * 
+         * @param newName The new name.
+         */
         public void setName(String newName) {
             this.name = newName;
         }
 
+        /**
+         * Gets the name of the block.
+         * 
+         * @return Returns the name of the block.
+         */
         public String getName() {
             return this.name;
         }
 
+        /**
+         * The string representation of the block.
+         */
         public String toString() {
             return this.getName();
         }
     }
 
+    /**
+     * Store the title, row axis label and column axis label of the table.
+     */
     private String title, rowAxisLabel, columnAxisLabel;
+    /**
+     * Store a list of all the blocks in the table.
+     */
     private ArrayList<Block> blocks = new ArrayList<>();
+    /**
+     * Store a list of all the series in the table.
+     */
     private ArrayList<Series> series = new ArrayList<>();
 
+    /**
+     * Construct the report data table.
+     * 
+     * @param title The title of the table.
+     * @param rowAxisLabel The label of the row axis.
+     * @param columnAxisLabel The label of the column axis.
+     */
     public ReportData(String title, String rowAxisLabel, String columnAxisLabel) {
         this.title = title;
         this.rowAxisLabel = rowAxisLabel;
         this.columnAxisLabel = columnAxisLabel;
     }
 
+    /**
+     * Sets the title of the table.
+     * 
+     * @param newTitle The new title.
+     */
     public void setTitle(String newTitle) {
         this.title = newTitle;
     }
 
+    /**
+     * Sets the row axis label of the table.
+     * 
+     * @param newRowAxisLabel The new row axis label.
+     */
     public void setRowAxisLabel(String newRowAxisLabel) {
         this.rowAxisLabel = newRowAxisLabel;
     }
 
+    /**
+     * Sets the column axis label of the table.
+     * 
+     * @param newColumnAxisLabel The new column axis label.
+     */
     public void setColumnAxisLabel(String newColumnAxisLabel) {
         this.columnAxisLabel = newColumnAxisLabel;
     }
 
+    /**
+     * Gets the title of the table.
+     * 
+     * @return Returns the title.
+     */
     public String getTitle() {
         return this.title;
     }
 
+    /**
+     * Gets the row axis label of the table.
+     * 
+     * @return Returns the row axis label.
+     */
     public String getRowAxisLabel() {
         return this.rowAxisLabel;
     }
 
+    /**
+     * Gets the column axis label of the table.
+     * 
+     * @return Returns the column axis label.
+     */
     public String getColumnAxisLabel() {
         return this.columnAxisLabel;
     }
 
+    /**
+     * Gets the row size of the table.
+     * 
+     * @return Returns the size of the rows.
+     */
     public int getRowSize() {
         return this.series.size();
     }
 
+    /**
+     * Gets the column size of the table.
+     * 
+     * @return Returns the size of the columns.
+     */
     public int getColumnSize() {
         return this.blocks.size();
     }
 
+    /**
+     * Adds a new row to the table.
+     * 
+     * @param rowName The name of the row.
+     */
     public void addRow(String rowName) {
         Series newSeries = new Series(rowName);
         this.series.add(newSeries);
     }
 
+    /**
+     * Adds a new column to the table.
+     * 
+     * @param columnName The name of the column.
+     */
     public void addColumn(String columnName) {
         Block newBlock = new Block(columnName);
         this.blocks.add(newBlock);
@@ -146,6 +309,13 @@ public class ReportData<T> {
         }
     }
 
+    /**
+     * Gets the name of the row at the given index of the table.
+     * 
+     * @param index The index.
+     * @return Returns the name of the row.
+     * @throws IndexOutOfBoundsException Thrown of the index is out of bounds.
+     */
     public String getRowName(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= this.series.size())
             throw new IndexOutOfBoundsException("Index " + index + "' out of row range.");
@@ -153,6 +323,13 @@ public class ReportData<T> {
         return this.series.get(index).getName();
     }
 
+    /**
+     * Gets the name of the column at the given index of the table.
+     * 
+     * @param index The index.
+     * @return Returns the name of the column.
+     * @throws IndexOutOfBoundsException Thrown of the index is out of bounds.
+     */
     public String getColumnName(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= this.blocks.size())
             throw new IndexOutOfBoundsException("Index " + index + "' out of column range.");
@@ -160,6 +337,13 @@ public class ReportData<T> {
         return this.blocks.get(index).getName();
     }
 
+    /**
+     * Sets the name of the row at the given index in the table.
+     * 
+     * @param index The index.
+     * @param newName The new name of the row.
+     * @throws IndexOutOfBoundsException Thrown of the index is out of bounds.
+     */
     public void setRowName(int index, String newName) throws IndexOutOfBoundsException {
         if (index < 0 || index >= this.series.size())
             throw new IndexOutOfBoundsException("Index " + index + "' out of row range.");
@@ -167,6 +351,13 @@ public class ReportData<T> {
         this.series.get(index).setName(newName);
     }
 
+    /**
+     * Sets the name of the column at the given index in the table.
+     * 
+     * @param index The index.
+     * @param newName The new name of the column.
+     * @throws IndexOutOfBoundsException Thrown of the index is out of bounds.
+     */
     public void setColumnName(int index, String newName ) throws IndexOutOfBoundsException {
         if (index < 0 || index >= this.blocks.size())
             throw new IndexOutOfBoundsException("Index '" + index + "' out of column range.");
@@ -174,6 +365,12 @@ public class ReportData<T> {
         this.blocks.get(index).setName(newName);
     }
 
+    /**
+     * Removes the row at the given index. This includes the cells associated with it as well.
+     * 
+     * @param index The index.
+     * @throws IndexOutOfBoundsException Thrown of the index is out of bounds.
+     */
     public void removeRow(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= this.series.size())
             throw new IndexOutOfBoundsException("Index " + index + "' out of row range.");
@@ -181,6 +378,12 @@ public class ReportData<T> {
         this.series.remove(index);
     }
 
+    /**
+     * Removes the column at the given index. This includes the cells associated with it as well.
+     * 
+     * @param index The index.
+     * @throws IndexOutOfBoundsException Thrown of the index is out of bounds.
+     */
     public void removeColumn(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= this.blocks.size())
             throw new IndexOutOfBoundsException("Index '" + index + "' out of column range.");
@@ -192,6 +395,14 @@ public class ReportData<T> {
         }
     }
 
+    /**
+     * Sets the set at the given row-column coordinate.
+     * 
+     * @param row The row.
+     * @param col The column.
+     * @param data The data of the cell.
+     * @throws IndexOutOfBoundsException Thrown if the row and/or column is out of bounds.
+     */
     public void setCell(int row, int col, T data) throws IndexOutOfBoundsException {
         if (row < 0 || row >= this.series.size()) 
             throw new IndexOutOfBoundsException("Row " + row + "' out of row range.");
@@ -202,7 +413,14 @@ public class ReportData<T> {
         series.setCell(col, data);
     }
 
-    public void clearCell(int row, int col) {
+    /**
+     * Clears the cell at the given row-column coordinate.
+     * 
+     * @param row The row.
+     * @param col The column.
+     * @throws IndexOutOfBoundsException Thrown if the row and/or column is out of bounds.
+     */
+    public void clearCell(int row, int col) throws IndexOutOfBoundsException {
         if (row < 0 || row >= this.series.size()) 
             throw new IndexOutOfBoundsException("Row '" + row + "' out of row range.");
         if (col < 0 || col >= this.series.size()) 
@@ -212,6 +430,9 @@ public class ReportData<T> {
         series.clearCell(col);
     }
 
+    /**
+     * The string representation of the table.
+     */
     public String toString() {
         StringBuilder ret_str = new StringBuilder();
 
@@ -247,24 +468,4 @@ public class ReportData<T> {
 
         System.out.println(test.toString());
     }
-
-    // private Iterator<Iterator<T>> rowIterator() {
-    //     Iterator<Iterator<T>> it = new Iterator<Iterator<T>>() {
-    //         private int currRow = 0;
-
-    //         @Override
-    //         public boolean hasNext() {
-    //             return currRow <= series.size(); 
-    //         }
-
-    //         @Override
-    //         public Iterator<T> next() {
-
-
-
-    //             return null;
-    //         }
-    //     };
-    //     return it;
-    // }
 }
