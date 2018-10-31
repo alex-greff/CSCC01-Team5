@@ -1,0 +1,12 @@
+Personas:
+- No changes
+
+User Stories:
+- Removed U10 and U11 because after some discussion the team decided that implementing graphical template editors is beyond the scope of the project
+
+Tasks:
+- Updated the tasks to reflect the changes made in the user stories.
+- Added an extra task (which is now T9) because we realized that we missed this necessary task in ealier versions.
+- Consolidated the T10 and T11 into one task.
+- Re-did T10 and T11 to better match the report system that was built (the conceptual report system turned out to be a bit different to the implemented version).
+- Lowered the story points for T13 from 4 to 3 because Won (who is completing it) thinks it will only take that long.
