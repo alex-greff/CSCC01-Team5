@@ -23,8 +23,10 @@
 			"minutes":["O", false]
 		},
 		"number-of-clients-in-group":["P", false],
-		"directed-at-specific-target-group":["Q", false],
+
 		"target-group":{
+			"directed-at-specific-target-group":["Q", false],
+
 			"children":["R", false],
 			"youth":["S", false],
 			"seniors":["T", false],
