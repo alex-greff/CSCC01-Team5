@@ -98,8 +98,8 @@ public class ReportGenerator {
         String verticalAxisTitleLocation = (String) dataLocations.get("vertical-axis-title");
         String horizontalAxisTitleLocation = (String) dataLocations.get("horizontal-axis-title");
         String seriesTitlesStartLocation = (String) dataLocations.get("series-start");
-        String blocksStartLocation = (String) dataLocations.get("blocks-start");
-        String cellsTitlesStartLocation = (String) dataLocations.get("cells-start");
+        String blocksTitlesStartLocation = (String) dataLocations.get("blocks-start");
+        String cellsStartLocation = (String) dataLocations.get("cells-start");
 
         // Get data sheet
         FileInputStream targetFile_is = new FileInputStream(new File(ROOT_DIR + targetPath));
@@ -122,8 +122,47 @@ public class ReportGenerator {
         // Add horizontal axis title
         addToCell(sheet, horizontalAxisTitleLocation, data.getColumnAxisLabel());
 
-        // TODO: add all the data to the sheet
+        int col_num, row_num;
 
+        // Add row title names
+        int[] rowTitleStartCoords = SpreadsheetHelpers.convertCellCoordsNumberedArray(seriesTitlesStartLocation);
+        col_num = rowTitleStartCoords[1];
+
+        for (int i = 0; i < data.getRowSize(); i++) {
+            row_num = rowTitleStartCoords[0] + i;
+            int[] coords = { row_num, col_num };
+            String row_name = data.getRowName(i);
+
+            addToCell(sheet, coords, row_name);
+        }
+
+        // Add column title names
+        int[] colTitleStartCoords = SpreadsheetHelpers.convertCellCoordsNumberedArray(blocksTitlesStartLocation);
+        row_num = colTitleStartCoords[0];
+
+        for (int i = 0; i < data.getColumnSize(); i++) {
+            col_num = colTitleStartCoords[1] + i;
+            int[] coords = { row_num, col_num };
+            String col_name = data.getColumnName(i);
+
+            addToCell(sheet, coords, col_name);
+        }
+
+        // Add all the data
+        int[] dataStartCoords = SpreadsheetHelpers.convertCellCoordsNumberedArray(cellsStartLocation);
+
+        for (int x = 0; x < data.getColumnSize(); x++) {
+            for (int y = 0; y < data.getRowSize(); y++) {
+                row_num = dataStartCoords[0] + y;
+                col_num = dataStartCoords[1] + x;
+                int[] coords = { row_num, col_num };
+
+                Object cellContent = data.getCell(row_num, col_num);
+                addToCell(sheet, coords, cellContent);
+            }
+        }
+
+        // Clean up and close file and workbook streams
         targetFile_is.close();
         FileOutputStream targetFile_os = new FileOutputStream(ROOT_DIR + targetPath);
         workbook.write(targetFile_os);
@@ -132,7 +171,11 @@ public class ReportGenerator {
 
     private void addToCell(Sheet sheet, String location, Object content) {
         int[] num_location = SpreadsheetHelpers.convertCellCoordsNumberedArray(location);
-        int rowNum = num_location[0], colNum = num_location[1];
+        addToCell(sheet, num_location, content);
+    }
+
+    private void addToCell(Sheet sheet, int[] location, Object content) {
+        int rowNum = location[0], colNum = location[1];
 
         Row curr_row = (sheet.getRow(rowNum) != null) ? sheet.getRow(rowNum) : sheet.createRow(rowNum);
 

@@ -81,6 +81,23 @@ public class ReportData<T> {
         }
 
         /**
+         * Gets the cell contents at the given index.
+         * 
+         * @param index The index.
+         * @return Returns the content of the cell.
+         */
+        public Object getCell(int index) throws IndexOutOfBoundsException {
+            // Upper bound check
+            if (index >= this.blocks.size())
+                throw new IndexOutOfBoundsException("Index '" + index + "'' is out of bounds. Add more blocks to expand the matrix.");
+            // Lower bound check
+            if (index < 0)
+                throw new IndexOutOfBoundsException("Index '" + index + "' can not be negative.");
+            
+            return this.cells.get(index);
+        }
+
+        /**
          * Sets the block at the given index to a new block.
          * 
          * @param index The index.
@@ -428,6 +445,24 @@ public class ReportData<T> {
 
         Series series = this.series.get(row);
         series.clearCell(col);
+    }
+
+    /**
+     * Gets the cell contents at the given row-column coordinate.
+     * 
+     * @param row The row.
+     * @param col The index.
+     * @throws IndexOutOfBoundsException Thrown if the row and/or column is out of bounds.
+     * @return Returns the cell contents.
+     */
+    public Object getCell(int row, int col)  throws IndexOutOfBoundsException {
+        if (row < 0 || row >= this.series.size()) 
+            throw new IndexOutOfBoundsException("Row '" + row + "' out of row range.");
+        if (col < 0 || col >= this.series.size()) 
+            throw new IndexOutOfBoundsException("Row '" + col + "' out of column range.");
+
+        Series series = this.series.get(row);
+        return series.getCell(col);
     }
 
     /**
