@@ -309,6 +309,11 @@ public class ReportData<T> {
      */
     public void addRow(String rowName) {
         Series newSeries = new Series(rowName);
+
+        for (Block block : this.blocks) {
+            newSeries.addBlock(block);
+        }
+
         this.series.add(newSeries);
     }
 
