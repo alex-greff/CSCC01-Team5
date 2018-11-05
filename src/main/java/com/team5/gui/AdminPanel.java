@@ -1,7 +1,5 @@
 package com.team5.gui;
 
-import java.awt.CardLayout;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -10,10 +8,10 @@ public class AdminPanel extends JPanel {
 	// Uploading iCare file | Generating report | Managing templates in template editor
 	private JButton upload, generate;
 	
-	AdminPanel(JPanel content, CardLayout cLayout){
+	AdminPanel(JPanel content){
 		super();
 		
-		EventHandler eventHandler = new EventHandler(content, cLayout);
+		EventHandler eventHandler = new EventHandler(content);
 		
 		// Adding Action Listener to buttons
 		upload = new JButton("Upload iCare File");

@@ -11,9 +11,9 @@ public class EventHandler implements ActionListener {
 	private CardLayout cLayout;
 	private JPanel content;
 
-	EventHandler(JPanel contentJPanel, CardLayout Layout) {
-		cLayout = Layout;
+	EventHandler(JPanel contentJPanel) {
 		content = contentJPanel;
+		cLayout = (CardLayout) content.getLayout();
 	}
 
 	@Override

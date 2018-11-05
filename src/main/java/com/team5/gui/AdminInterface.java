@@ -47,9 +47,9 @@ public class AdminInterface extends JFrame {
 	 */
 	private void loadContent() {
 		
-		JPanel adminPanel = new AdminPanel(content, cLayout);
-		JPanel icarePanel = new ICarePanel(content, cLayout);
-		JPanel reportPanel = new ReportPanel(content, cLayout);
+		JPanel adminPanel = new AdminPanel(content);
+		JPanel icarePanel = new ICarePanel(content);
+		JPanel reportPanel = new ReportPanel(content);
 		
 		content.add(adminPanel, "Admin");
 		content.add(icarePanel, "Upload iCare File");
