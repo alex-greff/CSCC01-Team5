@@ -5,13 +5,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 
-import com.team5.utilities.*;
+import com.team5.utilities.ConfigurationLoader;
+import com.team5.utilities.ConfigurationNotFoundException;
+import com.team5.utilities.JSONLoader;
+import com.team5.utilities.SpreadsheetHelpers;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -24,37 +25,67 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
+/**
+ * Generates reports based of the report template system.
+ */
 public class ReportGenerator {
-    private String ROOT_DIR = "";
+    /**
+     * The root directory for the templates.
+     */
+    private String TEMPLATE_ROOT_DIR = "";
 
-    public ReportGenerator() {
+    /**
+     * Constructs a ReportGenerator object.
+     * 
+     * @throws ConfigurationNotFoundException Thrown the configuration for the report system is missing.
+     */
+    public ReportGenerator() throws ConfigurationNotFoundException {
         getConfigs();
     }
 
+    /**
+     * Generates a report from the given report template and data object.
+     * 
+     * @param reportTemplateJSONPath The report template JSON file.
+     * @param targetPath The target path of the report file.
+     * @param data The data for the report.
+     * @throws ParseException Thrown if a parse exception occurs while parsing the template JSON.
+     * @throws IOException Occurs if an IOException occurs (most commonly a non-existent file).
+     * @throws InvalidFormatException Thrown if an invalid format is encountered in a report excel file.
+     */
     public void generateReport(String reportTemplateJSONPath, String targetPath, ReportData<?> data) 
         throws ParseException, IOException, InvalidFormatException {
         
-        JSONObject reportTemplateJSON = JSONLoader.parseJSONFile(ROOT_DIR + "/" + reportTemplateJSONPath);
+        // Get the report template JSON
+        JSONObject reportTemplateJSON = JSONLoader.parseJSONFile(TEMPLATE_ROOT_DIR + "/" + reportTemplateJSONPath);
 
+        // Initialize the report file
         initializeReportFile(reportTemplateJSON, targetPath);
 
+        // Populate the report file
         populateReportFile(reportTemplateJSON, data, targetPath);
     }
 
-    private void getConfigs() {
-        try {
-            // Load the needed configs
-            JSONObject config = ConfigurationLoader.loadConfiguration("report-template-system");
-            ROOT_DIR = (String) config.get("root-template-directory"); // Usually "data/templates/report-templates"
-        } catch (ConfigurationNotFoundException e) {
-            // Do nothing
-        }
+    /**
+     * Gets the configurations for the report generator.
+     */
+    private void getConfigs() throws ConfigurationNotFoundException {
+        // Load the needed configs
+        JSONObject config = ConfigurationLoader.loadConfiguration("report-template-system");
+        TEMPLATE_ROOT_DIR = (String) config.get("root-template-directory"); // Usually "data/templates/report-templates"
     }
 
+    /**
+     * Initializes the report file by creating and/or copying the template report file into the target file.
+     * 
+     * @param reportTemplate The report template.
+     * @param targetPath The target path of the report file.
+     * @throws IOException Thrown if an IO exception occurs.
+     */
     private void initializeReportFile(JSONObject reportTemplate, String targetPath) throws IOException {
         String correspondingTemplatePath = (String)reportTemplate.get("source-file");
 
-        String templateFilePath = ROOT_DIR + "/" + correspondingTemplatePath;
+        String templateFilePath = TEMPLATE_ROOT_DIR + "/" + correspondingTemplatePath;
         String targetFilePath = targetPath;
 
         File templateFile = new File(templateFilePath);
@@ -65,7 +96,16 @@ public class ReportGenerator {
     }
 
     
-
+    /**
+     * Populates the report file with the given data.
+     * 
+     * @param reportTemplate The report template.
+     * @param data The data object.
+     * @param targetPath The report file path.
+     * @throws FileNotFoundException Thrown if the report file is not found.
+     * @throws IOException Thrown if an IO exception occurs.
+     * @throws InvalidFormatException Thrown if an invalid format is encountered in a report excel file.
+     */
     private void populateReportFile(JSONObject reportTemplate, ReportData<?> data, String targetPath) throws FileNotFoundException, IOException, InvalidFormatException {
         // Load configs from template
         String dataSheet = (String) reportTemplate.get("data-sheet");
@@ -160,6 +200,13 @@ public class ReportGenerator {
         targetFile_os.close();
     }
 
+    /**
+     * Adds the given content to the cell in the given location of the given sheet.
+     * 
+     * @param sheet The sheet.
+     * @param location The string location (e.g. 'A10' for column A and row 10... careful it's one-based).
+     * @param content The content to the put in the cell.
+     */
     private void addToCell(Sheet sheet, String location, Object content) {
         // Get the coordinates in numerical form
         int[] num_location = SpreadsheetHelpers.convertCellCoordsNumberedArray(location);
@@ -169,6 +216,13 @@ public class ReportGenerator {
         addToCell(sheet, num_location, content);
     }
 
+    /**
+     * Adds the given content to the cell in the given location of the given sheet.
+     * 
+     * @param sheet The sheet.
+     * @param location The integer pair location (e.g. [0, 5] -> The 0th row and the 5th column... careful it's zero-based).
+     * @param content The content to be put in the cell.
+     */
     private void addToCell(Sheet sheet, int[] location, Object content) {
         // Get the coordinates
         int rowNum = location[0], colNum = location[1];
@@ -194,13 +248,5 @@ public class ReportGenerator {
             curr_cell.setCellValue((Calendar) content);
         else if (content instanceof RichTextString)
             curr_cell.setCellValue((RichTextString) content);
-    }
-
-
-    public static void main(String[] args) {
-        //System.out.println(convertUpperCaseLetterAlphabetRanking('Z'));
-        int[] ret = SpreadsheetHelpers.convertCellCoordsNumberedArray("A80");
-
-        System.out.println(ret[0] + ", " + ret[1]);
     }
 }
