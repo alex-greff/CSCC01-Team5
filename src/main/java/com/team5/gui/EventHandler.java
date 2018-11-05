@@ -1,19 +1,29 @@
 package com.team5.gui;
 
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JPanel;
+
 public class EventHandler implements ActionListener {
+	
+	private CardLayout cLayout;
+	private JPanel content;
+
+	EventHandler(JPanel contentJPanel, CardLayout Layout) {
+		cLayout = Layout;
+		content = contentJPanel;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("Upload iCare File")) {
-			// TODO Integrate the file upload feature
-		} else if (e.getActionCommand().equals("Generate Report")) {
-			// TODO Integrate the generate report feature
-		} else if (e.getActionCommand().equals("Manage Templates")){
-			// TODO Integrate the Manage Template Feature
-		}
+		String command = e.getActionCommand();
+
+		if (command == "Upload iCare File"){ cLayout.show(content, "Upload iCare File"); }
+		else if (command == "Generate Report") { cLayout.show(content, "Generate Report"); }
+		else if (command == "Back") { cLayout.show(content, "Admin"); }
+
 	}
 
 }

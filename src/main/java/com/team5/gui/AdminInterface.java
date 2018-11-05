@@ -1,5 +1,6 @@
 package com.team5.gui;
 
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -8,6 +9,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * The Interface for the admin user
@@ -15,8 +17,8 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class AdminInterface extends JFrame {
 
-	// Uploading iCare file | Generating report | Managing templates in template editor
-	private JButton upload, generate, manage;
+	private JPanel content = new JPanel();
+	CardLayout cLayout = new CardLayout();
 
 	/**
 	 * Constructs admin interface
@@ -27,16 +29,8 @@ public class AdminInterface extends JFrame {
 		setSize(getScreenDimension().width/2, getScreenDimension().height/2);
 		setResizable(false);
 		setLocationRelativeTo(null); // Starts interface at center of screen
-		setLayout(new GridBagLayout());
 		
-		upload = new JButton("Upload iCare File");
-		upload.addActionListener(new EventHandler());
-		
-		generate = new JButton("Generate Report");
-		generate.addActionListener(new EventHandler());
-		
-		manage = new JButton("Manage Templates");
-		manage.addActionListener(new EventHandler());
+		content.setLayout(cLayout);
 	}
 
 	/**
@@ -52,20 +46,20 @@ public class AdminInterface extends JFrame {
 	 * Loads the contents on the interface i.e., the buttons and layouts. 
 	 */
 	private void loadContent() {
-		GridBagConstraints constraint = new GridBagConstraints();
-		// Internal button padding
-		constraint.ipadx = 40;
-		constraint.ipady = 40;
 		
-		// Adding buttons
-		add(upload, constraint);
+		JPanel adminPanel = new AdminPanel(content, cLayout);
+		JPanel icarePanel = new ICarePanel(content, cLayout);
+		JPanel reportPanel = new ReportPanel(content, cLayout);
 		
-		constraint.insets = new Insets(60, 0, 0, 0); // External button padding
-		constraint.gridy = 1; // Make button below button above
-		add(generate, constraint);
+		content.add(adminPanel, "Admin");
+		content.add(icarePanel, "Upload iCare File");
+		content.add(reportPanel, "Generate Report");
 		
-		constraint.gridy = 2; // Below generate button
-		add(manage, constraint);
+		cLayout.show(content, "Admin");
+		
+		this.add(content);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setVisible(true);
 	}
 
 	/**
