@@ -1,0 +1,9 @@
+Personas:
+- No change
+
+User Stories:
+- Split existing user stories into more a more specific ones (a couple were close to being epics).
+- Reordered the user stories after discussions with the team highlighting flaws in the current order.
+
+Tasks:
+- Were not thought-up yet
