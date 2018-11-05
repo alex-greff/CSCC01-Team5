@@ -1,28 +1,28 @@
 package com.team5.gui;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class AdminPanel extends JPanel {
+public class AdminPanel extends SuperPanel {
 	
 	// Uploading iCare file | Generating report | Managing templates in template editor
-	private JButton upload, generate;
+	private JButton upload = new JButton("Upload iCare File");
+	private JButton generate = new JButton("Generate Report");
 	
 	AdminPanel(JPanel content){
-		super();
-		
-		EventHandler eventHandler = new EventHandler(content);
+		super(content);
 		
 		// Adding Action Listener to buttons
-		upload = new JButton("Upload iCare File");
 		upload.addActionListener(eventHandler);
-		
-		generate = new JButton("Generate Report");
 		generate.addActionListener(eventHandler);
 		
 		// Adding buttons
-		add(upload);
-		add(generate);
+		add(upload, defaultConstraint);
+		add(generate, defaultConstraint);
 	}
 
 }
