@@ -1,9 +1,5 @@
 package com.team5.gui;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 

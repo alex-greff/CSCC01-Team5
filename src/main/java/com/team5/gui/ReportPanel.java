@@ -1,6 +1,5 @@
 package com.team5.gui;
 
-import java.awt.GridBagConstraints;
 import java.awt.Label;
 import java.util.Arrays;
 
