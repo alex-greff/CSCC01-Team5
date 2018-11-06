@@ -12,6 +12,10 @@ import javax.swing.JPanel;
  */
 @SuppressWarnings("serial")
 public class GUIManager extends JFrame {
+	
+	final static String ADMIN = "Admin";
+	final static String ICARE = "Upload iCare File";
+	final static String REPORT = "Generate Report";
 
 	private JPanel content = new JPanel();
 	CardLayout cLayout = new CardLayout();
@@ -41,17 +45,17 @@ public class GUIManager extends JFrame {
 	/**
 	 * Loads the contents on the interface i.e., the buttons and layouts. 
 	 */
-	private void loadContent() {
+	private void loadContent(String page) {
 		
 		JPanel adminPanel = new AdminPanel(content);
 		JPanel icarePanel = new ICarePanel(content);
 		JPanel reportPanel = new ReportPanel(content);
 		
-		content.add(adminPanel, "Admin");
-		content.add(icarePanel, "Upload iCare File");
-		content.add(reportPanel, "Generate Report");
+		content.add(adminPanel, ADMIN);
+		content.add(icarePanel, ICARE);
+		content.add(reportPanel, REPORT);
 		
-		cLayout.show(content, "Admin");
+		cLayout.show(content, page);
 		
 		this.add(content);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -62,15 +66,18 @@ public class GUIManager extends JFrame {
 	 * Shows the interface and its contents.
 	 */
 	public void load() {
+		load("Admin");
+	}
+	public void load(String page) {
 		setVisible(true);
-		loadContent();
+		loadContent(page);
 		revalidate();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	// DEMO
 	public static void main(String[] args) {
-		GUIManager admin_gui = new GUIManager("Admin");
+		GUIManager admin_gui = new GUIManager(ADMIN);
 		admin_gui.load();
 	}
 }

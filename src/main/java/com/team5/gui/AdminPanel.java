@@ -21,4 +21,9 @@ public class AdminPanel extends SuperPanel {
 		add(generate, defaultConstraint);
 	}
 
+	// DEMO
+	public static void main(String[] args) {
+		GUIManager admin_gui = new GUIManager("Admin");
+		admin_gui.load(GUIManager.ADMIN);
+	}
 }
