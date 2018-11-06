@@ -7,6 +7,7 @@ import com.mongodb.MongoClientException;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import org.bson.Document;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
@@ -79,6 +81,32 @@ public class DatabaseDriver {
 	}
 	
 	/**
+	 * Retrieves data from the database.
+	 * @return A list of JSONObjects.
+	 */
+	public List<JSONObject> queryDatabase() {
+		List<JSONObject> data = new ArrayList<>(); // List of JSONObjects
+		
+		MongoCursor<Document> cursor = collection.find().iterator(); // Get the cursor
+		
+		// Go through the data in the collection
+		while (cursor.hasNext()) {
+			Document doc = cursor.next();
+			JSONParser parser = new JSONParser();
+			JSONObject object = null;
+			try {
+				object = (JSONObject) parser.parse(doc.toJson()); // Convert document to JSONObject;
+				object.remove("_id"); // Removes the _id field
+				data.add(object);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+		return data;
+	}
+	
+	/**
 	 * Closes the connection to the database.
 	 */
 	public void closeConnection() {
@@ -114,9 +142,19 @@ public class DatabaseDriver {
 		System.out.println("Inserting JSON objects into database...");
 		db.insertMany(ob);
 		System.out.println("JSON objects inserted.");
-		System.out.println("Closing connection.");
+		
+		System.out.println("Now we will get the objects that we inserted into the database. Printing objects...\n");
+		
+		List<JSONObject> data = db.queryDatabase();
+		for (JSONObject obj : data) {
+			obj.remove("_id"); // Removes the _id field
+			System.out.println(obj.toJSONString());
+		}
+		
+		System.out.println("\nNow closing connection.");
 		db.closeConnection();
-		System.out.println("Connection to database closed.");
+		System.out.println("Connection closed.");
+		
 	}
 
 }
