@@ -57,6 +57,7 @@ public class ICarePanel extends SuperPanel {
 		textFieldConstraint.gridwidth = 4;
 		textFieldConstraint.ipady = 100;
 		textFieldConstraint.ipadx = 800;
+		feedbackText.setEditable(false);
 		add(feedbackText, textFieldConstraint);
 		feedbackTextFieldIndex = Arrays.asList(getComponents()).indexOf(feedbackText); //Get index of feedback TextField
 		

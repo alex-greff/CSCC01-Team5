@@ -42,9 +42,6 @@ public class GUIManager extends JFrame {
 	 * Loads the contents on the interface i.e., the buttons and layouts. 
 	 */
 	private void loadContent() {
-		loadContent("Admin");
-	}
-	private void loadContent(String page) {
 		
 		JPanel adminPanel = new AdminPanel(content);
 		JPanel icarePanel = new ICarePanel(content);
@@ -54,7 +51,7 @@ public class GUIManager extends JFrame {
 		content.add(icarePanel, "Upload iCare File");
 		content.add(reportPanel, "Generate Report");
 		
-		cLayout.show(content, "Upload iCare File");
+		cLayout.show(content, "Admin");
 		
 		this.add(content);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
