@@ -1,7 +1,8 @@
 package com.team5.database;
 
 import com.team5.utilities.JSONLoader;
-
+import com.github.vincentrussell.query.mongodb.sql.converter.MongoDBQueryHolder;
+import com.github.vincentrussell.query.mongodb.sql.converter.QueryConverter;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientException;
 import com.mongodb.MongoClientURI;
@@ -84,24 +85,18 @@ public class DatabaseDriver {
 	 * Retrieves data from the database.
 	 * @return A list of JSONObjects.
 	 */
-	public List<JSONObject> queryDatabase() {
+	public List<JSONObject> queryDatabase(String queryCommand) {
 		List<JSONObject> data = new ArrayList<>(); // List of JSONObjects
 		
-		MongoCursor<Document> cursor = collection.find().iterator(); // Get the cursor
-		
-		// Go through the data in the collection
-		while (cursor.hasNext()) {
-			Document doc = cursor.next();
-			JSONParser parser = new JSONParser();
-			JSONObject object = null;
-			try {
-				object = (JSONObject) parser.parse(doc.toJson()); // Convert document to JSONObject;
-				object.remove("_id"); // Removes the _id field
-				data.add(object);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			} 
+		QueryConverter queryConverter = null;
+		try {
+			queryConverter = new QueryConverter(queryCommand);
+		} catch (com.github.vincentrussell.query.mongodb.sql.converter.ParseException e) {
+			e.printStackTrace();
 		}
+		MongoDBQueryHolder mongoDBQueryHolder = queryConverter.getMongoQuery();
+		Document query = mongoDBQueryHolder.getQuery();
+		System.out.println(query.toJson());
 		
 		return data;
 	}
@@ -142,6 +137,9 @@ public class DatabaseDriver {
 		System.out.println("Inserting JSON objects into database...");
 		db.insertMany(ob);
 		System.out.println("JSON objects inserted.");
+		
+		System.out.println("\nNow getting inserted object from database.");
+		db.queryDatabase("select field1 from client_profile");
 		
 		System.out.println("\nNow closing connection.");
 		db.closeConnection();
