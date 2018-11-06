@@ -4,6 +4,7 @@ import java.awt.Label;
 import java.util.Arrays;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -11,7 +12,8 @@ import javax.swing.JTextField;
 public class ReportPanel extends SuperPanel {
 	
 	private JLabel reportLabel = new JLabel("Report:", Label.RIGHT);
-	private JTextField reportText = new JTextField();
+	private String[] reports = {"Placeholder Report 1", "Placehoder Report 2", "Placeholder Report 3"};
+	private JComboBox<String> reportDropDown = new JComboBox<String>(reports);
 	
 	private JLabel saveLabel = new JLabel("Report Save Location:", Label.RIGHT);
 	private JTextField directoryTextField = new JTextField();
@@ -37,7 +39,7 @@ public class ReportPanel extends SuperPanel {
 		
 		// Adding buttons and labels
 		add(reportLabel, defaultConstraint);
-		add(reportText, textFieldConstraint);
+		add(reportDropDown, textFieldConstraint);
 		
 		defaultConstraint.gridy = 1;
 		textFieldConstraint.gridy = 1;
