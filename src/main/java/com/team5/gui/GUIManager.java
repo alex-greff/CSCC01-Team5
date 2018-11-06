@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  * The Interface for the admin user
  */
 @SuppressWarnings("serial")
-public class AdminInterface extends JFrame {
+public class GUIManager extends JFrame {
 
 	private JPanel content = new JPanel();
 	CardLayout cLayout = new CardLayout();
@@ -20,7 +20,7 @@ public class AdminInterface extends JFrame {
 	 * Constructs admin interface
 	 * @param title The title of the interface window.
 	 */
-	public AdminInterface(String title) {
+	public GUIManager(String title) {
 		super(title);
 		setSize(getScreenDimension().width/2, getScreenDimension().height/2);
 		setResizable(false);
@@ -42,6 +42,9 @@ public class AdminInterface extends JFrame {
 	 * Loads the contents on the interface i.e., the buttons and layouts. 
 	 */
 	private void loadContent() {
+		loadContent("Admin");
+	}
+	private void loadContent(String page) {
 		
 		JPanel adminPanel = new AdminPanel(content);
 		JPanel icarePanel = new ICarePanel(content);
@@ -51,7 +54,7 @@ public class AdminInterface extends JFrame {
 		content.add(icarePanel, "Upload iCare File");
 		content.add(reportPanel, "Generate Report");
 		
-		cLayout.show(content, "Admin");
+		cLayout.show(content, "Upload iCare File");
 		
 		this.add(content);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -70,7 +73,7 @@ public class AdminInterface extends JFrame {
 
 	// DEMO
 	public static void main(String[] args) {
-		AdminInterface admin_gui = new AdminInterface("Admin");
+		GUIManager admin_gui = new GUIManager("Admin");
 		admin_gui.load();
 	}
 }
