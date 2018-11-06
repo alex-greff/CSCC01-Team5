@@ -53,7 +53,20 @@ public class TemplateParser {
          	     inputobject.put(key, objects);
          	}
          }
-        
+         else if(inputcell.getCellType() == CellType.BLANK) {
+          
+          	if(inputobject.get(key) == null) {
+          		  ArrayList<String> objects = new ArrayList<String>();
+          		  objects.add(null);
+          		  inputobject.put(key, objects);
+          	   }
+          	else {
+          		 ArrayList<String> objects = (ArrayList<String>) inputobject.get(key);
+          	     objects.add(null);
+          	     inputobject.put(key, objects);
+          	}
+          }
+         
 		
 		
 		 
@@ -71,9 +84,20 @@ public class TemplateParser {
 	     while(firstSheet.getRow(row_cur) != null) {
 	     //first validate if this row is a valid row (client identity exist or not)
 	     
-	     Boolean row_validate = true;
-	     
-     	 
+	    Boolean row_validate = true;
+	     JSONObject objval = (JSONObject) jsonObject.get("identifier");
+
+     	for(Iterator nestediterator = objval.keySet().iterator(); nestediterator.hasNext();) {
+     		String nestedkey = (String) nestediterator.next();
+     		JSONArray array = (JSONArray) objval.get(nestedkey);
+     		int columnNum = CellReference.convertColStringToIndex((String) array.get(0));
+     		Cell inputcell = firstSheet.getRow(row_cur).getCell(columnNum);
+     		if(inputcell.getCellType() == CellType.BLANK) {
+     			row_validate = false;
+     		}
+     
+     
+     	}
      	 // iterate through each key value in the json object
 	     for(Iterator iterator = jsonObject.keySet().iterator(); iterator.hasNext();) {
 	        	
@@ -81,7 +105,9 @@ public class TemplateParser {
 	            // Check if the key returns an json array or Json Object
 	            if (jsonObject.get(key) instanceof JSONArray) {
 	            	JSONArray array = (JSONArray) jsonObject.get(key);
+	            	if(row_validate) {
 	            	inputValuesArray(parsedObj, firstSheet, key, array, row_cur);
+	            	}
 	            	
 	            }
 	            else {
@@ -96,10 +122,13 @@ public class TemplateParser {
 	            		String nestedkey = (String) nestediterator.next();
 	            		if (obj.get(nestedkey) instanceof JSONArray) {
 	            		JSONArray array = (JSONArray) obj.get(nestedkey);
+	            		if(row_validate) {
 	            		inputValuesArray(nestedobj, firstSheet, nestedkey, array, row_cur);
 	            		}
+	            		}
+	            	  if(row_validate) {
 	            	  parsedObj.put(key, nestedobj);
-	            	  
+	            	  }
 	            	}
 	            	
 	            }
