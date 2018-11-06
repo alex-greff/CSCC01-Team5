@@ -6,58 +6,48 @@
 * Mohammed Osumah
 * Gyeongwon Choi
 
+## Table of Contents
+- [Setting Up](#Setting-Up)
+  - [Production](#Production)
+  - [Development Environment](#Development-Environment)
+  - [Testing](#Testing)
+  - [System Demos](#System-Demos)
+- [Product Backlog](#Product-Backlog)
+  - [Version 0](#Version-0)
+  - [Version 1](#Version-1)
+  - [Version 2](#Version-2)
+- [Sprint Backlog](#Sprint-Backlog)
+  - [Sprint 1](#Sprint-1)
+  - [Sprint 2](#Sprint-2)
+  - [Sprint 3](#Sprint-3)
+  - [Sprint 4](#Sprint-4)
+- [Deliverables](#Deliverables)
+  - [Deliverable 1: Team Setup](#Deliverable-1:-Team-Setup)
+  - [Deliverable 2: Project Requirements](#Deliverable-2:-Project-Requirements)
+  - [Deliverable 3: Project Planning and Execution](#Deliverable-3:-Project-Planning-and-Execution)
+  - [Deliverable 4: Product Validation](#Deliverable-4:-Product-Validation)
+  - [Deliverable 5: Final Deliverable](#Deliverable-5:-Final-Deliverable)
+
+
 ## Setting Up
 
 ### Production
-(TODO...)
+- (Will be completed for the final deliverable...)
 
 ### Development Environment
 - Java 1.8.0 or above installed
 - Install [Maven 3.5.4](https://maven.apache.org/download.cgi)
 - Compile the project
-``` $ mvn compile ```
 
+  ``` $ mvn compile ```
 
 ### Testing
-``` $ mvn test ```
 
-## Deliverables
+- Run all tests
 
-### Deliverable 1: Team Setup
-* [Setup Report](team_setup/Team_Information.pdf)
-* [Team Expectation Agreement](team_setup/Team_Expectation_Agreement.pdf)
+  ``` $ mvn test ```
 
-### Deliverable 2: Project Requirements
-* [Personas v0](product_backlog/v0/personas_0.pdf)
-* [User Stories v0](product_backlog/v0/user_stories_0.pdf)
-
-### Deliverable 3: Project Planning and Execution
-#### Product Backlog
-* [Personas v1](product_backlog/v1/personas_1.pdf)
-* [User Stories v1](product_backlog/v1/user_stories_1.pdf)
-* [Tasks v1](product_backlog/v1/tasks_1.pdf)
-
-#### Sprint Backlog
-##### Sprint 1
-* [plan.xlsx](sprint_backlog/sprint1/plan.xlsx)
-* [execution.xlsx](sprint_backlog/sprint1/execution.xlsx)
-* [burndown.xlsx](sprint_backlog/sprint1/burndown.xlsx)
-
-##### Sprint 2
-* [plan.xlsx](sprint_backlog/sprint2/plan.xlsx)
-* [execution.xlsx](sprint_backlog/sprint2/execution.xlsx)
-* [burndown.xlsx](sprint_backlog/sprint2/burndown.xlsx)
-
-##### Trello Board
-<p align="left">
-    <img src="product_backlog/trello_screenshot.png" width="1000" title="Trello Screenshot">
-</p>
-
-#### Running the Code
-
-As of sprint 2 our systems are still indepentent of each other so they must all be compiled separately.
-
-For the convenience of the grader we have compiled small demos of each system in their respective main functions. 
+### System Demos
 
 Run these commands from the project root:
 
@@ -84,6 +74,65 @@ Run these commands from the project root:
     ``` $ mvn exec:java@json-loader-demo ```
 
 <!-- * **Template System:** TODO -->
+
+## Product Backlog
+
+### Version 0
+* [Personas v0](product_backlog/v0/personas_0.pdf)
+* [User Stories v0](product_backlog/v0/user_stories_0.pdf)
+* Tasks: (not developed at this point)
+
+### Version 1
+* [Personas v1](product_backlog/v1/personas_1.pdf)
+* [User Stories v1](product_backlog/v1/user_stories_1.pdf)
+* [Tasks v1](product_backlog/v1/tasks_1.pdf)
+
+### Version 2
+* [Personas v2](product_backlog/v2/personas_2.pdf)
+* [User Stories v2](product_backlog/v2/user_stories_2.pdf)
+* [Tasks v2](product_backlog/v2/tasks_2.pdf)
+
+## Sprint Backlog
+
+### Sprint 1
+* [Sprint 1 Report](TODO)
+
+### Sprint 2
+* [Sprint 2 Report](TODO)
+
+### Sprint 3
+* [Sprint 3 Report](TODO)
+
+### Sprint 4
+* [Sprint 4 Report](TODO)
+
+## Deliverables
+
+### Deliverable 1: Team Setup
+* [Setup Report](team_setup/Team_Information.pdf)
+* [Team Expectation Agreement](team_setup/Team_Expectation_Agreement.pdf)
+
+### Deliverable 2: Project Requirements
+* [Product Backlog v0](#Version-0)
+
+### Deliverable 3: Project Planning and Execution
+* [Product Backlog v1](#Version-1)
+* [Sprint 1](#Sprint-1)
+* [Sprint 2](#Sprint-2)
+
+##### Trello Board
+<p align="left">
+    <img src="product_backlog/trello_screenshot.png" width="1000" title="Trello Screenshot">
+</p>
+
+#### Running the Code
+
+As of sprint 2 our systems are still indepentent of each other so they must all be compiled separately.
+
+For the convenience of the grader we have compiled small demos of each system in their respective main functions. 
+
+Click [here](#System-Demos) for instructions on running the demos.
+
 
 ### Deliverable 4: Product Validation
 (In-Progress...)
