@@ -1,0 +1,165 @@
+{
+    "display-name":"Language Training - Course Setup",
+
+    "processing-details":["A", false],
+    "update-record-ID":["B", false],
+    "course-code":["C", true],
+    "notes":["D", false],
+    "course-held-on-ongoing-basis":["E", true],
+    "course-official-language":["F", true],
+    "format-of-training-provided":["G", true],
+
+    "classes-location":{
+        "classes-held-at":["H", true],
+        "in-person-instruction-percent":["I", false],
+        "online-or-distance-instruction-percent":["J", false]
+    },
+
+    "course-spots":{
+        "total-number-of-spots":["K", true],
+        "number-of-IRCC-funded-spots":["L", true]
+    },
+
+    "new-students-can-entrol-in-course":["M", true],
+
+    "support-services":{
+        "available-for-client":["N", true],
+        "care-for-newcomer-children":["O", false],
+        "transportation":["P", false],
+        "provisions-for-disabilities":["Q", false]
+    },
+
+    "course-start-date":["R", true],
+    "course-end-date":["S", true],
+
+    "course-schedule":{
+        "morning":["T", false],
+        "afternoon":["U", false],
+        "evening":["V", false],
+        "weekend":["W", false],
+        "anytime":["X", false],
+        "online":["Y", false]
+    },
+
+    "course-frequency":{
+        "instructional-hours-per-class":["Z", true],
+        "classes-per-week":["AA", true],
+        "weeks-of-instruction":["AB", false],
+        "weeks-of-instruction-per-year":["AC", false]
+    },
+
+    "course-focus":{
+        "dominant-focus-of-course":["AD", true],
+        "target-group": {
+            "course-directed-at-specific-target-group":["AE", true],
+            "children":["AF", false],
+            "youth":["AG", false],
+			"seniors":["AH", false],
+			"gender-specific":["AI", false],
+            "refugees":["AJ", false],
+            "official-language-minorities":["AK", false],
+			"ethnic-cultural-linguistic-group":["AL", false],
+			"deaf-or-hard-of-hearing":["AM", false],
+            "blind-or-partially-sighted":["AN", false],
+            "other-impairments":["AO", false],
+			"lgbtq":["AP", false],
+			"families-parents":["AQ", false],
+			"international-training-in-a-regulated-profession":["AR", false],
+			"international-training-in-a-regulated-trade":["AS", false]
+        }
+    },
+
+    "course-materials":{
+        "materials-used-in-course":["AT", true],
+        "citizenship-preparation":["AU", false],
+        "PBLA-language-companion":["AV", false]
+    },
+
+    "contact-information":{
+        "contact-name":["AW", false],
+        "address":{
+            "street-number":["AX", true],
+            "steet-name":["AY", true],
+            "street-type":["AZ", true],
+            "street-direction":["BA", false],
+            "unit-suit":["BB", false],
+            "province":["BC", true],
+            "city":["BD", true],
+            "postal-code":["BE", true]
+        },
+        "telephone-information":{
+            "telephone-number":["BF", true],
+            "telephone-extension":["BG", false]
+        },
+        "email-address":["BH", true]
+    },
+
+    "skill-levels":{
+        "listening-skill-level":{
+            "level-1":["BI", false],
+            "level-2":["BJ", false],
+            "level-3":["BK", false],
+            "level-4":["BL", false],
+            "level-5":["BM", false],
+            "level-6":["BN", false],
+            "level-7":["BO", false],
+            "level-8":["BP", false],
+            "level-9":["BQ", false],
+            "level-10":["BR", false],
+            "level-11":["BS", false],
+            "level-12":["BT", false]
+        },
+        "speaking-skill-level":{
+            "level-1":["BU", false],
+            "level-2":["BV", false],
+            "level-3":["BW", false],
+            "level-4":["BX", false],
+            "level-5":["BY", false],
+            "level-6":["BZ", false],
+            "level-7":["CA", false],
+            "level-8":["CB", false],
+            "level-9":["CC", false],
+            "level-10":["CD", false],
+            "level-11":["CE", false],
+            "level-12":["CF", false]
+        },
+        "reading-skill-level":{
+            "level-1":["CG", false],
+            "level-2":["CH", false],
+            "level-3":["CI", false],
+            "level-4":["CJ", false],
+            "level-5":["CK", false],
+            "level-6":["CL", false],
+            "level-7":["CM", false],
+            "level-8":["CN", false],
+            "level-9":["CO", false],
+            "level-10":["CP", false],
+            "level-11":["CQ", false],
+            "level-12":["CR", false],
+            "level-13":["CS", false],
+            "level-14":["CT", false],
+            "level-15":["CU", false],
+            "level-16":["CV", false],
+            "level-17":["CW", false]
+        },
+        "writing-skill-level":{
+            "level-1":["CX", false],
+            "level-2":["CY", false],
+            "level-3":["CZ", false],
+            "level-4":["DA", false],
+            "level-5":["DB", false],
+            "level-6":["DC", false],
+            "level-7":["DD", false],
+            "level-8":["DE", false],
+            "level-9":["DF", false],
+            "level-10":["DG", false],
+            "level-11":["DH", false],
+            "level-12":["DI", false],
+            "level-13":["DJ", false],
+            "level-14":["DK", false],
+            "level-15":["DL", false],
+            "level-16":["DM", false],
+            "level-17":["DN", false]
+        }
+    }
+}

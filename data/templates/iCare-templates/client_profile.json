@@ -1,4 +1,6 @@
 {
+    "display-name":"Client Profile",
+    
     "identifier": {
         "category":["B", true],
         "value":["C", true]
