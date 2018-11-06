@@ -23,8 +23,43 @@ import java.util.ArrayList;
 public class TemplateParser {
 	 private TemplateParser() {}
 	 
-	 
-	 public static JSONObject parseExcel(String excelFilePath, String parsetemplate) throws IOException, ParseException{
+	 public static void inputValuesArray(JSONObject inputobject, Sheet firstSheet, String key, JSONArray array, int row_cur) {
+     	int columnNum = CellReference.convertColStringToIndex((String) array.get(0));
+     	boolean requiredfield = (boolean) array.get(1);
+         Cell inputcell = firstSheet.getRow(row_cur).getCell(columnNum);
+         if(inputcell.getCellType() == CellType.STRING) {
+         	String inputvalue = inputcell.getStringCellValue();
+         	if(inputobject.get(key) == null) {
+         		  ArrayList<String> objects = new ArrayList<String>();
+         		  objects.add(inputvalue);
+         		  inputobject.put(key, objects);
+         	   }
+         	else {
+         		 ArrayList<String> objects = (ArrayList<String>) inputobject.get(key);
+         	     objects.add(inputvalue);
+         	     inputobject.put(key, objects);
+         	}
+         }
+         else if(inputcell.getCellType() == CellType.NUMERIC) {
+         	double inputvalue = inputcell.getNumericCellValue();
+         	if(inputobject.get(key) == null) {
+         		  ArrayList<Double> objects = new ArrayList<Double>();
+         		  objects.add(inputvalue);
+         		  inputobject.put(key, objects);
+         	   }
+         	else {
+         		 ArrayList<Double> objects = (ArrayList<Double>) inputobject.get(key);
+         	     objects.add(inputvalue);
+         	     inputobject.put(key, objects);
+         	}
+         }
+        
+		
+		
+		 
+	 }
+	 @SuppressWarnings("unchecked")
+	public static JSONObject parseExcel(String excelFilePath, String parsetemplate) throws IOException, ParseException{
 		 FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
 		 JSONObject jsonObject =  new TemplateLoader("data\\/templates\\/iCare-templates").parseTemplate(parsetemplate);
 		 JSONObject parsedObj = new JSONObject();
@@ -32,39 +67,21 @@ public class TemplateParser {
 	     Sheet firstSheet = workbook.getSheetAt(0);
 	     int row_cur = 3;
 	     
-	     
 	     //iterate through the row values in excel file
-	  
 	     while(firstSheet.getRow(row_cur) != null) {
 	     //first validate if this row is a valid row (client identity exist or not)
-	     Boolean row_validate = true;
-	     //
 	     
-	     // iterate through each key value in the json object
+	     Boolean row_validate = true;
+	     
+     	 
+     	 // iterate through each key value in the json object
 	     for(Iterator iterator = jsonObject.keySet().iterator(); iterator.hasNext();) {
 	        	
 	            String key =  (String) iterator.next();
 	            // Check if the key returns an json array or Json Object
 	            if (jsonObject.get(key) instanceof JSONArray) {
-	    
 	            	JSONArray array = (JSONArray) jsonObject.get(key);
-	            	int columnNum = CellReference.convertColStringToIndex((String) array.get(0));
-	                Cell inputcell = firstSheet.getRow(row_cur).getCell(columnNum);
-	            
-	            	//If its the first time putting a value in object create an array to input object
-	                if(inputcell != null) {
-	                inputcell.setCellType(CellType.STRING);
-	            	if(parsedObj.get(key) == null) {
-	            		 ArrayList<Cell> objects = new ArrayList<Cell>();
-	            		 objects.add(inputcell);
-	            		 parsedObj.put(key, objects);
-	            		 
-	            	}else {
-	            	ArrayList<Cell> objects = (ArrayList<Cell>) parsedObj.get(key);
-	            	objects.add(inputcell);
-	            	parsedObj.put(key, objects);
-	            	}
-	                }
+	            	inputValuesArray(parsedObj, firstSheet, key, array, row_cur);
 	            }
 	            else {
 	           
@@ -73,13 +90,25 @@ public class TemplateParser {
 	            	
 	            	
 	            	for(Iterator nestediterator = obj.keySet().iterator(); nestediterator.hasNext();) {
-	            		String key2 = (String) nestediterator.next();
-	            		if (obj.get(key2) instanceof JSONArray) {
-	            		JSONArray array = (JSONArray) obj.get(key2);
-	            		
+	            		String nestedkey = (String) nestediterator.next();
+	            		if (obj.get(nestedkey) instanceof JSONArray) {
+	            		JSONArray array = (JSONArray) obj.get(nestedkey);
 	            		int columnNum = CellReference.convertColStringToIndex((String) array.get(0));
-	            		nestedobj.put(key2, firstSheet.getRow(3).getCell(columnNum));
-
+	            		Cell cell = firstSheet.getRow(3).getCell(columnNum);
+	            		
+	            		if(cell.getCellType() == CellType.STRING) {
+	            		String inputval = cell.getStringCellValue();
+	            		if(nestedobj.get(nestedkey) == null) {
+	               		  ArrayList<String> objects = new ArrayList<String>();
+	               		  objects.add(inputval);
+	               		  nestedobj.put(nestedkey, objects);
+	               	   }
+	               	else {
+	               		 ArrayList<String> objects = (ArrayList<String>) nestedobj.get(nestedkey);
+	               	     objects.add(inputval);
+	               	     nestedobj.put(nestedkey, objects);
+	               	}
+	            		}
 	            		}
 	            	  parsedObj.put(key, nestedobj);
 	            	}
