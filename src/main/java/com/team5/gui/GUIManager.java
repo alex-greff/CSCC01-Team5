@@ -77,7 +77,7 @@ public class GUIManager extends JFrame {
 
 	// DEMO
 	public static void main(String[] args) {
-		GUIManager admin_gui = new GUIManager(ADMIN);
+		GUIManager admin_gui = new GUIManager("Admin");
 		admin_gui.load();
 	}
 }
