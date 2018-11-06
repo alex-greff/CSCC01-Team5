@@ -82,35 +82,24 @@ public class TemplateParser {
 	            if (jsonObject.get(key) instanceof JSONArray) {
 	            	JSONArray array = (JSONArray) jsonObject.get(key);
 	            	inputValuesArray(parsedObj, firstSheet, key, array, row_cur);
+	            	
 	            }
 	            else {
 	           
 	            	JSONObject obj = (JSONObject) jsonObject.get(key);
 	            	JSONObject nestedobj = new JSONObject();
-	            	
+	            	if(parsedObj.get(key) != null) {
+	            		nestedobj = (JSONObject) parsedObj.get(key);
+	            	}
 	            	
 	            	for(Iterator nestediterator = obj.keySet().iterator(); nestediterator.hasNext();) {
 	            		String nestedkey = (String) nestediterator.next();
 	            		if (obj.get(nestedkey) instanceof JSONArray) {
 	            		JSONArray array = (JSONArray) obj.get(nestedkey);
-	            		int columnNum = CellReference.convertColStringToIndex((String) array.get(0));
-	            		Cell cell = firstSheet.getRow(3).getCell(columnNum);
-	            		
-	            		if(cell.getCellType() == CellType.STRING) {
-	            		String inputval = cell.getStringCellValue();
-	            		if(nestedobj.get(nestedkey) == null) {
-	               		  ArrayList<String> objects = new ArrayList<String>();
-	               		  objects.add(inputval);
-	               		  nestedobj.put(nestedkey, objects);
-	               	   }
-	               	else {
-	               		 ArrayList<String> objects = (ArrayList<String>) nestedobj.get(nestedkey);
-	               	     objects.add(inputval);
-	               	     nestedobj.put(nestedkey, objects);
-	               	}
-	            		}
+	            		inputValuesArray(nestedobj, firstSheet, nestedkey, array, row_cur);
 	            		}
 	            	  parsedObj.put(key, nestedobj);
+	            	  
 	            	}
 	            	
 	            }
