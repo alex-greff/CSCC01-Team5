@@ -78,6 +78,12 @@
 			<artifactId>mongo-java-driver</artifactId>
 			<version>${mongo-java-driver-version}</version>
 		</dependency>
+		
+		<dependency>
+   			<groupId>com.github.vincentrussell</groupId>
+   			<artifactId>sql-to-mongo-db-query-converter</artifactId>
+   			<version>1.6</version>
+		</dependency>
 	</dependencies>
 
 	<build>
