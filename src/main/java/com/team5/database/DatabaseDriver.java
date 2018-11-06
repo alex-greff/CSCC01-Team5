@@ -143,14 +143,6 @@ public class DatabaseDriver {
 		db.insertMany(ob);
 		System.out.println("JSON objects inserted.");
 		
-		System.out.println("Now we will get the objects that we inserted into the database. Printing objects...\n");
-		
-		List<JSONObject> data = db.queryDatabase();
-		for (JSONObject obj : data) {
-			obj.remove("_id"); // Removes the _id field
-			System.out.println(obj.toJSONString());
-		}
-		
 		System.out.println("\nNow closing connection.");
 		db.closeConnection();
 		System.out.println("Connection closed.");
