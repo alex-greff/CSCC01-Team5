@@ -95,16 +95,16 @@ Run these commands from the project root:
 ## Sprint Backlog
 
 ### Sprint 1
-* [Sprint 1 Report](TODO)
+* [Sprint 1 Report](sprint_backlog/sprint1/sprint1_report.pdf)
 
 ### Sprint 2
-* [Sprint 2 Report](TODO)
+* [Sprint 2 Report](sprint_backlog/sprint2/sprint2_report.pdf)
 
 ### Sprint 3
-* [Sprint 3 Report](TODO)
+* [Sprint 3 Report](sprint_backlog/sprint3/sprint3_report.pdf)
 
 ### Sprint 4
-* [Sprint 4 Report](TODO)
+* [Sprint 4 Report](sprint_backlog/sprint4/sprint4_report.pdf)
 
 ## Deliverables
 
