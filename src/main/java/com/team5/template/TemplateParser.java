@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Iterator;
  
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -17,10 +18,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import com.team5.template.TemplateLoader;
- 
+import java.util.ArrayList;
 
 public class TemplateParser {
 	 private TemplateParser() {}
+	 
 	 
 	 public static JSONObject parseExcel(String excelFilePath, String parsetemplate) throws IOException, ParseException{
 		 FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
@@ -28,6 +30,15 @@ public class TemplateParser {
 		 JSONObject parsedObj = new JSONObject();
 	     Workbook workbook = new XSSFWorkbook(inputStream);
 	     Sheet firstSheet = workbook.getSheetAt(0);
+	     int row_cur = 3;
+	     
+	     
+	     //iterate through the row values in excel file
+	  
+	     while(firstSheet.getRow(row_cur) != null) {
+	     //first validate if this row is a valid row (client identity exist or not)
+	     Boolean row_validate = true;
+	     //
 	     
 	     // iterate through each key value in the json object
 	     for(Iterator iterator = jsonObject.keySet().iterator(); iterator.hasNext();) {
@@ -38,8 +49,22 @@ public class TemplateParser {
 	    
 	            	JSONArray array = (JSONArray) jsonObject.get(key);
 	            	int columnNum = CellReference.convertColStringToIndex((String) array.get(0));
-	            	parsedObj.put(key, firstSheet.getRow(3).getCell(columnNum));
-
+	                Cell inputcell = firstSheet.getRow(row_cur).getCell(columnNum);
+	            
+	            	//If its the first time putting a value in object create an array to input object
+	                if(inputcell != null) {
+	                inputcell.setCellType(CellType.STRING);
+	            	if(parsedObj.get(key) == null) {
+	            		 ArrayList<Cell> objects = new ArrayList<Cell>();
+	            		 objects.add(inputcell);
+	            		 parsedObj.put(key, objects);
+	            		 
+	            	}else {
+	            	ArrayList<Cell> objects = (ArrayList<Cell>) parsedObj.get(key);
+	            	objects.add(inputcell);
+	            	parsedObj.put(key, objects);
+	            	}
+	                }
 	            }
 	            else {
 	           
@@ -60,11 +85,13 @@ public class TemplateParser {
 	            	}
 	            	
 	            }
-	           
-	        }     
-	   
+	          
+	        } 
+	     row_cur++;
+	     }
 	        workbook.close();
 	        inputStream.close();
+	        
 		 return parsedObj;
 		 
 		 
