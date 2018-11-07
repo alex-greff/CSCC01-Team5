@@ -43,6 +43,13 @@ public class DatabaseDriver {
 	}
 	
 	/**
+	 * Closes the connection to the database.
+	 */
+	public void closeConnection() {
+		client.close(); // close the connection
+	}
+	
+	/**
 	 * Inserts JSON object into the client_profile collection of the database.
 	 * @param jsonObject The JSON object to be added to the database collection.
 	 */
@@ -163,11 +170,11 @@ public class DatabaseDriver {
 	}
 	
 	/**
-	 * Inserts JSON object into the It_client_enrollment collection of the database.
+	 * Inserts JSON object into the lt_client_enrollment collection of the database.
 	 * @param jsonObject The JSON object to be added to the database collection.
 	 */
-	public void insertItClientEnrollment(JSONObject jsonObject) {
-		MongoCollection<Document> collection = this.database.getCollection("It_client_enrollment");
+	public void insertLtClientEnrollment(JSONObject jsonObject) {
+		MongoCollection<Document> collection = this.database.getCollection("lt_client_enrollment");
 		
 		// Parse JSONObject
 		Document doc = Document.parse(jsonObject.toJSONString());
@@ -176,11 +183,11 @@ public class DatabaseDriver {
 	}
 	
 	/**
-	 * Inserts a list of JSON objects into the It_client_enrollment collection of the database.
+	 * Inserts a list of JSON objects into the lt_client_enrollment collection of the database.
 	 * @param jsonObject The JSON object to be added to the database collection.
 	 */
-	public void insertItClientEnrollments(List<JSONObject> jsonObjects) {
-		MongoCollection<Document> collection = this.database.getCollection("It_client_enrollment");
+	public void insertLtClientEnrollments(List<JSONObject> jsonObjects) {
+		MongoCollection<Document> collection = this.database.getCollection("lt_client_enrollment");
 
 		// Go through list of JSONObjects and parse each one
 		List<Document> docs = new ArrayList<>();
@@ -193,11 +200,11 @@ public class DatabaseDriver {
 	}
 	
 	/**
-	 * Inserts JSON object into the It_client_exit collection of the database.
+	 * Inserts JSON object into the lt_client_exit collection of the database.
 	 * @param jsonObject The JSON object to be added to the database collection.
 	 */
-	public void insertItClientExit(JSONObject jsonObject) {
-		MongoCollection<Document> collection = this.database.getCollection("It_client_exit");
+	public void insertLtClientExit(JSONObject jsonObject) {
+		MongoCollection<Document> collection = this.database.getCollection("lt_client_exit");
 		
 		// Parse JSONObject
 		Document doc = Document.parse(jsonObject.toJSONString());
@@ -206,11 +213,11 @@ public class DatabaseDriver {
 	}
 	
 	/**
-	 * Inserts a list of JSON objects into the It_client_exit collection of the database.
+	 * Inserts a list of JSON objects into the lt_client_exit collection of the database.
 	 * @param jsonObject The JSON object to be added to the database collection.
 	 */
-	public void insertItClientExits(List<JSONObject> jsonObjects) {
-		MongoCollection<Document> collection = this.database.getCollection("It_client_exit");
+	public void insertLtClientExits(List<JSONObject> jsonObjects) {
+		MongoCollection<Document> collection = this.database.getCollection("lt_client_exit");
 
 		// Go through list of JSONObjects and parse each one
 		List<Document> docs = new ArrayList<>();
@@ -275,16 +282,14 @@ public class DatabaseDriver {
 	
 	/**
 	 * Gets all documents from the client_profile collection
-	 * @param key The key.
-	 * @param value The search value for the key
 	 * @return The documents.
 	 */
-	public List<Document> getClientProfiles(String key, String value) {
+	public List<Document> getClientProfiles() {
 		MongoCollection<Document> collection = this.database.getCollection("client_profile");
 		List<Document> docs = new ArrayList<>();
 		
 		// Find the cursor, based on the search filters
-		MongoCursor<Document> cursor = collection.find(Filters.eq(key, value)).iterator();
+		MongoCursor<Document> cursor = collection.find().iterator();
 		
 		while (cursor.hasNext()) {
 			docs.add(cursor.next());
@@ -295,10 +300,243 @@ public class DatabaseDriver {
 	}
 	
 	/**
-	 * Closes the connection to the database.
+	 * Gets the document specified from community_collections collection.
+	 * @param key The key.
+	 * @param value The search value for the key
+	 * @return The selected document.
 	 */
-	public void closeConnection() {
-		client.close(); // close the connection
+	public Document getCommunityCollection(String key, String value) {
+		MongoCollection<Document> collection = this.database.getCollection("community_collections");
+		Document doc = null;
+		
+		// Find the cursor, based on the search filters
+		MongoCursor<Document> cursor = collection.find(Filters.eq(key, value)).iterator();
+		
+		if (cursor.hasNext()) {
+			doc = cursor.next();
+		}
+		
+		return doc;
+		
+	}
+	
+	/**
+	 * Gets all documents from the client_profile collection
+	 * @return The documents.
+	 */
+	public List<Document> getCommunityCollections() {
+		MongoCollection<Document> collection = this.database.getCollection("client_profile");
+		List<Document> docs = new ArrayList<>();
+		
+		// Find the cursor, based on the search filters
+		MongoCursor<Document> cursor = collection.find().iterator();
+		
+		while (cursor.hasNext()) {
+			docs.add(cursor.next());
+		}
+		
+		return docs;
+		
+	}
+	
+	/**
+	 * Gets the document specified from employment collection.
+	 * @param key The key.
+	 * @param value The search value for the key
+	 * @return The selected document.
+	 */
+	public Document getEmployment(String key, String value) {
+		MongoCollection<Document> collection = this.database.getCollection("employment");
+		Document doc = null;
+		
+		// Find the cursor, based on the search filters
+		MongoCursor<Document> cursor = collection.find(Filters.eq(key, value)).iterator();
+		
+		if (cursor.hasNext()) {
+			doc = cursor.next();
+		}
+		
+		return doc;
+		
+	}
+	
+	/**
+	 * Gets all documents from the employment collection
+	 * @return The documents.
+	 */
+	public List<Document> getEmployments() {
+		MongoCollection<Document> collection = this.database.getCollection("employment");
+		List<Document> docs = new ArrayList<>();
+		
+		// Find the cursor, based on the search filters
+		MongoCursor<Document> cursor = collection.find().iterator();
+		
+		while (cursor.hasNext()) {
+			docs.add(cursor.next());
+		}
+		
+		return docs;
+		
+	}
+	
+	/**
+	 * Gets the document specified from info_and_orientation collection.
+	 * @param key The key.
+	 * @param value The search value for the key
+	 * @return The selected document.
+	 */
+	public Document getInfoAndOrientation(String key, String value) {
+		MongoCollection<Document> collection = this.database.getCollection("info_and_orientation");
+		Document doc = null;
+		
+		// Find the cursor, based on the search filters
+		MongoCursor<Document> cursor = collection.find(Filters.eq(key, value)).iterator();
+		
+		if (cursor.hasNext()) {
+			doc = cursor.next();
+		}
+		
+		return doc;
+		
+	}
+	
+	/**
+	 * Gets all documents from the info_and_orientation collection
+	 * @return The documents.
+	 */
+	public List<Document> getInfoAndOrientations() {
+		MongoCollection<Document> collection = this.database.getCollection("info_and_orientation");
+		List<Document> docs = new ArrayList<>();
+		
+		// Find the cursor, based on the search filters
+		MongoCursor<Document> cursor = collection.find().iterator();
+		
+		while (cursor.hasNext()) {
+			docs.add(cursor.next());
+		}
+		
+		return docs;
+		
+	}
+	
+	/**
+	 * Gets the document specified from lt_client_enrollment collection.
+	 * @param key The key.
+	 * @param value The search value for the key
+	 * @return The selected document.
+	 */
+	public Document getLtClientEnrollment(String key, String value) {
+		MongoCollection<Document> collection = this.database.getCollection("lt_client_enrollment");
+		Document doc = null;
+		
+		// Find the cursor, based on the search filters
+		MongoCursor<Document> cursor = collection.find(Filters.eq(key, value)).iterator();
+		
+		if (cursor.hasNext()) {
+			doc = cursor.next();
+		}
+		
+		return doc;
+		
+	}
+	
+	/**
+	 * Gets all documents from the lt_client_enrollment collection
+	 * @return The documents.
+	 */
+	public List<Document> getLtClientEnrollments() {
+		MongoCollection<Document> collection = this.database.getCollection("lt_client_enrollment");
+		List<Document> docs = new ArrayList<>();
+		
+		// Find the cursor, based on the search filters
+		MongoCursor<Document> cursor = collection.find().iterator();
+		
+		while (cursor.hasNext()) {
+			docs.add(cursor.next());
+		}
+		
+		return docs;
+		
+	}
+	
+	/**
+	 * Gets the document specified from lt_client_exit collection.
+	 * @param key The key.
+	 * @param value The search value for the key
+	 * @return The selected document.
+	 */
+	public Document getLtClientExit(String key, String value) {
+		MongoCollection<Document> collection = this.database.getCollection("lt_client_exit");
+		Document doc = null;
+		
+		// Find the cursor, based on the search filters
+		MongoCursor<Document> cursor = collection.find(Filters.eq(key, value)).iterator();
+		
+		if (cursor.hasNext()) {
+			doc = cursor.next();
+		}
+		
+		return doc;
+		
+	}
+	
+	/**
+	 * Gets all documents from the lt_client_exit collection
+	 * @return The documents.
+	 */
+	public List<Document> getLtClientExits() {
+		MongoCollection<Document> collection = this.database.getCollection("lt_client_exit");
+		List<Document> docs = new ArrayList<>();
+		
+		// Find the cursor, based on the search filters
+		MongoCursor<Document> cursor = collection.find().iterator();
+		
+		while (cursor.hasNext()) {
+			docs.add(cursor.next());
+		}
+		
+		return docs;
+		
+	}
+	
+	/**
+	 * Gets the document specified from nars collection.
+	 * @param key The key.
+	 * @param value The search value for the key
+	 * @return The selected document.
+	 */
+	public Document getNar(String key, String value) {
+		MongoCollection<Document> collection = this.database.getCollection("nars");
+		Document doc = null;
+		
+		// Find the cursor, based on the search filters
+		MongoCursor<Document> cursor = collection.find(Filters.eq(key, value)).iterator();
+		
+		if (cursor.hasNext()) {
+			doc = cursor.next();
+		}
+		
+		return doc;
+		
+	}
+	
+	/**
+	 * Gets all documents from the nars collection
+	 * @return The documents.
+	 */
+	public List<Document> getNars() {
+		MongoCollection<Document> collection = this.database.getCollection("nars");
+		List<Document> docs = new ArrayList<>();
+		
+		// Find the cursor, based on the search filters
+		MongoCursor<Document> cursor = collection.find().iterator();
+		
+		while (cursor.hasNext()) {
+			docs.add(cursor.next());
+		}
+		
+		return docs;
+		
 	}
 	
 	// Demo
@@ -308,7 +546,7 @@ public class DatabaseDriver {
 		DatabaseDriver db = new DatabaseDriver("mongodb://mo:ProficiousF18@ds031088.mlab.com:31088/icare_db",
 												"icare_db", "client_profile");
 		System.out.println("We are now connected to the database icare_db on the cloud server.");
-		System.out.println("We are now going to insert two JSONObjects into the database collection, \'client_profile\'.");
+		System.out.println("We are now going to insert two JSONObjects into the database collections, \'client_profile\'.");
 		JSONObject jsonObject = null;
 		List<JSONObject> ob = new ArrayList<>();
 		try {
@@ -328,11 +566,23 @@ public class DatabaseDriver {
 			e.printStackTrace();
 		}
 		System.out.println("Inserting JSON objects into database...");
-		//db.insertMany(ob);
+		db.insertClientProfiles(ob);
+		db.insertCommunityCollections(ob);
+		db.insertEmployments(ob);
+		db.insertInfoAndOrientations(ob);
+		db.insertLtClientEnrollments(ob);
+		db.insertLtClientExits(ob);
+		db.insertNars(ob);
+		
 		System.out.println("JSON objects inserted.");
 		
-		System.out.println("\nNow getting inserted object from database.");
-		//db.queryDatabase("select field1 from client_profile");
+		System.out.println("\nNow getting inserted objects from one database collection.");
+		
+		System.out.println("\nlt_client_enrollment:\n");
+		
+		for (Document doc : db.getLtClientEnrollments()) {
+			System.out.println(doc.toJson());
+		}
 		
 		System.out.println("\nNow closing connection.");
 		db.closeConnection();
