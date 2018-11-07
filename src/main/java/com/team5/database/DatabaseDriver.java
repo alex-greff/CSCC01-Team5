@@ -1,12 +1,12 @@
 package com.team5.database;
 
 import com.team5.utilities.JSONLoader;
-import com.github.vincentrussell.query.mongodb.sql.converter.MongoDBQueryHolder;
-import com.github.vincentrussell.query.mongodb.sql.converter.QueryConverter;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientException;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
@@ -17,7 +17,6 @@ import java.util.List;
 
 import org.bson.Document;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
@@ -27,7 +26,6 @@ public class DatabaseDriver {
 	private MongoClientURI uri;
 	private MongoClient client;
 	private MongoDatabase database;
-	private MongoCollection<Document> collection;
 	
 	/**
 	 * Constructs the database driver.
@@ -39,27 +37,18 @@ public class DatabaseDriver {
 			this.uri = new MongoClientURI(uri); // URI of the client
 			this.client = new MongoClient(this.uri); // Connect to client
 			this.database = this.client.getDatabase(database); // Get the database
-			this.collection = this.database.getCollection(collection); // Get the collection
 		} catch (MongoClientException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	/**
-	 * Accesses a collection in the database. (NOTE: if collection doesn't exist
-	 * and you specify it, then inserting will create a new collection with the name
-	 * specified).
-	 * @param collection The collection to be accessed.
-	 */
-	public MongoCollection<Document> getCollection(String collection) {
-		this.collection = database.getCollection(collection);
-	}
-	
-	/**
-	 * Inserts JSON file object into the database.
+	 * Inserts JSON object into the client_profile collection of the database.
 	 * @param jsonObject The JSON object to be added to the database collection.
 	 */
-	public void insert(JSONObject jsonObject) {
+	public void insertClientProfile(JSONObject jsonObject) {
+		MongoCollection<Document> collection = this.database.getCollection("client_profile");
+		
 		// Parse JSONObject
 		Document doc = Document.parse(jsonObject.toJSONString());
 		
@@ -67,10 +56,12 @@ public class DatabaseDriver {
 	}
 	
 	/**
-	 * Inserts a list of JSON file objects into the database.
+	 * Inserts a list of JSON objects into the client_profile collection of the database.
 	 * @param jsonObject The JSON object to be added to the database collection.
 	 */
-	public void insertMany(List<JSONObject> jsonObjects) {
+	public void insertClientProfiles(List<JSONObject> jsonObjects) {
+		MongoCollection<Document> collection = this.database.getCollection("client_profile");
+
 		// Go through list of JSONObjects and parse each one
 		List<Document> docs = new ArrayList<>();
 		for (JSONObject object : jsonObjects) {
@@ -80,16 +71,227 @@ public class DatabaseDriver {
 		
 		collection.insertMany(docs); // Add the list of documents to database collection
 	}
-		
+	
 	/**
-	 * Retrieves data from the database.
-	 * @param query The query of the database.
-	 * @return A list of JSONObjects.
+	 * Inserts JSON object into the commuinity_collections collection of the database.
+	 * @param jsonObject The JSON object to be added to the database collection.
 	 */
-	public List<JSONObject> queryDatabase(String query) {
-		List<JSONObject> data = new ArrayList<>(); // List of JSONObjects
+	public void insertCommunityCollection(JSONObject jsonObject) {
+		MongoCollection<Document> collection = this.database.getCollection("community_collections");
+		
+		// Parse JSONObject
+		Document doc = Document.parse(jsonObject.toJSONString());
+		
+		collection.insertOne(doc); // Add to database collection
+	}
+	
+	/**
+	 * Inserts a list of JSON objects into the community_collections collection of the database.
+	 * @param jsonObject The JSON object to be added to the database collection.
+	 */
+	public void insertCommunityCollections(List<JSONObject> jsonObjects) {
+		MongoCollection<Document> collection = this.database.getCollection("community_collections");
 
-		return data;
+		// Go through list of JSONObjects and parse each one
+		List<Document> docs = new ArrayList<>();
+		for (JSONObject object : jsonObjects) {
+			Document doc = Document.parse(object.toJSONString());
+			docs.add(doc);
+		}
+		
+		collection.insertMany(docs); // Add the list of documents to database collection
+	}
+	
+	/**
+	 * Inserts JSON object into the employment collection of the database.
+	 * @param jsonObject The JSON object to be added to the database collection.
+	 */
+	public void insertEmployment(JSONObject jsonObject) {
+		MongoCollection<Document> collection = this.database.getCollection("employment");
+		
+		// Parse JSONObject
+		Document doc = Document.parse(jsonObject.toJSONString());
+		
+		collection.insertOne(doc); // Add to database collection
+	}
+	
+	/**
+	 * Inserts a list of JSON objects into the employment collection of the database.
+	 * @param jsonObject The JSON object to be added to the database collection.
+	 */
+	public void insertEmployments(List<JSONObject> jsonObjects) {
+		MongoCollection<Document> collection = this.database.getCollection("employment");
+
+		// Go through list of JSONObjects and parse each one
+		List<Document> docs = new ArrayList<>();
+		for (JSONObject object : jsonObjects) {
+			Document doc = Document.parse(object.toJSONString());
+			docs.add(doc);
+		}
+		
+		collection.insertMany(docs); // Add the list of documents to database collection
+	}
+	
+	/**
+	 * Inserts JSON object into the info_and_orientation collection of the database.
+	 * @param jsonObject The JSON object to be added to the database collection.
+	 */
+	public void insertInfoAndOrientation(JSONObject jsonObject) {
+		MongoCollection<Document> collection = this.database.getCollection("info_and_orientation");
+		
+		// Parse JSONObject
+		Document doc = Document.parse(jsonObject.toJSONString());
+		
+		collection.insertOne(doc); // Add to database collection
+	}
+	
+	/**
+	 * Inserts a list of JSON objects into the info_and_orientation collection of the database.
+	 * @param jsonObject The JSON object to be added to the database collection.
+	 */
+	public void insertInfoAndOrientations(List<JSONObject> jsonObjects) {
+		MongoCollection<Document> collection = this.database.getCollection("info_and_orientation");
+
+		// Go through list of JSONObjects and parse each one
+		List<Document> docs = new ArrayList<>();
+		for (JSONObject object : jsonObjects) {
+			Document doc = Document.parse(object.toJSONString());
+			docs.add(doc);
+		}
+		
+		collection.insertMany(docs); // Add the list of documents to database collection
+	}
+	
+	/**
+	 * Inserts JSON object into the It_client_enrollment collection of the database.
+	 * @param jsonObject The JSON object to be added to the database collection.
+	 */
+	public void insertItClientEnrollment(JSONObject jsonObject) {
+		MongoCollection<Document> collection = this.database.getCollection("It_client_enrollment");
+		
+		// Parse JSONObject
+		Document doc = Document.parse(jsonObject.toJSONString());
+		
+		collection.insertOne(doc); // Add to database collection
+	}
+	
+	/**
+	 * Inserts a list of JSON objects into the It_client_enrollment collection of the database.
+	 * @param jsonObject The JSON object to be added to the database collection.
+	 */
+	public void insertItClientEnrollments(List<JSONObject> jsonObjects) {
+		MongoCollection<Document> collection = this.database.getCollection("It_client_enrollment");
+
+		// Go through list of JSONObjects and parse each one
+		List<Document> docs = new ArrayList<>();
+		for (JSONObject object : jsonObjects) {
+			Document doc = Document.parse(object.toJSONString());
+			docs.add(doc);
+		}
+		
+		collection.insertMany(docs); // Add the list of documents to database collection
+	}
+	
+	/**
+	 * Inserts JSON object into the It_client_exit collection of the database.
+	 * @param jsonObject The JSON object to be added to the database collection.
+	 */
+	public void insertItClientExit(JSONObject jsonObject) {
+		MongoCollection<Document> collection = this.database.getCollection("It_client_exit");
+		
+		// Parse JSONObject
+		Document doc = Document.parse(jsonObject.toJSONString());
+		
+		collection.insertOne(doc); // Add to database collection
+	}
+	
+	/**
+	 * Inserts a list of JSON objects into the It_client_exit collection of the database.
+	 * @param jsonObject The JSON object to be added to the database collection.
+	 */
+	public void insertItClientExits(List<JSONObject> jsonObjects) {
+		MongoCollection<Document> collection = this.database.getCollection("It_client_exit");
+
+		// Go through list of JSONObjects and parse each one
+		List<Document> docs = new ArrayList<>();
+		for (JSONObject object : jsonObjects) {
+			Document doc = Document.parse(object.toJSONString());
+			docs.add(doc);
+		}
+		
+		collection.insertMany(docs); // Add the list of documents to database collection
+	}
+	
+	/**
+	 * Inserts JSON object into the nars collection of the database.
+	 * @param jsonObject The JSON object to be added to the database collection.
+	 */
+	public void insertNar(JSONObject jsonObject) {
+		MongoCollection<Document> collection = this.database.getCollection("nars");
+		
+		// Parse JSONObject
+		Document doc = Document.parse(jsonObject.toJSONString());
+		
+		collection.insertOne(doc); // Add to database collection
+	}
+	
+	/**
+	 * Inserts a list of JSON objects into the nars collection of the database.
+	 * @param jsonObject The JSON object to be added to the database collection.
+	 */
+	public void insertNars(List<JSONObject> jsonObjects) {
+		MongoCollection<Document> collection = this.database.getCollection("nars");
+
+		// Go through list of JSONObjects and parse each one
+		List<Document> docs = new ArrayList<>();
+		for (JSONObject object : jsonObjects) {
+			Document doc = Document.parse(object.toJSONString());
+			docs.add(doc);
+		}
+		
+		collection.insertMany(docs); // Add the list of documents to database collection
+	}
+	
+	/**
+	 * Gets the document specified from client_profile collection.
+	 * @param key The key.
+	 * @param value The search value for the key
+	 * @return The selected document.
+	 */
+	public Document getClientProfile(String key, String value) {
+		MongoCollection<Document> collection = this.database.getCollection("client_profile");
+		Document doc = null;
+		
+		// Find the cursor, based on the search filters
+		MongoCursor<Document> cursor = collection.find(Filters.eq(key, value)).iterator();
+		
+		if (cursor.hasNext()) {
+			doc = cursor.next();
+		}
+		
+		return doc;
+		
+	}
+	
+	/**
+	 * Gets all documents from the client_profile collection
+	 * @param key The key.
+	 * @param value The search value for the key
+	 * @return The documents.
+	 */
+	public List<Document> getClientProfiles(String key, String value) {
+		MongoCollection<Document> collection = this.database.getCollection("client_profile");
+		List<Document> docs = new ArrayList<>();
+		
+		// Find the cursor, based on the search filters
+		MongoCursor<Document> cursor = collection.find(Filters.eq(key, value)).iterator();
+		
+		while (cursor.hasNext()) {
+			docs.add(cursor.next());
+		}
+		
+		return docs;
+		
 	}
 	
 	/**
@@ -126,11 +328,11 @@ public class DatabaseDriver {
 			e.printStackTrace();
 		}
 		System.out.println("Inserting JSON objects into database...");
-		db.insertMany(ob);
+		//db.insertMany(ob);
 		System.out.println("JSON objects inserted.");
 		
 		System.out.println("\nNow getting inserted object from database.");
-		db.queryDatabase("select field1 from client_profile");
+		//db.queryDatabase("select field1 from client_profile");
 		
 		System.out.println("\nNow closing connection.");
 		db.closeConnection();
