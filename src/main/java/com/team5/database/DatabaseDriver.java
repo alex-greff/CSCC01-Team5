@@ -51,7 +51,7 @@ public class DatabaseDriver {
 	 * specified).
 	 * @param collection The collection to be accessed.
 	 */
-	public void useCollection(String collection) {
+	public MongoCollection<Document> getCollection(String collection) {
 		this.collection = database.getCollection(collection);
 	}
 	
@@ -80,12 +80,13 @@ public class DatabaseDriver {
 		
 		collection.insertMany(docs); // Add the list of documents to database collection
 	}
-	
+		
 	/**
 	 * Retrieves data from the database.
+	 * @param query The query of the database.
 	 * @return A list of JSONObjects.
 	 */
-	public List<JSONObject> queryDatabase(String queryCommand) {
+	public List<JSONObject> queryDatabase(String query) {
 		List<JSONObject> data = new ArrayList<>(); // List of JSONObjects
 
 		return data;
