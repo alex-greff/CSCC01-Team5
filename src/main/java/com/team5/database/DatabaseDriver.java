@@ -87,17 +87,7 @@ public class DatabaseDriver {
 	 */
 	public List<JSONObject> queryDatabase(String queryCommand) {
 		List<JSONObject> data = new ArrayList<>(); // List of JSONObjects
-		
-		QueryConverter queryConverter = null;
-		try {
-			queryConverter = new QueryConverter(queryCommand);
-		} catch (com.github.vincentrussell.query.mongodb.sql.converter.ParseException e) {
-			e.printStackTrace();
-		}
-		MongoDBQueryHolder mongoDBQueryHolder = queryConverter.getMongoQuery();
-		Document query = mongoDBQueryHolder.getQuery();
-		System.out.println(query.toJson());
-		
+
 		return data;
 	}
 	
