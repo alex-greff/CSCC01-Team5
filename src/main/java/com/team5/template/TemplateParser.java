@@ -94,6 +94,7 @@ public class TemplateParser {
 	            	
 	            	
 	            }
+	            
 	            else if(jsonObject.get(key) instanceof String) {
 	            	 parsedObj.put(key, parsetemplate);
 	            }
@@ -101,11 +102,9 @@ public class TemplateParser {
 	           
 	            	JSONObject obj =  (JSONObject) jsonObject.get(key);
 	            	JSONObject nestedobj = new JSONObject();
-	            	if(parsedObj.get(key) != null) {
-	            		nestedobj = (JSONObject) parsedObj.get(key);
-	            	}
 	            	
 	            	for(Iterator nestediterator = obj.keySet().iterator(); nestediterator.hasNext();) {
+	            		
 	            		String nestedkey = (String) nestediterator.next();
 	            		if (obj.get(nestedkey) instanceof JSONArray) {
 	            			JSONArray array = (JSONArray) obj.get(nestedkey);
@@ -134,8 +133,8 @@ public class TemplateParser {
 	 
 	  public static void main(String[] args) throws IOException, ParseException, ConfigurationNotFoundException {
 	    	
-	        String excelFilePath = "D:\\team5_project\\Team5\\src\\main\\java\\com\\team5\\template\\client.xlsx";
-	        String excelFilePath2 = "D:\\team5_project\\Team5\\src\\main\\java\\com\\team5\\template\\enroll.xlsx";
+	        String excelFilePath = "testFiles/reportGeneratorTests/client.xlsx";
+	        String excelFilePath2 = "testFiles/reportGeneratorTests/enroll.xlsx";
 
 	        System.out.println("This is the Parser Test, This parse the excel file and puts it into a Json Object");
 	        System.out.println("Client Profile");
