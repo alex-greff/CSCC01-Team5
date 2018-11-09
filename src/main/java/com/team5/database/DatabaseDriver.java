@@ -1,20 +1,22 @@
 package com.team5.database;
 
-import com.team5.utilities.JSONLoader;
-
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientException;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoCollection;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientException;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.team5.utilities.JSONLoader;
+
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
@@ -79,10 +81,61 @@ public class DatabaseDriver {
 	}
 	
 	/**
+	 * Retrieves all documents from the current collection.
+	 * 
+	 * @return A list of JSONObjects.
+	 */
+	public List<JSONObject> queryDatabase() {
+		// Query the database with no filter
+		return queryDatabase(new Document());
+	}
+
+	/**
+	 * Retrieves all documents from the current collection that match the inputted query.
+	 * 
+	 * @param query The query to the database.
+	 * @return Returns a list of JSONObjects.
+	 */
+	public List<JSONObject> queryDatabase(Bson query) {
+		List<JSONObject> queried_docs = new ArrayList<>();
+
+		// Find all documents matching the query
+		FindIterable<Document> findIterable = collection.find(query);
+
+		// Initialize a JSON parser instance
+		JSONParser parser = new JSONParser();
+
+		// Iterate through each filtered document
+		for (Document doc : findIterable) {
+			try {
+				// Parse to JSON
+				JSONObject doc_obj = (JSONObject) parser.parse(doc.toJson());
+				// Add to the queried document JSON list
+				queried_docs.add(doc_obj);
+
+			} catch (ParseException e) {
+				// If an error occurs parsing then just print the stack trace and ignore it
+				e.printStackTrace();
+			}
+		}
+
+		// Return the queried docs
+		return queried_docs;
+	}
+	
+	/**
 	 * Closes the connection to the database.
 	 */
 	public void closeConnection() {
 		client.close(); // close the connection
+	}
+
+	/**
+	 * Deconstructor
+	 */
+	@Override
+	public void finalize() {
+		closeConnection(); // Close the connection
 	}
 	
 	// Demo
@@ -114,9 +167,19 @@ public class DatabaseDriver {
 		System.out.println("Inserting JSON objects into database...");
 		db.insertMany(ob);
 		System.out.println("JSON objects inserted.");
-		System.out.println("Closing connection.");
+		
+		System.out.println("Now we will get the objects that we inserted into the database. Printing objects...\n");
+		
+		List<JSONObject> data = db.queryDatabase();
+		for (JSONObject obj : data) {
+			obj.remove("_id"); // Removes the _id field
+			System.out.println(obj.toJSONString());
+		}
+		
+		System.out.println("\nNow closing connection.");
 		db.closeConnection();
-		System.out.println("Connection to database closed.");
+		System.out.println("Connection closed.");
+		
 	}
 
 }
