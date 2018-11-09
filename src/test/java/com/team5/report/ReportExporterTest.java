@@ -70,7 +70,7 @@ public class ReportExporterTest {
     @Test
     @DisplayName("Test generating a report with data")
     void testGenerateReportWithData() throws ParseException, IOException, InvalidFormatException {
-        RG.generateReport(REPORT_TEMPLATE, targetPath1, many_RD);
+        RG.exportReport(REPORT_TEMPLATE, targetPath1, many_RD);
 
         FileInputStream targetFile_is = new FileInputStream(new File(targetPath1));
         Workbook workbook = WorkbookFactory.create(targetFile_is);
@@ -98,7 +98,7 @@ public class ReportExporterTest {
     @Test
     @DisplayName("Test generating a report with empty data object")
     void testGenerateReportWitEmptyData() throws ParseException, IOException, InvalidFormatException {
-        RG.generateReport(REPORT_TEMPLATE, targetPath2, empty_RD);
+        RG.exportReport(REPORT_TEMPLATE, targetPath2, empty_RD);
 
         FileInputStream targetFile_is = new FileInputStream(new File(targetPath2));
         Workbook workbook = WorkbookFactory.create(targetFile_is);
@@ -120,7 +120,7 @@ public class ReportExporterTest {
     void testGenerateReportWithNonExistentTemplateFile() throws ParseException, IOException, InvalidFormatException {
         assertThrows(FileNotFoundException.class,
             ()->{
-                RG.generateReport("someTemplateThatDoesNotExist.json", targetPath1, many_RD);
+                RG.exportReport("someTemplateThatDoesNotExist.json", targetPath1, many_RD);
             }
         );
     }

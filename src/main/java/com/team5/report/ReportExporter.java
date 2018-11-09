@@ -53,7 +53,7 @@ public class ReportExporter {
      * @throws IOException Occurs if an IOException occurs (most commonly a non-existent file).
      * @throws InvalidFormatException Thrown if an invalid format is encountered in a report excel file.
      */
-    public void generateReport(String reportTemplateJSONPath, String targetPath, ReportData<?> data) 
+    public void exportReport(String reportTemplateJSONPath, String targetPath, ReportData<?> data) 
         throws ParseException, IOException, InvalidFormatException {
         
         // Get the report template JSON
