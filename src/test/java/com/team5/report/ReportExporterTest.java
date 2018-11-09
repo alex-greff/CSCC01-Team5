@@ -21,7 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class ReportGeneratorTest {
+public class ReportExporterTest {
     String empty_RD_title = "Empty RowData";
     String empty_RD_rowAxisLabel = "Empty RowData row axis label";
     String empty_RD_colAxisLabel = "Empty RowData col axis label";
@@ -43,11 +43,11 @@ public class ReportGeneratorTest {
     final String targetPath1 = REPORT_GENERATOR_TESTS_ROOT + "/excelFile1Populated.xlsm";
     final String targetPath2 = REPORT_GENERATOR_TESTS_ROOT + "/excelFile2Populated.xlsm";
 
-    ReportGenerator RG;
+    ReportExporter RG;
 
     @BeforeEach
     void setup() throws ConfigurationNotFoundException {
-        RG = new ReportGenerator();
+        RG = new ReportExporter();
 
         empty_RD = new ReportData<>(empty_RD_title, empty_RD_rowAxisLabel, empty_RD_colAxisLabel);
 

@@ -26,25 +26,25 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 /**
- * Generates reports based of the report template system.
+ * Exports reports based of the report template system.
  */
-public class ReportGenerator {
+public class ReportExporter {
     /**
      * The root directory for the templates.
      */
     private String TEMPLATE_ROOT_DIR = "";
 
     /**
-     * Constructs a ReportGenerator object.
+     * Constructs a ReportExporter object.
      * 
      * @throws ConfigurationNotFoundException Thrown the configuration for the report system is missing.
      */
-    public ReportGenerator() throws ConfigurationNotFoundException {
+    public ReportExporter() throws ConfigurationNotFoundException {
         getConfigs();
     }
 
     /**
-     * Generates a report from the given report template and data object.
+     * Export a report from the given report template and data object.
      * 
      * @param reportTemplateJSONPath The report template JSON file.
      * @param targetPath The target path of the report file.
