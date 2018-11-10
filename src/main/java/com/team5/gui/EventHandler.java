@@ -3,7 +3,6 @@ package com.team5.gui;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -17,7 +16,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import com.mongodb.MongoClientException;
-import com.mongodb.MongoSocketException;
 import com.mongodb.MongoTimeoutException;
 import com.team5.database.DatabaseDriver;
 import com.team5.database.MongoDriver;
@@ -112,7 +110,7 @@ public class EventHandler implements ActionListener {
 			if (noExceptionRaised) {
 				// Connect to database
 				try {
-					db = new MongoDriver(ConfigurationLoader.loadConfiguration("database-URI").get("test_db_saad").toString(),
+					db = new MongoDriver(ConfigurationLoader.loadConfiguration("database-URI").get("test_db_remote").toString(),
 							"test_db", FilenameUtils.removeExtension(selectedTemplateType));
 				} catch (ConfigurationNotFoundException e1) {
 					// TODO Auto-generated catch block
