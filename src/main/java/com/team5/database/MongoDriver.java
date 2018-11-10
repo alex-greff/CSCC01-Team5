@@ -11,6 +11,8 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.team5.utilities.ConfigurationLoader;
+import com.team5.utilities.ConfigurationNotFoundException;
 import com.team5.utilities.JSONLoader;
 
 import org.bson.Document;
@@ -148,9 +150,14 @@ public class MongoDriver implements DatabaseDriver {
 	public static void main(String[] args) {
 		System.out.println("The DatabaseDriver is the driver that connects, and allows us to populate our database.");
 		System.out.println("Initializing a new DatabaseDriver with the specified fields will connect us to the database.");
-		MongoDriver db = new MongoDriver("mongodb://mo:ProficiousF18@ds031088.mlab.com:31088/icare_db",
-												"icare_db", "client_profile");
-		System.out.println("We are now connected to the database icare_db on the cloud server.");
+		MongoDriver db = null;
+		try {
+			db = new MongoDriver(ConfigurationLoader.loadConfiguration("database-URI").get("test_db_mo").toString(),
+													"test_db", "client_profile");
+		} catch (ConfigurationNotFoundException e) {
+			e.printStackTrace();
+		}
+		System.out.println("We are now connected to the database test_db on the cloud server.");
 		System.out.println("We are now going to insert two JSONObjects into the database collection, \'client_profile\'.");
 		JSONObject jsonObject = null;
 		List<JSONObject> ob = new ArrayList<>();
