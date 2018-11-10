@@ -152,7 +152,7 @@ public class MongoDriver implements DatabaseDriver {
 		System.out.println("Initializing a new DatabaseDriver with the specified fields will connect us to the database.");
 		MongoDriver db = null;
 		try {
-			db = new MongoDriver(ConfigurationLoader.loadConfiguration("database-URI").get("test_db_mo").toString(),
+			db = new MongoDriver(ConfigurationLoader.loadConfiguration("database-URI").get("test_db_remote").toString(),
 													"test_db", "client_profile");
 		} catch (ConfigurationNotFoundException e) {
 			e.printStackTrace();
