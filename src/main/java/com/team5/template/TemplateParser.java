@@ -1,13 +1,13 @@
 package com.team5.template;
  
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
- 
+
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellReference;
@@ -15,13 +15,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.team5.utilities.ConfigurationLoader;
 import com.team5.utilities.ConfigurationNotFoundException;
-import com.team5.utilities.JSONLoader;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import com.team5.template.TemplateLoader;
 import java.util.ArrayList;
+
 
 
 /**
@@ -45,7 +45,7 @@ public class TemplateParser {
 	 * @return row_validate this is the validation if we put the data into json object
 	 */
 	 
-	public static boolean validateRow(JSONObject jsonObject, int row_cur, Sheet firstSheet ) {
+	private static boolean validateRow(JSONObject jsonObject, int row_cur, Sheet firstSheet ) {
 			ArrayList<String> missingval = new ArrayList<String>();
 		    Boolean validate = true;
 		    JSONObject objval = (JSONObject) jsonObject.get("identifier");
@@ -78,7 +78,7 @@ public class TemplateParser {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static JSONObject getTemplateObject(String parsetemplate, String configName) throws ParseException, ConfigurationNotFoundException, FileNotFoundException, IOException {
+	private static JSONObject getTemplateObject(String parsetemplate, String configName) throws ParseException, ConfigurationNotFoundException, FileNotFoundException, IOException {
 		String config = (String) ConfigurationLoader.loadConfiguration(configName).get("root-template-directory");
 		JSONObject jsonObject =  new TemplateLoader(config).parseTemplate(parsetemplate);
 		return jsonObject;
@@ -87,7 +87,7 @@ public class TemplateParser {
 	 * @param stringInput
 	 * @return
 	 */
-	public static boolean checkInt(String stringInput) {
+	private static boolean checkInt(String stringInput) {
 		try {
 			Integer.parseInt(stringInput);
 			return true;
@@ -101,7 +101,7 @@ public class TemplateParser {
 	 * @param stringInput
 	 * @return
 	 */
-	public static boolean checkDouble(String stringInput) {
+	private static boolean checkDouble(String stringInput) {
 		try {
 			Double.parseDouble(stringInput);
 			return true;
@@ -114,7 +114,7 @@ public class TemplateParser {
 	/**
 	 * @param stringInput
 	 */
-	public static void inputNumber(String stringInput, String key, JSONObject inputobject) {
+	private static void inputNumber(String stringInput, String key, JSONObject inputobject) {
 	
 		if(checkInt(stringInput)) {
 			int value = Integer.parseInt(stringInput);
@@ -128,12 +128,15 @@ public class TemplateParser {
 		}
 	}
 	/**
+	 * 
+	 * 
+	 * 
 	 * @param key
 	 * @param array
 	 */
 	
 	
-	public static void checkmissingval(String key, JSONArray array) {
+	private static void checkmissingval(String key, JSONArray array) {
 		 boolean requiredfield = (boolean) array.get(1);
 		 String rowString = Integer.toString(row_cur);
 		 if(row_validate && requiredfield) {
@@ -174,7 +177,7 @@ public class TemplateParser {
 		 * @param row_cur this is the current row we are on
 		 * @param row_validate this is the validation if we put it into the object
 		 */
-	public static void inputValues(JSONObject inputobject, Sheet firstSheet, String key, JSONArray array) {
+	private static void inputValues(JSONObject inputobject, Sheet firstSheet, String key, JSONArray array) {
 			 int columnNum = CellReference.convertColStringToIndex((String) array.get(0));
 		     Cell inputcell = firstSheet.getRow(row_cur).getCell(columnNum);
 		    
@@ -196,7 +199,7 @@ public class TemplateParser {
 	 * @param firstSheet
 	 * @return
 	 */
-	public static ArrayList<JSONObject> getJsonArrayObjects(JSONArray obj, Sheet firstSheet){
+	private static ArrayList<JSONObject> getJsonArrayObjects(JSONArray obj, Sheet firstSheet){
 		ArrayList<JSONObject> jsonobjects = new ArrayList<JSONObject>();
 		
 		for(int i = 0 ; i < obj.size(); i ++) {
@@ -214,7 +217,7 @@ public class TemplateParser {
 	 * @param nestedkey
 	 * @param array
 	 */
-	public static void inputValuesArray(JSONObject nestedobj, Sheet firstSheet, String nestedkey, JSONArray array) {
+	private static void inputValuesArray(JSONObject nestedobj, Sheet firstSheet, String nestedkey, JSONArray array) {
 		if(array.get(0) instanceof JSONObject) {
 			ArrayList<JSONObject> arrayofObjects = getJsonArrayObjects(array, firstSheet);
 			nestedobj.put(nestedkey, arrayofObjects);
@@ -232,7 +235,7 @@ public class TemplateParser {
 	 * @param row_cur
 	 * @return
 	 */
-	public static JSONObject recursiveInputJson(Sheet firstSheet, JSONObject nestedobj, JSONObject obj) {
+	private static JSONObject recursiveInputJson(Sheet firstSheet, JSONObject nestedobj, JSONObject obj) {
 		
 		for(Iterator nestediterator = obj.keySet().iterator(); nestediterator.hasNext();) {
     		
@@ -266,7 +269,8 @@ public class TemplateParser {
 	 * @throws ParseException
 	 * @throws ConfigurationNotFoundException
 	 */
-	public static ArrayList<JSONObject> getJsonObject(String excelFilePath, String parsetemplate, String configName) throws IOException, ParseException, ConfigurationNotFoundException{
+	public static ArrayList<JSONObject> getArrayJsonObject(String excelFilePath, String parsetemplate, String configName) throws IOException, ParseException, ConfigurationNotFoundException{
+		 missingvalues = new JSONObject();
 		 parseTemplate = parsetemplate; 
 		 FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
 		 JSONObject jsonObject =  getTemplateObject(parsetemplate, configName);
@@ -274,23 +278,39 @@ public class TemplateParser {
 	     Sheet firstSheet = workbook.getSheetAt(0);
 	     ArrayList<JSONObject> jsonobjects = new ArrayList<JSONObject>();
 	     row_cur = 3;
-	     //iterate through the row values in excel file
-	     while(firstSheet.getRow(row_cur) != null) {
-	     //first validate if this row is a valid row (client identity exist or not)
-	     JSONObject parsedObj = new JSONObject();
-	     row_validate = validateRow(jsonObject, row_cur, firstSheet);
-	     parsedObj = recursiveInputJson(firstSheet, parsedObj, jsonObject);
-	     
-     	 // iterate through each key value in the json object
-	
-	     	if(row_validate) {
+	     	     while(firstSheet.getRow(row_cur) != null) {
+	    	 JSONObject parsedObj = new JSONObject();
+	    	 row_validate = validateRow(jsonObject, row_cur, firstSheet);
+	    	 parsedObj = recursiveInputJson(firstSheet, parsedObj, jsonObject);
+	    	 if(row_validate) {
 	     		jsonobjects.add(parsedObj);
-	     	}
+	     	 }
 	     	row_cur++;
 	     }
+	   
 	     inputStream.close();
 	     return jsonobjects;
 	 }
+	
+	/**
+	 * @param excelFilePath
+	 * @param parsetemplate
+	 * @param configName
+	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 * @throws ConfigurationNotFoundException
+	 */
+	public static ArrayList<ArrayList<JSONObject>> GetJsonObjectContainer(String excelFilePath, String parsetemplate, String configName) throws IOException, ParseException, ConfigurationNotFoundException{
+		ArrayList<JSONObject> jsonobjects = getArrayJsonObject( excelFilePath,  parsetemplate, configName);
+		ArrayList<JSONObject> missingValuesArray = new ArrayList<JSONObject>();
+		missingValuesArray.add(missingvalues);
+		ArrayList<ArrayList<JSONObject>> jsonContainer = new ArrayList<ArrayList<JSONObject>>();
+		jsonContainer.add(jsonobjects);
+		jsonContainer.add(missingValuesArray);
+		return jsonContainer;
+		
+	}
 	 
 	  public static void main(String[] args) throws IOException, ParseException, ConfigurationNotFoundException {
 	    	
@@ -299,9 +319,9 @@ public class TemplateParser {
 
 	        System.out.println("This is the Parser Test, This parse the excel file and puts it into a Json Object");
 	        System.out.println("Client Profile");
-	        System.out.println(TemplateParser.getJsonObject(excelFilePath, "client_profile.json","iCare-template-system"));
+	        System.out.println(TemplateParser.GetJsonObjectContainer(excelFilePath, "client_profile.json","iCare-template-system"));
 	        System.out.println("lt_client_enroll");
-	        System.out.println(TemplateParser.getJsonObject(excelFilePath2, "lt_client_enroll.json","iCare-template-system"));
+	        System.out.println(TemplateParser.GetJsonObjectContainer(excelFilePath2, "lt_client_enroll.json","iCare-template-system"));
 	        
 	    }
 
