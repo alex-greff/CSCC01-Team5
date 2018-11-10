@@ -32,7 +32,6 @@ public class TemplateParser {
 
 	private static int row_cur;
 	private static boolean row_validate;
-	private static String parseTemplate;
 	private static JSONObject missingvalues = new JSONObject();
 
 	/**
@@ -285,7 +284,6 @@ public class TemplateParser {
 			String configName) throws IOException, ParseException, ConfigurationNotFoundException {
 
 		missingvalues = new JSONObject();
-		parseTemplate = parsetemplate;
 		//gets the sheet from the workbook
 		FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
 		JSONObject jsonObject = getTemplateObject(parsetemplate, configName);
