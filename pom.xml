@@ -18,6 +18,7 @@
 		<json-simple.version>1.1.1</json-simple.version>
 		<apache-commons-io-version>2.6</apache-commons-io-version>
 		<mongo-java-driver-version>3.4.3</mongo-java-driver-version>
+		<javatuples-version>1.2</javatuples-version>
 	</properties>
 
 	<dependencies>
@@ -78,6 +79,15 @@
 			<artifactId>mongo-java-driver</artifactId>
 			<version>${mongo-java-driver-version}</version>
 		</dependency>
+
+		<!-- Java Tuples -->
+		<!-- https://mvnrepository.com/artifact/org.javatuples/javatuples -->
+		<dependency>
+			<groupId>org.javatuples</groupId>
+			<artifactId>javatuples</artifactId>
+			<version>${javatuples-version}</version>
+		</dependency>
+
 		
 	</dependencies>
 
