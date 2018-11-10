@@ -198,7 +198,7 @@ public class TemplateParser {
 	 * @param firstSheet this is the sheet on the workbook
 	 * @return An arraylist of jsonObjects
 	 */
-	private static ArrayList<JSONObject> getJsonArrayObjects(JSONArray obj, Sheet firstSheet) {
+	private static ArrayList<JSONObject> getJsonArrayObjects(JSONArray obj, Sheet firstSheet) throws FileNotFoundException {
 		ArrayList<JSONObject> jsonobjects = new ArrayList<JSONObject>();
 
 		for (int i = 0; i < obj.size(); i++) {
@@ -220,8 +220,9 @@ public class TemplateParser {
 	 * @param key        this is the key value in the template JSONObject
 	 * @param array      this is the array value we get from the key in the
 	 *                   JSONObject
+	 * @throws FileNotFoundException 
 	 */
-	private static void inputValuesArray(JSONObject inputobject, Sheet firstSheet, String key, JSONArray array) {
+	private static void inputValuesArray(JSONObject inputobject, Sheet firstSheet, String key, JSONArray array) throws FileNotFoundException {
 		// checks if the array consist of JSONObject or consist of the coordinate and
 		// boolean
 		if (array.get(0) instanceof JSONObject) {
@@ -241,8 +242,9 @@ public class TemplateParser {
 	 * @param row_validate this validate if the row is a row with a client id
 	 * @param row_cur      this is the current row we are parsing through
 	 * @return this return the JSONObject with all the keys filled
+	 * @throws FileNotFoundException 
 	 */
-	private static JSONObject recursiveInputJson(Sheet firstSheet, JSONObject inputobj, JSONObject templateobj) {
+	private static JSONObject recursiveInputJson(Sheet firstSheet, JSONObject inputobj, JSONObject templateobj) throws FileNotFoundException {
 		// iterate through all the keys in the template object
 		for (Iterator nestediterator = templateobj.keySet().iterator(); nestediterator.hasNext();) {
 			// this get the key value for the template object
@@ -281,9 +283,10 @@ public class TemplateParser {
 	 * @throws ConfigurationNotFoundException
 	 */
 	private static ArrayList<JSONObject> getArrayJsonObject(String excelFilePath, String parsetemplate,
-			String configName) throws IOException, ParseException, ConfigurationNotFoundException {
+			String configName) throws IOException, ParseException, ConfigurationNotFoundException, FileNotFoundException {
 
 		missingvalues = new JSONObject();
+	
 		//gets the sheet from the workbook
 		FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
 		JSONObject jsonObject = getTemplateObject(parsetemplate, configName);
