@@ -23,17 +23,16 @@ import org.json.simple.parser.ParseException;
 import com.team5.template.TemplateLoader;
 import java.util.ArrayList;
 
-
-public class MissingFieldException extends Exception{
+public class MissingFieldException extends Exception {
 	private ArrayList<JSONObject> missingFields;
-    
-    public MissingFieldException(ArrayList<JSONObject> missingFields){
-        super();
-        this.missingFields = missingFields;
-    }
-    
-    public ArrayList<JSONObject> getMissingField(){
+
+	public MissingFieldException(ArrayList<JSONObject> missingFields) {
+		super();
+		this.missingFields = missingFields;
+	}
+
+	public ArrayList<JSONObject> getMissingField() {
 		return this.missingFields;
-    }
+	}
 
 }
