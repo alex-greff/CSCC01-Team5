@@ -39,13 +39,13 @@ public class EventHandler implements ActionListener {
 			reportFC.setDialogTitle("Select File");
 			reportFC.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			if (reportFC.showOpenDialog(open) == JFileChooser.APPROVE_OPTION) { // Add path to textfield if 'open' button is clicked
-				JTextField directoryTextField = (JTextField) ((Container) content.getComponent(2)).getComponent(ReportPanel.directoryTextFieldIndex); //Populate save TextField using index
+				JTextField directoryTextField = ReportPanel.directoryTextFieldComponent;
 				directoryTextField.setText(reportFC.getSelectedFile().getAbsolutePath());
 			}
 		}
 		else if (command == "Generate") {
 			//TODO: Add Report Generate functionality
-			JTextField feedbackTextField = (JTextField) ((Container) content.getComponent(2)).getComponent(ReportPanel.feedbackTextFieldIndex); //Populate feedback TextField using index
+			JTextField feedbackTextField = ReportPanel.feedbackTextFieldComponent;
 			feedbackTextField.setText("Functionality not yet implemented.");
 		}
 		else if (command == "Select Template") {
@@ -54,13 +54,13 @@ public class EventHandler implements ActionListener {
 			reportFC.setDialogTitle("Select File");
 			reportFC.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			if (reportFC.showOpenDialog(open) == JFileChooser.APPROVE_OPTION) { // Add path to textfield if 'open' button is clicked
-				JTextField directoryTextField = (JTextField) ((Container) content.getComponent(1)).getComponent(ICarePanel.directoryTextFieldIndex); //Populate save TextField using index
+				JTextField directoryTextField = ICarePanel.directoryTextFieldComponent;
 				directoryTextField.setText(reportFC.getSelectedFile().getAbsolutePath());
 			}
 		}
 		else if (command == "Upload") {
 			//TODO: Add iCare file Upload functionality
-			JTextField feedbackTextField = (JTextField) ((Container) content.getComponent(1)).getComponent(ICarePanel.feedbackTextFieldIndex); //Populate feedback TextField using index
+			JTextField feedbackTextField = ICarePanel.feedbackTextFieldComponent;
 			feedbackTextField.setText("Functionality not yet implemented.");
 		}
 

@@ -13,15 +13,15 @@ public class ICarePanel extends SuperPanel {
 	
 	private JLabel iCareLabel = new JLabel("iCare File:", Label.RIGHT);
 	private JTextField iCareNameTextField = new JTextField();
-	protected static int directoryTextFieldIndex;
+	protected static JTextField directoryTextFieldComponent;
 	
 	private JLabel templateTypeLabel = new JLabel("Template Type:", Label.RIGHT);
 	private JButton selectFileButton = new JButton("Select Template");
 	String[] templates = {"Placeholer 1", "Placeholder 2", "Placeholder 3"}; //TODO: Add template list
-	private JComboBox templateDropDown = new JComboBox<String>(templates);
+	private JComboBox<String> templateDropDown = new JComboBox<String>(templates);
 	
 	private JTextField feedbackText = new JTextField();
-	protected static int feedbackTextFieldIndex;
+	protected static JTextField feedbackTextFieldComponent;
 	
 	private JButton uploadButton = new JButton("Upload");
 	
@@ -40,7 +40,7 @@ public class ICarePanel extends SuperPanel {
 		// Adding buttons and labels
 		add(iCareLabel, defaultConstraint);
 		add(iCareNameTextField, textFieldConstraint);
-		directoryTextFieldIndex = Arrays.asList(getComponents()).indexOf(iCareNameTextField); //Get index of save TextField
+		directoryTextFieldComponent = iCareNameTextField;
 		add(selectFileButton, defaultConstraint);
 		
 		defaultConstraint.gridy = 1;
@@ -59,7 +59,7 @@ public class ICarePanel extends SuperPanel {
 		textFieldConstraint.ipadx = 800;
 		feedbackText.setEditable(false);
 		add(feedbackText, textFieldConstraint);
-		feedbackTextFieldIndex = Arrays.asList(getComponents()).indexOf(feedbackText); //Get index of feedback TextField
+		feedbackTextFieldComponent = feedbackText;
 		
 		defaultConstraint.gridy = 4;
 		defaultConstraint.gridx = 2;
