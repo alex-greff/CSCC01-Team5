@@ -34,16 +34,13 @@ public class MongoDriver implements DatabaseDriver {
 	 * Constructs the database driver.
 	 * @param client The database client for connection.
 	 * @param database The name of the database to get from the client.
+	 * @throws MongoClientException Exception thrown if connection to database fails.
 	 */
-	public MongoDriver(String uri, String database, String collection) {
-		try {
-			this.uri = new MongoClientURI(uri); // URI of the client
-			this.client = new MongoClient(this.uri); // Connect to client
-			this.database = this.client.getDatabase(database); // Get the database
-			this.collection = this.database.getCollection(collection); // Get the collection
-		} catch (MongoClientException e) {
-			e.printStackTrace();
-		}
+	public MongoDriver(String uri, String database, String collection) throws MongoClientException {
+		this.uri = new MongoClientURI(uri); // URI of the client
+		this.client = new MongoClient(this.uri); // Connect to client
+		this.database = this.client.getDatabase(database); // Get the database
+		this.collection = this.database.getCollection(collection); // Get the collection
 	}
 	
 	/**
@@ -152,7 +149,7 @@ public class MongoDriver implements DatabaseDriver {
 		System.out.println("Initializing a new DatabaseDriver with the specified fields will connect us to the database.");
 		MongoDriver db = null;
 		try {
-			db = new MongoDriver(ConfigurationLoader.loadConfiguration("database-URI").get("test_db_mo").toString(),
+			db = new MongoDriver(ConfigurationLoader.loadConfiguration("database-URI").get("test_db_remote").toString(),
 													"test_db", "client_profile");
 		} catch (ConfigurationNotFoundException e) {
 			e.printStackTrace();
