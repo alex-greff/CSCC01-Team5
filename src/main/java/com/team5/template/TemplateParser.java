@@ -34,7 +34,8 @@ public class TemplateParser {
 	 private static int row_cur;
 	 private static boolean row_validate;
 	 private static String parseTemplate;
-	 
+	 private static JSONObject missingvalues = new JSONObject();
+	 private static ArrayList<String> missingIdentity = new ArrayList<String>();
 	 /**
 	 * This class is responsible for validating if we put the data of the current row into the json object
 	 * 
@@ -43,7 +44,9 @@ public class TemplateParser {
 	 * @param firstSheet this is the .xslx sheet
 	 * @return row_validate this is the validation if we put the data into json object
 	 */
+	 
 	public static boolean validateRow(JSONObject jsonObject, int row_cur, Sheet firstSheet ) {
+			ArrayList<String> missingval = new ArrayList<String>();
 		    Boolean validate = true;
 		    JSONObject objval = (JSONObject) jsonObject.get("identifier");
 
@@ -52,12 +55,15 @@ public class TemplateParser {
 	     		JSONArray array = (JSONArray) objval.get(nestedkey);
 	     		int columnNum = CellReference.convertColStringToIndex((String) array.get(0));
 	     		Cell inputcell = firstSheet.getRow(row_cur).getCell(columnNum);
+	     		
 	     		if(inputcell.getCellType() == Cell.CELL_TYPE_BLANK) {
+	     			missingval.add((String) array.get(0));
 	     			validate = false;
 	     		}
 	     
 	     
 	     	}
+	     	missingIdentity = missingval;
 			return validate;
 	 }
 
@@ -121,6 +127,43 @@ public class TemplateParser {
 			inputobject.put(key, stringInput);
 		}
 	}
+	/**
+	 * @param key
+	 * @param array
+	 */
+	
+	
+	public static void checkmissingval(String key, JSONArray array) {
+		 boolean requiredfield = (boolean) array.get(1);
+		 String rowString = Integer.toString(row_cur);
+		 if(row_validate && requiredfield) {
+			 if(missingvalues.get(key) == null) {
+				 ArrayList<String> missingKeyArray = new ArrayList<String>();
+				 missingKeyArray.add(array.get(0) + rowString);
+				 missingvalues.put(key, missingKeyArray);
+			 }else {
+				 ArrayList<String> missingKeyArray = (ArrayList<String>) missingvalues.get(key);
+				 missingKeyArray.add(array.get(0) + rowString);
+				 missingvalues.put(key, missingKeyArray);
+			 }
+			 
+		 }else if(requiredfield && !row_validate){
+			 if(missingvalues.containsKey("identifier")) {
+				 ArrayList<String> missingKeyArray = new ArrayList<String>();
+				 for(int i = 0; i < missingIdentity.size(); i++ ) {
+				 missingKeyArray.add(missingIdentity.get(i) + rowString);
+				 missingvalues.put("identifier", missingKeyArray);
+				 }
+			 }else {
+				 ArrayList<String> missingKeyArray = (ArrayList<String>) missingvalues.get("identifier");
+				 for(int i = 0; i < missingIdentity.size(); i++ ) {
+					 missingKeyArray.add(missingIdentity.get(i) + rowString);
+					 missingvalues.put("identifier", missingKeyArray);
+				 }
+			 }
+		 }
+		 
+	}
 	 /**
 		 * This inputs values into the json object to put into the array 
 		 * 
@@ -133,14 +176,15 @@ public class TemplateParser {
 		 */
 	public static void inputValues(JSONObject inputobject, Sheet firstSheet, String key, JSONArray array) {
 			 int columnNum = CellReference.convertColStringToIndex((String) array.get(0));
-		     boolean requiredfield = (boolean) array.get(1);
 		     Cell inputcell = firstSheet.getRow(row_cur).getCell(columnNum);
+		    
 		     if(row_validate) {
 		    	 if(inputcell.getCellType() == Cell.CELL_TYPE_STRING) {
 		         		String inputvalue = inputcell.getStringCellValue();
 		         		inputNumber(inputvalue, key, inputobject);
 		    	 }
 		    	 else {
+		    		  checkmissingval(key, array);
 		    		 inputobject.put(key, null);
 		    	 }
 		     }
@@ -229,11 +273,7 @@ public class TemplateParser {
 	     Workbook workbook = new XSSFWorkbook(inputStream);
 	     Sheet firstSheet = workbook.getSheetAt(0);
 	     ArrayList<JSONObject> jsonobjects = new ArrayList<JSONObject>();
-	     //ArrayList<String> invalid_values = new ArrayList<String>();
-	     //ArrayList<String> missing_values = new ArrayList<String>();
-	     
 	     row_cur = 3;
-	     
 	     //iterate through the row values in excel file
 	     while(firstSheet.getRow(row_cur) != null) {
 	     //first validate if this row is a valid row (client identity exist or not)
