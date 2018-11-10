@@ -1,4 +1,4 @@
-package com.team5.report;
+package com.team5.report.data;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;

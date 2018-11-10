@@ -2,6 +2,7 @@ package com.team5.report;
 
 import java.io.IOException;
 
+import com.team5.report.data.ReportData;
 import com.team5.utilities.ConfigurationNotFoundException;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;

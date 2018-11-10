@@ -1,29 +1,45 @@
-package com.team5.report;
+package com.team5.report.data;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * The data container for the reports.
  * 
  * @param <T> The generic type of the data stored.
  */
-public class ReportData<T> {
+public class ReportData<T> implements Iterable<ReportData<T>.Series>{
     /**
-     * Private class representing a series (row) on the table.
+     * A class representing a series (row) on the table.
      */
-    private class Series {
+    public class Series implements Iterable<ReportData<T>.Block>{
         /**
          * The name of the series.
          */
         private String name;
         /**
-         * The list of blocks (columns) in the series.
+         * The list of blocks (columns) and the contents of the cell in the series.
          */
         private ArrayList<Block> blocks = new ArrayList<>();
-        /**
-         * The list of cells in the current series. Size(cells) == Size(blocks) always.
-         */
-        private ArrayList<T> cells = new ArrayList<>();
+
+        @Override
+        public Iterator<ReportData<T>.Block> iterator() {
+            Iterator<ReportData<T>.Block> it = new Iterator<ReportData<T>.Block>() {
+                ArrayList<ReportData<T>.Block> arr = new ArrayList<>(blocks);
+
+                @Override
+                public boolean hasNext() {
+                    return arr.size() > 0;
+                }
+
+                @Override 
+                public ReportData<T>.Block next() {
+                    return arr.remove(0);
+                }
+            };
+            return it;
+        }
+
 
         /**
          * Constructs the series with the given name.
@@ -59,7 +75,6 @@ public class ReportData<T> {
          */
         public void addBlock(Block newBlock) {
             this.blocks.add(newBlock);
-            this.cells.add(null);
         }
 
         /**
@@ -77,7 +92,7 @@ public class ReportData<T> {
             if (index < 0)
                 throw new IndexOutOfBoundsException("Index '" + index + "' can not be negative.");
             
-            this.cells.set(index, data);
+            this.blocks.get(index).setContent(data);;
         }
 
         /**
@@ -86,7 +101,7 @@ public class ReportData<T> {
          * @param index The index.
          * @return Returns the content of the cell.
          */
-        public Object getCell(int index) throws IndexOutOfBoundsException {
+        public T getCell(int index) throws IndexOutOfBoundsException {
             // Upper bound check
             if (index >= this.blocks.size())
                 throw new IndexOutOfBoundsException("Index '" + index + "'' is out of bounds. Add more blocks to expand the matrix.");
@@ -94,7 +109,7 @@ public class ReportData<T> {
             if (index < 0)
                 throw new IndexOutOfBoundsException("Index '" + index + "' can not be negative.");
             
-            return this.cells.get(index);
+            return this.blocks.get(index).getContent();
         }
 
         /**
@@ -136,7 +151,6 @@ public class ReportData<T> {
                 throw new IndexOutOfBoundsException("Index '" + index + "'' is out of bounds");
             
             this.blocks.remove(index);
-            this.cells.remove(index);
         }
 
         /**
@@ -149,32 +163,37 @@ public class ReportData<T> {
             if (index < 0 || index >= this.blocks.size())
                 throw new IndexOutOfBoundsException("Index " + index + "'' is out of bounds");
             
-            this.cells.set(index, null);
+            this.blocks.get(index).setContent(null);
         }
 
         /**
          * The string representation of the series.
          */
         public String toString() {
-            return this.getName() + ": " + this.cells.toString();
+            return this.getName() + ": " + this.blocks.toString();
         }
     }
 
     /**
-     * Private class reprsenting a block (column) on the table.
+     * A class reprsenting a block (column) on the table.
      */
-    private class Block {
+    public class Block {
         /**
          * The name of the block.
          */
         private String name;
 
         /**
+         * The content of the block
+         */
+        private T content;
+
+        /**
          * Constructs the block with the given name.
          * 
          * @param name The name of the block.
          */
-        public Block(String name) {
+        public Block(String name, T content) {
             this.name = name;
         }
 
@@ -196,13 +215,52 @@ public class ReportData<T> {
             return this.name;
         }
 
+
+        /**
+         * Sets the content of the block.
+         * 
+         * @param newContent The new content.
+         */
+        public void setContent(T newContent) {
+            this.content = newContent;
+        }
+
+        /**
+         * Gets the content of the block.
+         * 
+         * @return Returns the content of the block.
+         */
+        public T getContent() {
+            return this.content;
+        }
+        
+
         /**
          * The string representation of the block.
          */
         public String toString() {
-            return this.getName();
+            return String.format("%s = %s", this.getName(), this.getContent().toString());
         }
     }
+
+    @Override
+    public Iterator<ReportData<T>.Series> iterator() {
+        Iterator<ReportData<T>.Series> it = new Iterator<ReportData<T>.Series>() {
+            ArrayList<ReportData<T>.Series> arr = new ArrayList<>(series);
+
+            @Override
+            public boolean hasNext() {
+                return arr.size() > 0;
+            }
+
+            @Override
+            public ReportData<T>.Series next() {
+                return arr.remove(0);
+            }
+        };
+        return it;
+    }
+
 
     /**
      * Store the title, row axis label and column axis label of the table.
@@ -323,7 +381,7 @@ public class ReportData<T> {
      * @param columnName The name of the column.
      */
     public void addColumn(String columnName) {
-        Block newBlock = new Block(columnName);
+        Block newBlock = new Block(columnName, null);
         this.blocks.add(newBlock);
 
         for (Series currSeries : this.series){
