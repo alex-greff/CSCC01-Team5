@@ -31,6 +31,9 @@ import java.util.ArrayList;
 public class TemplateParser {
 	 //constructor class
 	 private TemplateParser() {}
+	 private static int row_cur;
+	 private static boolean row_validate;
+	 private static String parseTemplate;
 	 
 	 /**
 	 * This class is responsible for validating if we put the data of the current row into the json object
@@ -41,7 +44,7 @@ public class TemplateParser {
 	 * @return row_validate this is the validation if we put the data into json object
 	 */
 	public static boolean validateRow(JSONObject jsonObject, int row_cur, Sheet firstSheet ) {
-		    Boolean row_validate = true;
+		    Boolean validate = true;
 		    JSONObject objval = (JSONObject) jsonObject.get("identifier");
 
 	     	for(Iterator nestediterator = objval.keySet().iterator(); nestediterator.hasNext();) {
@@ -50,12 +53,12 @@ public class TemplateParser {
 	     		int columnNum = CellReference.convertColStringToIndex((String) array.get(0));
 	     		Cell inputcell = firstSheet.getRow(row_cur).getCell(columnNum);
 	     		if(inputcell.getCellType() == Cell.CELL_TYPE_BLANK) {
-	     			row_validate = false;
+	     			validate = false;
 	     		}
 	     
 	     
 	     	}
-			return row_validate;
+			return validate;
 	 }
 
 	 /**
@@ -74,10 +77,6 @@ public class TemplateParser {
 		JSONObject jsonObject =  new TemplateLoader(config).parseTemplate(parsetemplate);
 		return jsonObject;
 	 }
-
-	
-	
-	
 	/**
 	 * @param stringInput
 	 * @return
@@ -132,7 +131,7 @@ public class TemplateParser {
 		 * @param row_cur this is the current row we are on
 		 * @param row_validate this is the validation if we put it into the object
 		 */
-		public static void inputValues(JSONObject inputobject, Sheet firstSheet, String key, JSONArray array, int row_cur, boolean row_validate) {
+	public static void inputValues(JSONObject inputobject, Sheet firstSheet, String key, JSONArray array) {
 			 int columnNum = CellReference.convertColStringToIndex((String) array.get(0));
 		     boolean requiredfield = (boolean) array.get(1);
 		     Cell inputcell = firstSheet.getRow(row_cur).getCell(columnNum);
@@ -145,8 +144,40 @@ public class TemplateParser {
 		    		 inputobject.put(key, null);
 		    	 }
 		     }
-		 }
-	
+	 }
+	/**
+	 * 
+	 * 
+	 * @param obj
+	 * @param firstSheet
+	 * @return
+	 */
+	public static ArrayList<JSONObject> getJsonArrayObjects(JSONArray obj, Sheet firstSheet){
+		ArrayList<JSONObject> jsonobjects = new ArrayList<JSONObject>();
+		
+		for(int i = 0 ; i < obj.size(); i ++) {
+			JSONObject inputobject = (JSONObject) obj.get(i);
+			JSONObject newObject = new JSONObject();
+			newObject = recursiveInputJson(firstSheet, newObject, inputobject);
+			jsonobjects.add(newObject);
+		}
+		return jsonobjects;
+		
+	}
+	/**
+	 * @param nestedobj
+	 * @param firstSheet
+	 * @param nestedkey
+	 * @param array
+	 */
+	public static void inputValuesArray(JSONObject nestedobj, Sheet firstSheet, String nestedkey, JSONArray array) {
+		if(array.get(0) instanceof JSONObject) {
+			ArrayList<JSONObject> arrayofObjects = getJsonArrayObjects(array, firstSheet);
+			nestedobj.put(nestedkey, arrayofObjects);
+		}else {
+			inputValues(nestedobj, firstSheet, nestedkey, array);
+		}
+	}
 	/**
 	 * 
 	 * 
@@ -157,27 +188,28 @@ public class TemplateParser {
 	 * @param row_cur
 	 * @return
 	 */
-	public static JSONObject recursiveInputJson(Sheet firstSheet, JSONObject nestedobj, JSONObject obj, boolean row_validate, int row_cur) {
+	public static JSONObject recursiveInputJson(Sheet firstSheet, JSONObject nestedobj, JSONObject obj) {
 		
-	
-    	for(Iterator nestediterator = obj.keySet().iterator(); nestediterator.hasNext();) {
+		for(Iterator nestediterator = obj.keySet().iterator(); nestediterator.hasNext();) {
     		
     		String nestedkey = (String) nestediterator.next();
     		if (obj.get(nestedkey) instanceof JSONArray) {
     			JSONArray array = (JSONArray) obj.get(nestedkey);
-    			
-    			inputValues(nestedobj, firstSheet, nestedkey, array, row_cur, row_validate);
-    		
-    		}else {
+    			inputValuesArray(nestedobj, firstSheet, nestedkey, array);
+    		} else if(obj.get(nestedkey) instanceof String) {
+           	  nestedobj.put(nestedkey, parseTemplate);
+    		} else {
     			JSONObject nestedObj = (JSONObject) obj.get(nestedkey);
     			JSONObject newobj = new JSONObject();
-    			newobj = recursiveInputJson(firstSheet, newobj ,  nestedObj,  row_validate,  row_cur);
+    			newobj = recursiveInputJson(firstSheet, newobj, nestedObj);
     			nestedobj.put(nestedkey, newobj);
     		}
     	}
 		return nestedobj;
     
 	 }
+
+
 
 	 /**
 	 * Parses a .xlsx file into an array of JSON objects
@@ -191,6 +223,7 @@ public class TemplateParser {
 	 * @throws ConfigurationNotFoundException
 	 */
 	public static ArrayList<JSONObject> getJsonObject(String excelFilePath, String parsetemplate, String configName) throws IOException, ParseException, ConfigurationNotFoundException{
+		 parseTemplate = parsetemplate; 
 		 FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
 		 JSONObject jsonObject =  getTemplateObject(parsetemplate, configName);
 	     Workbook workbook = new XSSFWorkbook(inputStream);
@@ -199,44 +232,21 @@ public class TemplateParser {
 	     //ArrayList<String> invalid_values = new ArrayList<String>();
 	     //ArrayList<String> missing_values = new ArrayList<String>();
 	     
-	     int row_cur = 3;
+	     row_cur = 3;
 	     
 	     //iterate through the row values in excel file
 	     while(firstSheet.getRow(row_cur) != null) {
 	     //first validate if this row is a valid row (client identity exist or not)
 	     JSONObject parsedObj = new JSONObject();
-	     boolean row_validate = validateRow(jsonObject, row_cur, firstSheet);
- 
+	     row_validate = validateRow(jsonObject, row_cur, firstSheet);
+	     parsedObj = recursiveInputJson(firstSheet, parsedObj, jsonObject);
+	     
      	 // iterate through each key value in the json object
-	     for(Iterator iterator = jsonObject.keySet().iterator(); iterator.hasNext();) {
-	        	
-	            String key =  (String) iterator.next();
-	            // Check if the key returns an json array or Json Object
-	            if (jsonObject.get(key) instanceof JSONArray) {
-	            	JSONArray array = (JSONArray) jsonObject.get(key);
-	            	inputValues(parsedObj, firstSheet, key, array, row_cur,row_validate);
-	            	
-	            	
-	            }
-	            
-	            else if(jsonObject.get(key) instanceof String) {
-	            	 parsedObj.put(key, parsetemplate);
-	            }
-	            else {
-	           
-	            	JSONObject obj =  (JSONObject) jsonObject.get(key);
-	            	JSONObject nestedobj = new JSONObject();
-	                nestedobj = recursiveInputJson(firstSheet, nestedobj, obj, row_validate, row_cur);
-	            	parsedObj.put(key, nestedobj);
-	            	
-	            	
-	            }
-	          
-	        }
-	     if(row_validate) {
-	     jsonobjects.add(parsedObj);
-	     }
-	     row_cur++;
+	
+	     	if(row_validate) {
+	     		jsonobjects.add(parsedObj);
+	     	}
+	     	row_cur++;
 	     }
 	     inputStream.close();
 	     return jsonobjects;
