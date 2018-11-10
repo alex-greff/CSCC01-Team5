@@ -11,6 +11,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.apache.commons.io.FilenameUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
@@ -70,14 +71,15 @@ public class EventHandler implements ActionListener {
 			}
 		}
 		else if (command == "Upload") {
-			String filePath = ICarePanel.directoryTextFieldComponent.getText();
-			
-			JTextField feedbackTextField = ICarePanel.feedbackTextFieldComponent;
+			String filePath = ICarePanel.directoryTextFieldComponent.getText(); // Inputted filepath to ICare file TODO: check that the file is actually an ICare file
+			String selectedTemplateType = (String) ICarePanel.templateDropDownComponent.getSelectedItem(); // Selected template type
+			JTextField feedbackTextField = ICarePanel.feedbackTextFieldComponent; // Component for inserting feedback
 			
 			ArrayList<JSONObject> parsedFile = null;
 			
+			// Parse the selected ICare file using the selected template type
 			try {
-				parsedFile = TemplateParser.GetJsonArray(filePath, "client_profile.json", "iCare-template-system");
+				parsedFile = TemplateParser.GetJsonArray(filePath, selectedTemplateType, "iCare-template-system");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -91,16 +93,19 @@ public class EventHandler implements ActionListener {
 				feedbackTextField.setText(String.format("The following required items are missing: %s", e1.getMissingField()));
 				e1.printStackTrace();
 			}
+			feedbackTextField.setText(parsedFile.toString()); //TODO: Remove this debug line
 			
-			feedbackTextField.setText(parsedFile.toString());
+			// Connect to database
 			DatabaseDriver db = null;
 			try {
 				db = new MongoDriver(ConfigurationLoader.loadConfiguration("database-URI").get("test_db_saad").toString(),
-						"test_db", "client_profile");
+						"test_db", FilenameUtils.removeExtension(selectedTemplateType));
 			} catch (ConfigurationNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			
+			// Insert parsed file into database
 			db.insertMany(parsedFile);
 		}
 

@@ -17,8 +17,9 @@ public class ICarePanel extends SuperPanel {
 	
 	private JLabel templateTypeLabel = new JLabel("Template Type:", Label.RIGHT);
 	private JButton selectFileButton = new JButton("Select Template");
-	ArrayList<String> templates = getFileNames("data\\templates\\iCare-templates");; //TODO: Add template list
+	ArrayList<String> templates = getFileNames("data\\templates\\iCare-templates"); //TODO: Add template list
 	private JComboBox<String> templateDropDown = new JComboBox<String>(templates.toArray(new String[0]));
+	protected static JComboBox<String> templateDropDownComponent;
 	
 	private JTextField feedbackText = new JTextField();
 	protected static JTextField feedbackTextFieldComponent;
@@ -47,6 +48,7 @@ public class ICarePanel extends SuperPanel {
 		textFieldConstraint.gridy = 1;
 		add(templateTypeLabel, defaultConstraint);
 		add(templateDropDown, textFieldConstraint);
+		templateDropDownComponent = templateDropDown;
 		
 		defaultConstraint.gridy = 2;
 		defaultConstraint.gridx = 1;
