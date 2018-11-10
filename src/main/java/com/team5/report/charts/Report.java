@@ -1,4 +1,4 @@
-package com.team5.report;
+    package com.team5.report.charts;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,17 +29,18 @@ public abstract class Report extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Scene scene = populateChart(stage);
+        Scene scene = makeChart(stage);
         saveAsPng(scene, this.targetPath);
     }
 
-    protected abstract Scene populateChart(Stage stage);
+    protected abstract Scene makeChart(Stage stage);
 
     protected void saveAsPng(Scene scene, String path) throws IOException {
         WritableImage image = scene.snapshot(null);
         File file = new File(path);
         ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
     }
+
 
     
     // @Override
@@ -103,9 +104,9 @@ public abstract class Report extends Application {
     //     System.exit(0);
     // }
  
-    public static void main(String[] args) {
-        // launch(args);
-        // Report r = new Report();
-        // r.generate("");
-    }
+    // public static void main(String[] args) {
+    //     // launch(args);
+    //     // Report r = new Report();
+    //     // r.generate("");
+    // }
 }
