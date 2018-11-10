@@ -3,6 +3,7 @@ package com.team5.gui;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -15,6 +16,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
+import com.mongodb.MongoClientException;
+import com.mongodb.MongoSocketException;
+import com.mongodb.MongoTimeoutException;
 import com.team5.database.DatabaseDriver;
 import com.team5.database.MongoDriver;
 import com.team5.parser.MissingFieldException;
@@ -35,6 +39,7 @@ public class EventHandler implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
+		Boolean noExceptionRaised = true;
 
 		if (command == "Upload iCare File"){
 			cLayout.show(content, "Upload iCare File");
@@ -82,31 +87,61 @@ public class EventHandler implements ActionListener {
 				parsedFile = TemplateParser.GetJsonArray(filePath, selectedTemplateType, "iCare-template-system");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
+				noExceptionRaised = false;
 				e1.printStackTrace();
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
+				noExceptionRaised = false;
 				e1.printStackTrace();
 			} catch (ConfigurationNotFoundException e1) {
 				// TODO Auto-generated catch block
+				noExceptionRaised = false;
 				e1.printStackTrace();
 			} catch (MissingFieldException e1) {
 				feedbackTextField.setText(String.format("The following required items are missing: %s", e1.getMissingField()));
+				noExceptionRaised = false;
 				e1.printStackTrace();
-			}
-			feedbackTextField.setText(parsedFile.toString()); //TODO: Remove this debug line
-			
-			// Connect to database
-			DatabaseDriver db = null;
-			try {
-				db = new MongoDriver(ConfigurationLoader.loadConfiguration("database-URI").get("test_db_saad").toString(),
-						"test_db", FilenameUtils.removeExtension(selectedTemplateType));
-			} catch (ConfigurationNotFoundException e1) {
+			} catch (Exception e1) {
 				// TODO Auto-generated catch block
+				System.out.println("RANDOM!");
+				noExceptionRaised = false;
 				e1.printStackTrace();
 			}
 			
-			// Insert parsed file into database
-			db.insertMany(parsedFile);
+			DatabaseDriver db = null;
+			if (noExceptionRaised) {
+				// Connect to database
+				try {
+					db = new MongoDriver(ConfigurationLoader.loadConfiguration("database-URI").get("test_db_saad").toString(),
+							"test_db", FilenameUtils.removeExtension(selectedTemplateType));
+				} catch (ConfigurationNotFoundException e1) {
+					// TODO Auto-generated catch block
+					noExceptionRaised = false;
+					e1.printStackTrace();
+				} catch (MongoClientException e1) {
+					// TODO Auto-generated catch block
+					System.out.println("MONGO");
+					noExceptionRaised = false;
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					System.out.println("RANDOM!");
+					noExceptionRaised = false;
+					e1.printStackTrace();
+				}
+			}
+			
+			if (noExceptionRaised) {
+				try {
+					// Insert parsed file into database
+					db.insertMany(parsedFile);
+				}catch (MongoTimeoutException e1) {
+					// TODO Auto-generated catch block
+					System.out.println("CAN'T CONNECT!");
+					noExceptionRaised = false;
+					e1.printStackTrace();
+				}
+			}
 		}
 
 	}
