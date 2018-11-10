@@ -1,20 +1,20 @@
 package com.team5.database;
 
-import com.team5.utilities.JSONLoader;
-
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientException;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientException;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.team5.utilities.JSONLoader;
+
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -81,29 +81,46 @@ public class DatabaseDriver {
 	}
 	
 	/**
-	 * Retrieves data from the database.
+	 * Retrieves all documents from the current collection.
+	 * 
 	 * @return A list of JSONObjects.
 	 */
 	public List<JSONObject> queryDatabase() {
-		List<JSONObject> data = new ArrayList<>(); // List of JSONObjects
-		
-		MongoCursor<Document> cursor = collection.find().iterator(); // Get the cursor
-		
-		// Go through the data in the collection
-		while (cursor.hasNext()) {
-			Document doc = cursor.next();
-			JSONParser parser = new JSONParser();
-			JSONObject object = null;
+		// Query the database with no filter
+		return queryDatabase(new Document());
+	}
+
+	/**
+	 * Retrieves all documents from the current collection that match the inputted query.
+	 * 
+	 * @param query The query to the database.
+	 * @return Returns a list of JSONObjects.
+	 */
+	public List<JSONObject> queryDatabase(Bson query) {
+		List<JSONObject> queried_docs = new ArrayList<>();
+
+		// Find all documents matching the query
+		FindIterable<Document> findIterable = collection.find(query);
+
+		// Initialize a JSON parser instance
+		JSONParser parser = new JSONParser();
+
+		// Iterate through each filtered document
+		for (Document doc : findIterable) {
 			try {
-				object = (JSONObject) parser.parse(doc.toJson()); // Convert document to JSONObject;
-				object.remove("_id"); // Removes the _id field
-				data.add(object);
+				// Parse to JSON
+				JSONObject doc_obj = (JSONObject) parser.parse(doc.toJson());
+				// Add to the queried document JSON list
+				queried_docs.add(doc_obj);
+
 			} catch (ParseException e) {
+				// If an error occurs parsing then just print the stack trace and ignore it
 				e.printStackTrace();
-			} 
+			}
 		}
-		
-		return data;
+
+		// Return the queried docs
+		return queried_docs;
 	}
 	
 	/**
@@ -111,6 +128,14 @@ public class DatabaseDriver {
 	 */
 	public void closeConnection() {
 		client.close(); // close the connection
+	}
+
+	/**
+	 * Deconstructor
+	 */
+	@Override
+	public void finalize() {
+		closeConnection(); // Close the connection
 	}
 	
 	// Demo
