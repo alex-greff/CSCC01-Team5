@@ -1,7 +1,7 @@
 package com.team5.gui;
 
 import java.awt.Label;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,8 +17,8 @@ public class ICarePanel extends SuperPanel {
 	
 	private JLabel templateTypeLabel = new JLabel("Template Type:", Label.RIGHT);
 	private JButton selectFileButton = new JButton("Select Template");
-	String[] templates = {"Placeholer 1", "Placeholder 2", "Placeholder 3"}; //TODO: Add template list
-	private JComboBox<String> templateDropDown = new JComboBox<String>(templates);
+	ArrayList<String> templates = getFileNames("data\\templates\\iCare-templates");; //TODO: Add template list
+	private JComboBox<String> templateDropDown = new JComboBox<String>(templates.toArray(new String[0]));
 	
 	private JTextField feedbackText = new JTextField();
 	protected static JTextField feedbackTextFieldComponent;

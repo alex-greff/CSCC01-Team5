@@ -27,7 +27,7 @@ import java.util.ArrayList;
  */
 public class TemplateParser {
 	// constructor class
-	private TemplateParser() {
+	public TemplateParser() {
 	}
 
 	private static int row_cur;
