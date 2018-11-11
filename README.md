@@ -142,7 +142,7 @@ Click [here](#System-Demos) for instructions on running the demos.
 #### Deliverables
 * [Acceptance Tests](TODO)
 * [Code Review Report](code_reviews/code_review_1/code_review_report.pdf)
-* [Code Review Debriefing Meeting](code_reviews/code_review_1/CodeReviewDebriefing.mp4)
+* [Code Review Debriefing Meeting](https://youtu.be/ttGEu-ViChk)
 
 
 ### Deliverable 5: Final Deliverable
