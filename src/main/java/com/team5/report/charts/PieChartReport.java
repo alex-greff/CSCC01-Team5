@@ -30,14 +30,16 @@ public abstract class PieChartReport extends ChartReport {
 
     protected abstract ObservableList<PieChart.Data> getData();
 
-    protected Scene makeChart(Stage stage) {
-        Chart chart = getChart();
-        chart.setTitle(getTitle());
+    // @Override
+    // protected void makeChart(Stage stage, Scene scene) {
+    //     Chart chart = getChart();
+    //     chart.setTitle(getTitle());
 
-        Scene scene = new Scene(new Group());
+    //     // Scene scene = new Scene(new Group());
+    //     scene.setRoot(new Group());
 
-        ((Group) scene.getRoot()).getChildren().add(chart);
+    //     ((Group) scene.getRoot()).getChildren().add(chart);
 
-        return scene;
-    }
+    //     // return scene;
+    // }
 }

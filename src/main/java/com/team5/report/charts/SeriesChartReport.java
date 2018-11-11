@@ -3,6 +3,8 @@ package com.team5.report.charts;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.team5.report.generators.SeriesChartGenerator;
+
 import org.javatuples.Pair;
 
 import javafx.scene.Scene;
@@ -27,13 +29,28 @@ public abstract class SeriesChartReport<X, Y> extends ChartReport {
 
     }
 
+    // @Override
+    // protected void makeChart(Stage stage, Scene scene) {
+    //     setupStage(stage);
+
+    //     // Scene scene = new Scene(getChart(), getDimensions().getValue0(), getDimensions().getValue1());
+
+    //     scene.setRoot(getChart());
+    //     // scene.wid
+
+    //     // return scene;
+    // }
+
     @Override
-    protected Scene makeChart(Stage stage) {
-        setupStage(stage);
+    public void generate(String targetPath) {
+        System.out.println("Ready to generate!");
 
-        Scene scene = new Scene(getChart(), getDimensions().getValue0(), getDimensions().getValue1());
+        SeriesChartGenerator generator = new SeriesChartGenerator();
 
-        return scene;
+        Double width = getDimensions().getValue0();
+        Double height = getDimensions().getValue1();
+
+        generator.generate(getChart(), width, height, targetPath);
     }
 
     @Override

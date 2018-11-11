@@ -1,12 +1,9 @@
 package com.team5.report.charts;
 
-import com.team5.report.charts.PairChartReport;
-import com.team5.report.charts.TripletChartReport;
-
-import org.javatuples.Pair;
-
 import javafx.scene.chart.Axis;
+import javafx.scene.chart.BubbleChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 
 public abstract class BubbleChartReport extends TripletChartReport<Number, Number, Number> {
     private NumberAxis xAxis, yAxis;
@@ -31,5 +28,10 @@ public abstract class BubbleChartReport extends TripletChartReport<Number, Numbe
         this.yAxis.setLowerBound(lowerBound);
         this.yAxis.setUpperBound(upperBound);
         this.yAxis.setTickUnit(tickUnit);
+    }
+
+    @Override
+    protected XYChart<Number, Number> instantiateXYChart() {
+        return new BubbleChart<>(getXAxis(), getYAxis());
     }
 }

@@ -1,9 +1,12 @@
 package com.team5.report.charts;
 
-import com.team5.report.charts.NumberedChartReport;
-
-import org.javatuples.Pair;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 
 public abstract class LineChartReport extends NumberedChartReport {
-
+    @Override
+    protected XYChart<Number, Number> instantiateXYChart() {
+        return new LineChart<>(getXAxis(), getYAxis());
+    }
 }

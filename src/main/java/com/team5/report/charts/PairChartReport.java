@@ -16,7 +16,8 @@ public abstract class PairChartReport<X, Y> extends SeriesChartReport<X, Y> {
 
     @Override
     protected XYChart<X,Y> getXYChart() {
-        XYChart<X, Y> chart = getXYChart();
+        XYChart<X, Y> chart = instantiateXYChart();
+
         List<Series<Pair<X,Y>>> data = getPairData();
 
         List<XYChart.Series<X,Y>> seriesList = new ArrayList<>();
@@ -41,4 +42,6 @@ public abstract class PairChartReport<X, Y> extends SeriesChartReport<X, Y> {
     }
 
     protected abstract List<Series<Pair<X,Y>>> getPairData();
+
+    protected abstract XYChart<X, Y> instantiateXYChart();
 }

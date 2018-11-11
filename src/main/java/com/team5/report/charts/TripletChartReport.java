@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public abstract class TripletChartReport<X, Y, Z> extends SeriesChartReport<X, Y> {
     @Override
     protected XYChart<X,Y> getXYChart() {
-        XYChart<X, Y> chart = getXYChart();
+        XYChart<X, Y> chart = instantiateXYChart();
         List<Series<Triplet<X, Y, Z>>> data = getTripletData();
 
         List<XYChart.Series<X,Y>> seriesList = new ArrayList<>();
@@ -37,4 +37,6 @@ public abstract class TripletChartReport<X, Y, Z> extends SeriesChartReport<X, Y
     }
 
     protected abstract List<Series<Triplet<X, Y, Z>>> getTripletData();
+
+    protected abstract XYChart<X, Y> instantiateXYChart();
 }
