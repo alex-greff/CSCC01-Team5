@@ -10,18 +10,6 @@ import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
 public abstract class TripletChartReport<X, Y, Z> extends SeriesChartReport<X, Y> {
-
-    protected TripletChartReport(String title, Pair<Double, Double> dimensions, String xAxisLabel, String yAxisLabel) {
-        super(title, dimensions, xAxisLabel, yAxisLabel);
-    }
-
-    @Override
-    protected void setupStage(Stage stage) {
-        super.setupStage(stage);
-
-        
-    }
-
     @Override
     protected XYChart<X,Y> getXYChart() {
         XYChart<X, Y> chart = getXYChart();

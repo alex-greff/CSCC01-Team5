@@ -11,43 +11,15 @@ import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
 public abstract class ChartReport extends Report {
-
-    // protected XYChartReport(XYChart<X, Y> chartReference) {
-    //     this.chartReference = chartReference;
-    // }
-
-    // protected Scene makeChart(Stage stage) {
-    //     List<Pair<X,Y>> data = getData();
-
-    //     for (Pair<X,Y> series : data) {
-
-    //     }
-
-    //     return null;
-    // }
-
-    private String title;
-    private Pair<Double, Double> dimensions;
-
-    protected ChartReport(String title, Pair<Double, Double> dimensions) {
-        this.title = title;
-        this.dimensions = dimensions;
-    }
+    protected abstract String getTitle();
+    protected abstract Pair<Double, Double> getDimensions();
 
     protected void setupStage(Stage stage) {
-        stage.setTitle(this.title);
+        stage.setTitle(this.getTitle());
 
         // chart.setTitle(this.title);
-        getChart().setTitle(this.title);
+        getChart().setTitle(this.getTitle());
     } 
 
     protected abstract Chart getChart();
-
-    protected String getTitle() {
-        return this.title;
-    }
-
-    protected Pair<Double, Double> getDimensions() {
-        return new Pair<Double, Double>(this.dimensions.getValue0(), this.dimensions.getValue1());
-    }
 }

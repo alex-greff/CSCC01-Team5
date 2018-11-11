@@ -12,29 +12,20 @@ import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
 public abstract class SeriesChartReport<X, Y> extends ChartReport {
+    protected abstract String getXAxisLabel();
+    protected abstract String getYAxisLabel();
 
-    private String xAxisLabel;
-    private String yAxisLabel;
-
-    protected SeriesChartReport(String title, Pair<Double, Double> dimensions, String xAxisLabel, String yAxisLabel) {
-        super(title, dimensions);
-        this.xAxisLabel = xAxisLabel;
-        this.yAxisLabel = yAxisLabel;
-    }
-
-    // protected abstract List<Series<Tuple>> getData();
+    protected abstract Axis<X> getXAxis();
+    protected abstract Axis<Y> getYAxis();
 
     @Override
     protected void setupStage(Stage stage) {
         super.setupStage(stage);
 
-        getXAxis().setLabel(this.xAxisLabel);
-        getYAxis().setLabel(this.yAxisLabel);
+        getXAxis().setLabel(this.getXAxisLabel());
+        getYAxis().setLabel(this.getYAxisLabel());
 
     }
-
-    protected abstract Axis<X> getXAxis();
-    protected abstract Axis<Y> getYAxis();
 
     @Override
     protected Scene makeChart(Stage stage) {
@@ -51,14 +42,6 @@ public abstract class SeriesChartReport<X, Y> extends ChartReport {
     }
 
     protected abstract XYChart<X,Y> getXYChart();
-
-    protected String xAxisLabel() {
-        return this.xAxisLabel;
-    }
-    
-    protected String yAxisLabel() {
-        return this.yAxisLabel;
-    }
 
     public class Series<A> {
         private String name;

@@ -7,11 +7,7 @@ import javafx.scene.chart.NumberAxis;
 
 public abstract class NumberedChartReport extends PairChartReport<Number, Number> {
     private NumberAxis xAxis, yAxis;
-
-    protected NumberedChartReport(String title, Pair<Double, Double> dimensions, String xAxisLabel, String yAxisLabel) {
-        super(title, dimensions, xAxisLabel, yAxisLabel);
-    }
-
+    
     @Override
     protected Axis<Number> getXAxis() {
         return xAxis;

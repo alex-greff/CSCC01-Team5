@@ -12,9 +12,6 @@ import javafx.scene.chart.PieChart;
 import javafx.stage.Stage;
 
 public abstract class PieChartReport extends ChartReport {
-    protected PieChartReport(String title, Pair<Double, Double> dimensions) {
-        super(title, dimensions);
-    }
 
     @Override
     protected void setupStage(Stage stage) {

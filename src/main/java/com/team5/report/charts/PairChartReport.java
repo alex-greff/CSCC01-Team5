@@ -9,11 +9,6 @@ import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
 public abstract class PairChartReport<X, Y> extends SeriesChartReport<X, Y> {
-
-    protected PairChartReport(String title, Pair<Double, Double> dimensions, String xAxisLabel, String yAxisLabel) {
-        super(title, dimensions, xAxisLabel, yAxisLabel);
-    }
-
     @Override
     protected void setupStage(Stage stage) {
         super.setupStage(stage);

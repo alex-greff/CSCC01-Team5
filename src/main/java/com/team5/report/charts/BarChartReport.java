@@ -12,10 +12,6 @@ public abstract class BarChartReport extends PairChartReport<String, Number> {
     private CategoryAxis xAxis;
     private NumberAxis yAxis;
 
-    protected BarChartReport(String title, Pair<Double, Double> dimensions, String xAxisLabel, String yAxisLabel) {
-        super(title, dimensions, xAxisLabel, yAxisLabel);
-    }
-
     @Override
     protected Axis<String> getXAxis() {
         return xAxis;
