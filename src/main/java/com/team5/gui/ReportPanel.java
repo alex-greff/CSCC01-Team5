@@ -17,11 +17,11 @@ public class ReportPanel extends SuperPanel {
 	
 	private JLabel saveLabel = new JLabel("Report Save Location:", Label.RIGHT);
 	private JTextField directoryTextField = new JTextField();
-	protected static int directoryTextFieldIndex;
+	protected static JTextField directoryTextFieldComponent;
 	private JButton selectFileButton = new JButton("Select File");
 	
 	private JTextField feedbackText = new JTextField();
-	protected static int feedbackTextFieldIndex;
+	protected static JTextField feedbackTextFieldComponent;
 	
 	private JButton generateButton = new JButton("Generate");
 	
@@ -45,7 +45,7 @@ public class ReportPanel extends SuperPanel {
 		textFieldConstraint.gridy = 1;
 		add(saveLabel, defaultConstraint);
 		add(directoryTextField, textFieldConstraint);
-		directoryTextFieldIndex = Arrays.asList(getComponents()).indexOf(directoryTextField); //Get index of save TextField
+		directoryTextFieldComponent = directoryTextField;
 		add(selectFileButton, defaultConstraint);
 		
 		defaultConstraint.gridy = 2;
@@ -59,7 +59,7 @@ public class ReportPanel extends SuperPanel {
 		textFieldConstraint.ipadx = 800;
 		feedbackText.setEditable(false);
 		add(feedbackText, textFieldConstraint);
-		feedbackTextFieldIndex = Arrays.asList(getComponents()).indexOf(feedbackText); //Get index of feedback TextField
+		feedbackTextFieldComponent = feedbackText;
 		
 		defaultConstraint.gridy = 4;
 		defaultConstraint.gridx = 2;

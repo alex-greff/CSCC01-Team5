@@ -11,6 +11,8 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.team5.utilities.ConfigurationLoader;
+import com.team5.utilities.ConfigurationNotFoundException;
 import com.team5.utilities.JSONLoader;
 
 import org.bson.Document;
@@ -32,16 +34,13 @@ public class MongoDriver implements DatabaseDriver {
 	 * Constructs the database driver.
 	 * @param client The database client for connection.
 	 * @param database The name of the database to get from the client.
+	 * @throws MongoClientException Exception thrown if connection to database fails.
 	 */
-	public MongoDriver(String uri, String database, String collection) {
-		try {
-			this.uri = new MongoClientURI(uri); // URI of the client
-			this.client = new MongoClient(this.uri); // Connect to client
-			this.database = this.client.getDatabase(database); // Get the database
-			this.collection = this.database.getCollection(collection); // Get the collection
-		} catch (MongoClientException e) {
-			e.printStackTrace();
-		}
+	public MongoDriver(String uri, String database, String collection) throws MongoClientException {
+		this.uri = new MongoClientURI(uri); // URI of the client
+		this.client = new MongoClient(this.uri); // Connect to client
+		this.database = this.client.getDatabase(database); // Get the database
+		this.collection = this.database.getCollection(collection); // Get the collection
 	}
 	
 	/**
@@ -148,9 +147,14 @@ public class MongoDriver implements DatabaseDriver {
 	public static void main(String[] args) {
 		System.out.println("The DatabaseDriver is the driver that connects, and allows us to populate our database.");
 		System.out.println("Initializing a new DatabaseDriver with the specified fields will connect us to the database.");
-		MongoDriver db = new MongoDriver("mongodb://mo:ProficiousF18@ds031088.mlab.com:31088/icare_db",
-												"icare_db", "client_profile");
-		System.out.println("We are now connected to the database icare_db on the cloud server.");
+		MongoDriver db = null;
+		try {
+			db = new MongoDriver(ConfigurationLoader.loadConfiguration("database-URI").get("test_db_remote").toString(),
+													"test_db", "client_profile");
+		} catch (ConfigurationNotFoundException e) {
+			e.printStackTrace();
+		}
+		System.out.println("We are now connected to the database test_db on the cloud server.");
 		System.out.println("We are now going to insert two JSONObjects into the database collection, \'client_profile\'.");
 		JSONObject jsonObject = null;
 		List<JSONObject> ob = new ArrayList<>();

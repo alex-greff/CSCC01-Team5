@@ -1,7 +1,7 @@
 package com.team5.gui;
 
 import java.awt.Label;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,15 +13,16 @@ public class ICarePanel extends SuperPanel {
 	
 	private JLabel iCareLabel = new JLabel("iCare File:", Label.RIGHT);
 	private JTextField iCareNameTextField = new JTextField();
-	protected static int directoryTextFieldIndex;
+	protected static JTextField directoryTextFieldComponent;
 	
 	private JLabel templateTypeLabel = new JLabel("Template Type:", Label.RIGHT);
 	private JButton selectFileButton = new JButton("Select Template");
-	String[] templates = {"Placeholer 1", "Placeholder 2", "Placeholder 3"}; //TODO: Add template list
-	private JComboBox templateDropDown = new JComboBox<String>(templates);
+	ArrayList<String> templates = getFileNames("data\\templates\\iCare-templates"); //TODO: Add template list
+	private JComboBox<String> templateDropDown = new JComboBox<String>(templates.toArray(new String[0]));
+	protected static JComboBox<String> templateDropDownComponent;
 	
 	private JTextField feedbackText = new JTextField();
-	protected static int feedbackTextFieldIndex;
+	protected static JTextField feedbackTextFieldComponent;
 	
 	private JButton uploadButton = new JButton("Upload");
 	
@@ -40,13 +41,14 @@ public class ICarePanel extends SuperPanel {
 		// Adding buttons and labels
 		add(iCareLabel, defaultConstraint);
 		add(iCareNameTextField, textFieldConstraint);
-		directoryTextFieldIndex = Arrays.asList(getComponents()).indexOf(iCareNameTextField); //Get index of save TextField
+		directoryTextFieldComponent = iCareNameTextField;
 		add(selectFileButton, defaultConstraint);
 		
 		defaultConstraint.gridy = 1;
 		textFieldConstraint.gridy = 1;
 		add(templateTypeLabel, defaultConstraint);
 		add(templateDropDown, textFieldConstraint);
+		templateDropDownComponent = templateDropDown;
 		
 		defaultConstraint.gridy = 2;
 		defaultConstraint.gridx = 1;
@@ -59,7 +61,7 @@ public class ICarePanel extends SuperPanel {
 		textFieldConstraint.ipadx = 800;
 		feedbackText.setEditable(false);
 		add(feedbackText, textFieldConstraint);
-		feedbackTextFieldIndex = Arrays.asList(getComponents()).indexOf(feedbackText); //Get index of feedback TextField
+		feedbackTextFieldComponent = feedbackText;
 		
 		defaultConstraint.gridy = 4;
 		defaultConstraint.gridx = 2;

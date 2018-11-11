@@ -3,6 +3,8 @@ package com.team5.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -30,5 +32,20 @@ public class SuperPanel extends JPanel {
 		// Customizing TextField layout ---
 		textFieldConstraint = (GridBagConstraints) defaultConstraint.clone();
 		textFieldConstraint.ipadx = 500;
+	}
+	
+	protected static ArrayList<String> getFileNames(String filePath) {
+		File directory = new File(".\\data\\templates\\iCare-templates");
+		File[] fileList = directory.listFiles();
+		ArrayList<String> fileNameList = new ArrayList<String>();
+
+		// Add all the .json files into the list
+		for(File file : fileList) {
+			
+			if (file.getName().endsWith(".json")) {
+				fileNameList.add(file.getName());
+			}
+		}
+		return fileNameList;
 	}
 }
