@@ -1,4 +1,4 @@
-package com.team5.report.charts.implementations;
+package com.team5.report.charts;
 
 import com.team5.report.charts.NumberedChartReport;
 
