@@ -317,13 +317,13 @@ public class TemplateParser {
 
 	public static void main(String[] args)
 			throws IOException, ParseException, ConfigurationNotFoundException, MissingFieldException {
-
+		String excelFilePath4 = "testFiles/SampleFilledTemplates/community_connectionsMISSING.xlsx";
 		String excelFilePath = "testFiles/reportGeneratorTests/client.xlsx";
 		String excelFilePath2 = "testFiles/reportGeneratorTests/enroll.xlsx";
 
 		System.out.println("This is the Parser Test, This parse the excel file and puts it into a Json Object");
 		System.out.println("Client Profile");
-		System.out.println(TemplateParser.GetJsonArray(excelFilePath, "client_profile.json", "iCare-template-system"));
+		System.out.println(TemplateParser.GetJsonArray(excelFilePath4, "community_connections.json", "iCare-template-system"));
 		System.out.println("lt_client_enroll");
 		System.out.println(TemplateParser.GetJsonArray(excelFilePath2, "lt_client_enroll.json", "iCare-template-system"));
 
