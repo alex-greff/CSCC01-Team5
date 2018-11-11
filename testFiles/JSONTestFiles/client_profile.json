@@ -1,0 +1,22 @@
+ {
+    "display-name":"Client Profile",
+    
+    "identifier": {
+        "category":"FOSS/GCMS Client ID",
+        "value":12345678
+    },
+    "dob":"1978-05-20",
+    "phone-number":"902-628-1285",
+    "email":"hnestor@cathcrosscultural.org",
+    "address":{
+        "street-number":1256,
+        "steet-name":"College",
+        "street-type":"Abbey",
+        "unit-suit-apt":205,
+        "city":"Toronto",
+        "province":"Ontario",
+        "postal-code":"M6G3A4"
+    },
+    "language-of-preference":"English",
+    "future-research-or-consultation-consent":"Yes"
+}
