@@ -29,11 +29,11 @@ public class ParserTest {
 	@Test
     @DisplayName("valid client profile")
 	void client_profile_valid() throws MissingFieldException, FileNotFoundException, IOException, ParseException, ConfigurationNotFoundException {
-	ArrayList<JSONObject> arrayjson = new ArrayList<JSONObject>();
-	JSONObject j_obj = JSONLoader.parseJSONFile(jsonObjectpath1);
-	arrayjson = TemplateParser.GetJsonArray(excelFilePath, "client_profile.json", "iCare-template-system");
-	JSONObject check = arrayjson.get(0);
-	assertEquals(j_obj, check);
+		ArrayList<JSONObject> arrayjson = new ArrayList<JSONObject>();
+		JSONObject j_obj = JSONLoader.parseJSONFile(jsonObjectpath1);
+		arrayjson = TemplateParser.GetJsonArray(excelFilePath, "client_profile.json", "iCare-template-system");
+		JSONObject check = arrayjson.get(0);
+		assertEquals(j_obj, check);
 	}
 	@Test
 	@DisplayName("Missing Client profile")
