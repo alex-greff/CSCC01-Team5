@@ -72,10 +72,10 @@ public class EventHandler implements ActionListener {
 				e1.printStackTrace();
 			}
 			
-			Report r = null;
+			Report report = null;
 			if(noExceptionRaised) {
 				try {
-					r = (Report) reportClass.newInstance();
+					report = (Report) reportClass.newInstance();
 				} catch (InstantiationException e1) {
 					// TODO Auto-generated catch block
 					noExceptionRaised = false;
@@ -88,7 +88,7 @@ public class EventHandler implements ActionListener {
 			}
 			
 			if (noExceptionRaised) {
-				r.generate(ReportPanel.directoryTextFieldComponent.getText());
+				report.generate(ReportPanel.directoryTextFieldComponent.getText() + "\\" + ReportPanel.nameTextFieldComponent.getText() + ".png");
 			}
 		}
 		else if (command == "Select Template") {

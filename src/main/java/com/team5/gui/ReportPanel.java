@@ -21,6 +21,10 @@ public class ReportPanel extends SuperPanel {
 	protected static JTextField directoryTextFieldComponent;
 	private JButton selectFileButton = new JButton("Select File");
 	
+	private JLabel nameLabel = new JLabel("Report name");
+	private JTextField nameTextField = new JTextField();
+	protected static JTextField nameTextFieldComponent;
+	
 	private JTextField feedbackText = new JTextField();
 	protected static JTextField feedbackTextFieldComponent;
 	
@@ -51,10 +55,16 @@ public class ReportPanel extends SuperPanel {
 		add(selectFileButton, defaultConstraint);
 		
 		defaultConstraint.gridy = 2;
+		textFieldConstraint.gridy = 2;
+		add(nameLabel, defaultConstraint);
+		add(nameTextField, textFieldConstraint);
+		nameTextFieldComponent = nameTextField;
+		
+		defaultConstraint.gridy = 3;
 		defaultConstraint.gridx = 1;
 		add(generateButton, defaultConstraint);
 		
-		textFieldConstraint.gridy = 3;
+		textFieldConstraint.gridy = 4;
 		textFieldConstraint.gridx = 0;
 		textFieldConstraint.gridwidth = 4;
 		textFieldConstraint.ipady = 100;
