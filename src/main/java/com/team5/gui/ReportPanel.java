@@ -12,16 +12,21 @@ import javax.swing.JTextField;
 public class ReportPanel extends SuperPanel {
 	
 	private JLabel reportLabel = new JLabel("Report:", Label.RIGHT);
-	private String[] reports = {"Placeholder Report 1", "Placehoder Report 2", "Placeholder Report 3"};
+	private String[] reports = getFileNames("src\\main\\java\\com\\team5\\report\\implementations", ".java");;
 	private JComboBox<String> reportDropDown = new JComboBox<String>(reports);
+	protected static JComboBox<String> reportDropDownComponent;
 	
 	private JLabel saveLabel = new JLabel("Report Save Location:", Label.RIGHT);
 	private JTextField directoryTextField = new JTextField();
-	protected static int directoryTextFieldIndex;
+	protected static JTextField directoryTextFieldComponent;
 	private JButton selectFileButton = new JButton("Select File");
 	
+	private JLabel nameLabel = new JLabel("Report name");
+	private JTextField nameTextField = new JTextField();
+	protected static JTextField nameTextFieldComponent;
+	
 	private JTextField feedbackText = new JTextField();
-	protected static int feedbackTextFieldIndex;
+	protected static JTextField feedbackTextFieldComponent;
 	
 	private JButton generateButton = new JButton("Generate");
 	
@@ -40,26 +45,33 @@ public class ReportPanel extends SuperPanel {
 		// Adding buttons and labels
 		add(reportLabel, defaultConstraint);
 		add(reportDropDown, textFieldConstraint);
+		reportDropDownComponent = reportDropDown;
 		
 		defaultConstraint.gridy = 1;
 		textFieldConstraint.gridy = 1;
 		add(saveLabel, defaultConstraint);
 		add(directoryTextField, textFieldConstraint);
-		directoryTextFieldIndex = Arrays.asList(getComponents()).indexOf(directoryTextField); //Get index of save TextField
+		directoryTextFieldComponent = directoryTextField;
 		add(selectFileButton, defaultConstraint);
 		
 		defaultConstraint.gridy = 2;
+		textFieldConstraint.gridy = 2;
+		add(nameLabel, defaultConstraint);
+		add(nameTextField, textFieldConstraint);
+		nameTextFieldComponent = nameTextField;
+		
+		defaultConstraint.gridy = 3;
 		defaultConstraint.gridx = 1;
 		add(generateButton, defaultConstraint);
 		
-		textFieldConstraint.gridy = 3;
+		textFieldConstraint.gridy = 4;
 		textFieldConstraint.gridx = 0;
 		textFieldConstraint.gridwidth = 4;
 		textFieldConstraint.ipady = 100;
 		textFieldConstraint.ipadx = 800;
 		feedbackText.setEditable(false);
 		add(feedbackText, textFieldConstraint);
-		feedbackTextFieldIndex = Arrays.asList(getComponents()).indexOf(feedbackText); //Get index of feedback TextField
+		feedbackTextFieldComponent = feedbackText;
 		
 		defaultConstraint.gridy = 4;
 		defaultConstraint.gridx = 2;
