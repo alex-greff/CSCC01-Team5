@@ -34,18 +34,18 @@ public class SuperPanel extends JPanel {
 		textFieldConstraint.ipadx = 500;
 	}
 	
-	protected static ArrayList<String> getFileNames(String filePath) {
-		File directory = new File(".\\data\\templates\\iCare-templates");
+	protected static String[] getFileNames(String filePath, String extension) {
+		File directory = new File(".\\"+filePath);
 		File[] fileList = directory.listFiles();
 		ArrayList<String> fileNameList = new ArrayList<String>();
 
 		// Add all the .json files into the list
 		for(File file : fileList) {
 			
-			if (file.getName().endsWith(".json")) {
+			if (file.getName().endsWith(extension)) {
 				fileNameList.add(file.getName());
 			}
 		}
-		return fileNameList;
+		return fileNameList.toArray(new String[0]);
 	}
 }

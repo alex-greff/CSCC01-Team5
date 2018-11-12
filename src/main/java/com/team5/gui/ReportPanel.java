@@ -12,8 +12,9 @@ import javax.swing.JTextField;
 public class ReportPanel extends SuperPanel {
 	
 	private JLabel reportLabel = new JLabel("Report:", Label.RIGHT);
-	private String[] reports = {"Placeholder Report 1", "Placehoder Report 2", "Placeholder Report 3"};
+	private String[] reports = getFileNames("src\\main\\java\\com\\team5\\report\\implementations", ".java");;
 	private JComboBox<String> reportDropDown = new JComboBox<String>(reports);
+	protected static JComboBox<String> reportDropDownComponent;
 	
 	private JLabel saveLabel = new JLabel("Report Save Location:", Label.RIGHT);
 	private JTextField directoryTextField = new JTextField();
@@ -40,6 +41,7 @@ public class ReportPanel extends SuperPanel {
 		// Adding buttons and labels
 		add(reportLabel, defaultConstraint);
 		add(reportDropDown, textFieldConstraint);
+		reportDropDownComponent = reportDropDown;
 		
 		defaultConstraint.gridy = 1;
 		textFieldConstraint.gridy = 1;
