@@ -134,8 +134,16 @@ For the convenience of the grader we have compiled small demos of each system in
 Click [here](#System-Demos) for instructions on running the demos.
 
 
-### Deliverable 4: Product Validation
-(In-Progress...)
+### Deliverable 4: Product Verification and Code Review
+* [Product Backlog v2](#Version-2)
+* [Sprint 3](#Sprint-3)
+* [Sprint 4](#Sprint-4)
+
+#### Deliverables
+* [Acceptance Tests](acceptance_tests/v1/acceptance_tests.pdf)
+* [Code Review Report](code_reviews/code_review_1/code_review_report.pdf)
+* [Code Review Debriefing Meeting](https://youtu.be/ttGEu-ViChk)
+
 
 ### Deliverable 5: Final Deliverable
 (In-Progress...)
