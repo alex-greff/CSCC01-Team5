@@ -303,7 +303,7 @@ public class TemplateParser {
 		//gets the missing values and array of filled JSONObjects
 		ArrayList<JSONObject> jsonobjects = getArrayJsonObject(excelFilePath, parsetemplate, configName);
 		ArrayList<JSONObject> missingValuesArray = new ArrayList<JSONObject>();
-		System.out.println(missingvaluesarray);
+	
 		missingValuesArray.add(missingvalues);
 		if (!missingvaluesarray.isEmpty()) {
 			throw new MissingFieldException(missingvaluesarray);
