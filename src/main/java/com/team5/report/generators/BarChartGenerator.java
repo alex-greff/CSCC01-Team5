@@ -67,7 +67,7 @@ public class BarChartGenerator extends Application {
         saveAsPng(scene, targetPath);
 
         stage.close();
-        System.exit(0);
+        // System.exit(0);
     }
 
     protected void saveAsPng(Scene scene, String path) throws IOException {
