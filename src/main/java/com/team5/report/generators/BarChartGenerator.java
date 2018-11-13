@@ -61,12 +61,12 @@ public class BarChartGenerator extends Application {
         chart.getData().addAll(seriesList);
         // chart.getData().addAll(seriesList.get(0), seriesList.get(1));
 
-        // stage.setScene(scene);
-        // stage.show();
+        stage.setScene(scene);
+        stage.show();
 
         saveAsPng(scene, targetPath);
 
-        stage.close();
+        // stage.close();
         // System.exit(0);
     }
 
