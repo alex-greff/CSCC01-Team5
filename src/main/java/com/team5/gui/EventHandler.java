@@ -88,8 +88,8 @@ public class EventHandler implements ActionListener {
 			}
 			
 			if (noExceptionRaised) {
-				String reportName = ReportPanel.nameTextFieldComponent.getText() + ".png";
-				report.generate(ReportPanel.directoryTextFieldComponent.getText() + "\\" + reportName);
+				String reportName = ReportPanel.directoryTextFieldComponent.getText() + "\\" + ReportPanel.nameTextFieldComponent.getText() + ".png";
+				report.generate(reportName);
 				ReportPanel.feedbackTextFieldComponent.setText(reportName + " file successfully generated.");
 			}
 		}
