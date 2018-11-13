@@ -32,7 +32,17 @@
 ## Setting Up
 
 ### Production
-- (Will be completed for the final deliverable...)
+
+Run these commands from the project root:
+
+* **Admin Panel**
+  ``` $ mvn exec:java@admin-panel ```
+
+* **Report Panel**
+  ``` $ mvn exec:java@report-panel ```
+
+* **Upload Panel**
+  ``` $ mvn exec:java@uploader-panel ```
 
 ### Development Environment
 - Java 1.8.0 or above installed
