@@ -13,6 +13,8 @@ public class SuperPanel extends JPanel {
 	EventHandler eventHandler;
 	GridBagConstraints defaultConstraint;
 	GridBagConstraints textFieldConstraint;
+	
+	public static int defaultSize = 40;
 
 	SuperPanel(JPanel content){
 		// Setting EventHandler ---
@@ -23,8 +25,8 @@ public class SuperPanel extends JPanel {
 		defaultConstraint = new GridBagConstraints();
 		
 		// Internal button padding
-		defaultConstraint.ipadx = 40;
-		defaultConstraint.ipady = 40;
+		defaultConstraint.ipadx = defaultSize;
+		defaultConstraint.ipady = defaultSize;
 		
 		// External button padding
 		defaultConstraint.insets = new Insets(60, 0, 0, 0);
