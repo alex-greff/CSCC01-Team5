@@ -140,7 +140,7 @@ Click [here](#System-Demos) for instructions on running the demos.
 * [Sprint 4](#Sprint-4)
 
 #### Deliverables
-* [Acceptance Tests](TODO)
+* [Acceptance Tests](acceptance_tests/v1/acceptance_tests.pdf)
 * [Code Review Report](code_reviews/code_review_1/code_review_report.pdf)
 * [Code Review Debriefing Meeting](https://youtu.be/ttGEu-ViChk)
 
