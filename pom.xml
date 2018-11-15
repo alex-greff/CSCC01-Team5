@@ -107,7 +107,29 @@
 					<execution>
 						<id>default-cli</id>
 						<configuration>
-							<mainClass>com.team5.driver.Driver</mainClass>
+							<mainClass>com.team5.gui.AdminPanel</mainClass>
+						</configuration>
+					</execution>
+
+					<!-- Entry points -->
+					<execution>
+						<id>admin-panel</id>
+						<configuration>
+							<mainClass>com.team5.gui.AdminPanel</mainClass>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>report-panel</id>
+						<configuration>
+							<mainClass>com.team5.gui.ReportPanel</mainClass>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>upload-panel</id>
+						<configuration>
+							<mainClass>com.team5.gui.ICarePanel</mainClass>
 						</configuration>
 					</execution>
 

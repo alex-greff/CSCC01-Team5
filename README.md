@@ -16,6 +16,7 @@
   - [Version 0](#Version-0)
   - [Version 1](#Version-1)
   - [Version 2](#Version-2)
+  - [Version 3](#Version-3)
 - [Sprint Backlog](#Sprint-Backlog)
   - [Sprint 1](#Sprint-1)
   - [Sprint 2](#Sprint-2)
@@ -32,7 +33,22 @@
 ## Setting Up
 
 ### Production
-- (Will be completed for the final deliverable...)
+
+Run these commands from the project root:
+
+Compile the project with ``` $ mvn compile ```
+
+* **Admin Panel**
+  
+  ``` $ mvn exec:java@admin-panel ```
+
+* **Report Panel**
+  
+  ``` $ mvn exec:java@report-panel ```
+
+* **Upload Panel**
+  
+  ``` $ mvn exec:java@uploader-panel ```
 
 ### Development Environment
 - Java 1.8.0 or above installed
@@ -86,11 +102,19 @@ Run these commands from the project root:
 * [Personas v1](product_backlog/v1/personas_1.pdf)
 * [User Stories v1](product_backlog/v1/user_stories_1.pdf)
 * [Tasks v1](product_backlog/v1/tasks_1.pdf)
+* [Changes from v0 to v1](product_backlog/v1/v0_to_v1_changes.txt)
 
 ### Version 2
 * [Personas v2](product_backlog/v2/personas_2.pdf)
 * [User Stories v2](product_backlog/v2/user_stories_2.pdf)
 * [Tasks v2](product_backlog/v2/tasks_2.pdf)
+* [Changes from v1 to v2](product_backlog/v2/v1_to_v2_changes.txt)
+
+### Version 3
+* [Personas v3](product_backlog/v3/personas_3.pdf)
+* [User Stories v3](product_backlog/v3/user_stories_3.pdf)
+* [Tasks v3](product_backlog/v3/tasks_3.pdf)
+* [Changes from v2 to v3](product_backlog/v3/v2_to_v3_changes.txt)
 
 ## Sprint Backlog
 
@@ -140,7 +164,7 @@ Click [here](#System-Demos) for instructions on running the demos.
 * [Sprint 4](#Sprint-4)
 
 #### Deliverables
-* [Acceptance Tests](TODO)
+* [Acceptance Tests](acceptance_tests/v1/acceptance_tests.pdf)
 * [Code Review Report](code_reviews/code_review_1/code_review_report.pdf)
 * [Code Review Debriefing Meeting](https://youtu.be/ttGEu-ViChk)
 

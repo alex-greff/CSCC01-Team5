@@ -61,13 +61,13 @@ public class BarChartGenerator extends Application {
         chart.getData().addAll(seriesList);
         // chart.getData().addAll(seriesList.get(0), seriesList.get(1));
 
-        // stage.setScene(scene);
-        // stage.show();
+        stage.setScene(scene);
+        stage.show();
 
         saveAsPng(scene, targetPath);
 
-        stage.close();
-        System.exit(0);
+        // stage.close();
+        // System.exit(0);
     }
 
     protected void saveAsPng(Scene scene, String path) throws IOException {

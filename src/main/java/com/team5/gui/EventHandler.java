@@ -23,6 +23,8 @@ import com.team5.parser.MissingFieldException;
 import com.team5.parser.TemplateParser;
 import com.team5.utilities.ConfigurationLoader;
 import com.team5.utilities.ConfigurationNotFoundException;
+import com.team5.report.charts.Report;
+import com.team5.report.implementations.*;
 
 public class EventHandler implements ActionListener {
 	
@@ -59,9 +61,37 @@ public class EventHandler implements ActionListener {
 			}
 		}
 		else if (command == "Generate") {
-			//TODO: Add Report Generate functionality
-			JTextField feedbackTextField = ReportPanel.feedbackTextFieldComponent;
-			feedbackTextField.setText("Functionality not yet implemented.");
+			String reportClassName = "com.team5.report.implementations." + FilenameUtils.removeExtension(ReportPanel.reportDropDownComponent.getSelectedItem().toString());
+			Class reportClass = null;
+			
+			try {
+				reportClass = Class.forName(reportClassName);
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block. Selected report type does not exist
+				noExceptionRaised = false;
+				e1.printStackTrace();
+			}
+			
+			Report report = null;
+			if(noExceptionRaised) {
+				try {
+					report = (Report) reportClass.newInstance();
+				} catch (InstantiationException e1) {
+					// TODO Auto-generated catch block
+					noExceptionRaised = false;
+					e1.printStackTrace();
+				} catch (IllegalAccessException e1) {
+					// TODO Auto-generated catch block
+					noExceptionRaised = false;
+					e1.printStackTrace();
+				}
+			}
+			
+			if (noExceptionRaised) {
+				String reportName = ReportPanel.directoryTextFieldComponent.getText() + "\\" + ReportPanel.nameTextFieldComponent.getText() + ".png";
+				report.generate(reportName);
+				ReportPanel.feedbackTextFieldComponent.setText(reportName + " file successfully generated.");
+			}
 		}
 		else if (command == "Select Template") {
 			JButton open = new JButton();
@@ -133,6 +163,7 @@ public class EventHandler implements ActionListener {
 				try {
 					// Insert parsed file into database
 					db.insertMany(parsedFile);
+					ICarePanel.feedbackTextFieldComponent.setText(filePath + " ICare file successfully uploaded");
 				}catch (MongoTimeoutException e1) {
 					// TODO Auto-generated catch block
 					System.out.println("CAN'T CONNECT!");

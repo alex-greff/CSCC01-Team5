@@ -17,8 +17,8 @@ public class ICarePanel extends SuperPanel {
 	
 	private JLabel templateTypeLabel = new JLabel("Template Type:", Label.RIGHT);
 	private JButton selectFileButton = new JButton("Select Template");
-	ArrayList<String> templates = getFileNames("data\\templates\\iCare-templates"); //TODO: Add template list
-	private JComboBox<String> templateDropDown = new JComboBox<String>(templates.toArray(new String[0]));
+	String[] templates = getFileNames("data\\templates\\iCare-templates", ".json"); //TODO: Add template list
+	private JComboBox<String> templateDropDown = new JComboBox<String>(templates);
 	protected static JComboBox<String> templateDropDownComponent;
 	
 	private JTextField feedbackText = new JTextField();
