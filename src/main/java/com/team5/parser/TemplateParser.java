@@ -308,16 +308,14 @@ public class TemplateParser {
 		if (!missingvaluesarray.isEmpty()) {
 			throw new MissingFieldException(missingvaluesarray);
 		}
-		JSONObject missingarray = missingValuesArray.get(0);
-	
-
+		
 		return jsonobjects;
 
 	}
 
 	public static void main(String[] args)
 			throws IOException, ParseException, ConfigurationNotFoundException, MissingFieldException {
-		String excelFilePath4 = "testFiles/SampleFilledTemplates/community_connectionsMISSING.xlsx";
+		String excelFilePath4 = "testFiles/ParseTestFiles/community_connections.xlsx";
 		String excelFilePath = "testFiles/reportGeneratorTests/client.xlsx";
 		String excelFilePath2 = "testFiles/reportGeneratorTests/enroll.xlsx";
 
