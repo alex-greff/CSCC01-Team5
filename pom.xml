@@ -80,7 +80,6 @@
 			<version>${mongo-java-driver-version}</version>
 		</dependency>
 
-<<<<<<< HEAD
 		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
 		<dependency>
     		<groupId>org.mockito</groupId>
@@ -89,7 +88,6 @@
     		<scope>test</scope>
 		</dependency>
 
-=======
 		<!-- Java Tuples -->
 		<!-- https://mvnrepository.com/artifact/org.javatuples/javatuples -->
 		<dependency>
@@ -98,8 +96,6 @@
 			<version>${javatuples-version}</version>
 		</dependency>
 
-		
->>>>>>> master
 	</dependencies>
 
 	<build>
