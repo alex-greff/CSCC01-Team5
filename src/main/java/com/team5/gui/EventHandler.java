@@ -88,7 +88,9 @@ public class EventHandler implements ActionListener {
 			}
 			
 			if (noExceptionRaised) {
-				report.generate(ReportPanel.directoryTextFieldComponent.getText() + "\\" + ReportPanel.nameTextFieldComponent.getText() + ".png");
+				String reportName = ReportPanel.directoryTextFieldComponent.getText() + "\\" + ReportPanel.nameTextFieldComponent.getText() + ".png";
+				report.generate(reportName);
+				ReportPanel.feedbackTextFieldComponent.setText(reportName + " file successfully generated.");
 			}
 		}
 		else if (command == "Select Template") {
@@ -161,6 +163,7 @@ public class EventHandler implements ActionListener {
 				try {
 					// Insert parsed file into database
 					db.insertMany(parsedFile);
+					ICarePanel.feedbackTextFieldComponent.setText(filePath + " ICare file successfully uploaded");
 				}catch (MongoTimeoutException e1) {
 					// TODO Auto-generated catch block
 					System.out.println("CAN'T CONNECT!");

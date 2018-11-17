@@ -1,0 +1,8 @@
+Personas:
+- No changes
+
+User Stories:
+- Added U10 which is a code cleanup user story
+
+Tasks:
+- Added the corresponding tasks associated with U10
