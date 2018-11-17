@@ -4,39 +4,43 @@ import org.mockito.Mock;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bson.Document;
+//import org.bson.Document;
 
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.junit.Test;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DatabaseDriverTest {
 	
 	@Mock
-	DatabaseDriver emptyDb;
+	static DatabaseDriver emptyDb;
 	
 	@Mock
-	DatabaseDriver oneObjectDb;
+	static DatabaseDriver oneObjectDb;
 	
 	@Mock
-	DatabaseDriver db;
+	static DatabaseDriver db;
 	
 	@BeforeAll
-	public void setUpBeforeClass() {
+	static void setUpBeforeClass() {
 		emptyDb = mock(MongoDriver.class);
+		when(emptyDb.queryCollection()).thenReturn(new ArrayList<JSONObject>()); // Set the return for empt
 		oneObjectDb = mock(MongoDriver.class);
 		db = mock(MongoDriver.class);
 	}
 
 	@Test
-	public void testQueryEmptyDatabase() {
+	@DisplayName("Test empty database.")
+	void testQueryEmptyDatabaseCollection() {
 		List<JSONObject> objects = new ArrayList<>();
 		
 		List<JSONObject> dbObjects = emptyDb.queryCollection();
@@ -45,12 +49,14 @@ public class DatabaseDriverTest {
 	}
 	
 	@Test
-	public void testQueryCollectionWithOneData() {
+	@DisplayName("Test data base with one object.")
+	void testQueryCollectionWithOneObject() {
 		
 	}
 	
 	@Test
-	public void testQueryCollectionWithMultipleData() {
+	@DisplayName("Test database with multiple objects.")
+	void testQueryCollectionWithMultipleObjects() {
 		
 	}
 	
