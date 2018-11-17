@@ -10,4 +10,18 @@ public abstract class Report {
      * @param targetPath The target save location.
      */
     public abstract void generate(String targetPath);
+
+    /**
+     * Gets the name of the report.
+     * 
+     * @return Returns a string with the report's name.
+     */
+    public abstract String getReportName();
+
+    /**
+     * Gets a short description of the report.
+     * 
+     * @return Returns a string with the description.
+     */
+    public abstract String getReportDescription();
 }

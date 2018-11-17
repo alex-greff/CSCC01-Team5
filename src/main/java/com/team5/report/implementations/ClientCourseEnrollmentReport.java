@@ -119,6 +119,16 @@ public class ClientCourseEnrollmentReport extends BarChartReport {
         return axisLabels;
     }
 
+    @Override
+    public String getReportName() {
+        return "TODO: some name here";
+    }
+
+    @Override
+    public String getReportDescription() {
+        return "TODO: some report description here";
+    }
+
     public static void main(String[] args) throws IOException {
         Report report = new ClientCourseEnrollmentReport();
 
