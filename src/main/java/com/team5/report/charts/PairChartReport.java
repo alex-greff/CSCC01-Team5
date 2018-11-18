@@ -6,17 +6,33 @@ import java.util.List;
 
 import org.javatuples.Pair;
 
-/**
- * The abstract class for the chart report type with 2 data relationships.
- * 
- * @param <X> The type of the first data relationship.
- * @param <Y> The type of the second data relationship.
- */
 public abstract class PairChartReport<X, Y> extends SeriesChartReport<X, Y> {
-    /**
-     * Gets the data for the pair report.
-     * 
-     * @return Returns the pair report data.
-     */
     protected abstract List<Series<Pair<X,Y>>> getPairData();
+
+    // @Override
+    // protected XYChart<X,Y> getXYChart() {
+    //     XYChart<X, Y> chart = instantiateXYChart();
+
+    //     List<Series<Pair<X,Y>>> data = getPairData();
+
+    //     List<XYChart.Series<X,Y>> seriesList = new ArrayList<>();
+
+    //     for (Series<Pair<X,Y>> currDataSeries : data) {
+    //         XYChart.Series<X,Y> chartSeries = new XYChart.Series<X,Y>();
+
+    //         chartSeries.setName(currDataSeries.getName());
+
+    //         for (Pair<X,Y> currDataEntry : currDataSeries.getContent()) {
+    //             XYChart.Data<X,Y> chartDataEntry = new XYChart.Data<X,Y>(currDataEntry.getValue0(), currDataEntry.getValue1());
+
+    //             chartSeries.getData().add(chartDataEntry);
+    //         }
+
+    //         seriesList.add(chartSeries);
+    //     }
+        
+    //     chart.getData().addAll(seriesList);
+
+        // return chart;
+    // }
 }

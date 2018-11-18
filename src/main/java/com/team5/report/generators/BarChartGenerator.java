@@ -21,11 +21,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 
-/**
- * The generator for the bar chart report.
- */
 public class BarChartGenerator extends Application {
-    // Data storage
     private static String targetPath, title;
     private static Pair<String, String> axisLabels;
     private static Pair<Double, Double> dimensions;
@@ -33,84 +29,108 @@ public class BarChartGenerator extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle(title); // Set the title of the chart
-        // Setup the axises and the chart
+        stage.setTitle(title);
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         final BarChart<String,Number> chart =  new BarChart<>(xAxis,yAxis);
-        chart.setTitle(title); // Set the title of the chart
+        chart.setTitle(title);
 
-        // Set the lables of the axises
+        // System.out.printf("%s\n", axisLabels);
         xAxis.setLabel(axisLabels.getValue0());       
         yAxis.setLabel(axisLabels.getValue1());
 
-        // Initialize the series list container
         List<XYChart.Series<String, Number>> seriesList = new ArrayList<>();
 
-        // Populate the series list container with the generated information of the report
         for (Series<Pair<String, Number>> currDataSeries : data) {
             XYChart.Series<String, Number> chartSeries = new XYChart.Series<String, Number>();
 
-            chartSeries.setName(currDataSeries.getName()); // Set the series name
+            chartSeries.setName(currDataSeries.getName());
 
-            // Get and add each data entry
             for (Pair<String, Number> currDataEntry : currDataSeries.getContent()) {
                 XYChart.Data<String, Number> chartDataEntry = new XYChart.Data<String, Number>(currDataEntry.getValue0(), currDataEntry.getValue1());
 
                 chartSeries.getData().add(chartDataEntry);
             }
 
-            seriesList.add(chartSeries); // Add the series to series list
+            seriesList.add(chartSeries);
+            // chart.getData().add(chartSeries);
         }
         
-        // Initialize the scene
         Scene scene  = new Scene(chart, dimensions.getValue0(), dimensions.getValue1());
 
-        // Add the data to the chart
         chart.getData().addAll(seriesList);
+        // chart.getData().addAll(seriesList.get(0), seriesList.get(1));
 
-        // Display the scene
         stage.setScene(scene);
         stage.show();
 
-        // Save the scene in the target path
         saveAsPng(scene, targetPath);
 
         // stage.close();
         // System.exit(0);
     }
 
-    /**
-     * Saves the generated report to the given target location.
-     * 
-     * @param scene The report.
-     * @param path The save location.
-     * @throws IOException Thrown if an IOException occurs.
-     */
     protected void saveAsPng(Scene scene, String path) throws IOException {
         WritableImage image = scene.snapshot(null);
         File file = new File(path);
         ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
     }
 
-    /**
-     * Generates the report with the given information.
-     * 
-     * @param targetPath The save path of the report.
-     * @param title The title of the report.
-     * @param axisLabels The axis lables of the report.
-     * @param dimensions The dimensions of the report.
-     * @param data The data of the report.
-     */
+    // final static String austria = "Austria";
+    // final static String brazil = "Brazil";
+    // final static String france = "France";
+    // final static String italy = "Italy";
+    // final static String usa = "USA";
+
+    // @Override public void start(Stage stage) {
+    //     stage.setTitle("Bar Chart Sample");
+    //     final CategoryAxis xAxis = new CategoryAxis();
+    //     final NumberAxis yAxis = new NumberAxis();
+    //     final BarChart<String,Number> bc = 
+    //         new BarChart<>(xAxis,yAxis);
+    //     bc.setTitle("Country Summary");
+    //     xAxis.setLabel("Country");       
+    //     yAxis.setLabel("Value");
+ 
+    //     XYChart.Series series1 = new XYChart.Series();
+    //     series1.setName("2003");       
+    //     series1.getData().add(new XYChart.Data(austria, 25601.34));
+    //     series1.getData().add(new XYChart.Data(brazil, 20148.82));
+    //     series1.getData().add(new XYChart.Data(france, 10000));
+    //     series1.getData().add(new XYChart.Data(italy, 35407.15));
+    //     series1.getData().add(new XYChart.Data(usa, 12000));      
+        
+    //     XYChart.Series series2 = new XYChart.Series();
+    //     series2.setName("2004");
+    //     series2.getData().add(new XYChart.Data(austria, 57401.85));
+    //     series2.getData().add(new XYChart.Data(brazil, 41941.19));
+    //     series2.getData().add(new XYChart.Data(france, 45263.37));
+    //     series2.getData().add(new XYChart.Data(italy, 117320.16));
+    //     series2.getData().add(new XYChart.Data(usa, 14845.27));  
+        
+    //     XYChart.Series series3 = new XYChart.Series();
+    //     series3.setName("2005");
+    //     series3.getData().add(new XYChart.Data(austria, 45000.65));
+    //     series3.getData().add(new XYChart.Data(brazil, 44835.76));
+    //     series3.getData().add(new XYChart.Data(france, 18722.18));
+    //     series3.getData().add(new XYChart.Data(italy, 17557.31));
+    //     series3.getData().add(new XYChart.Data(usa, 92633.68));  
+        
+    //     Scene scene  = new Scene(bc,800,600);
+    //     bc.getData().addAll(series1, series2, series3);
+    //     stage.setScene(scene);
+    //     stage.show();
+    // }
+
     public void generate(String targetPath, String title, Pair<String, String> axisLabels, Pair<Double, Double> dimensions, List<Series<Pair<String, Number>>> data) {
-        // Setup the chart data
         BarChartGenerator.targetPath = targetPath;
         BarChartGenerator.title = title;
         BarChartGenerator.axisLabels = axisLabels;
         BarChartGenerator.dimensions = dimensions;
         BarChartGenerator.data = data;
 
-        // Generate and save the chart
+        // System.out.printf("%s, %s, %s\n", this.title, this.axisLabels.toString(), this.dimensions.toString());
+
         launch(new String[0]);
     }
 }
