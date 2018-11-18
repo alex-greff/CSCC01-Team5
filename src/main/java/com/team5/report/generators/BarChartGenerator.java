@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
@@ -30,6 +31,8 @@ public class BarChartGenerator extends Application {
     private static Pair<String, String> axisLabels;
     private static Pair<Double, Double> dimensions;
     private static List<Series<Pair<String, Number>>> data;
+
+    private static Scene scene;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -69,6 +72,20 @@ public class BarChartGenerator extends Application {
         // Add the data to the chart
         chart.getData().addAll(seriesList);
 
+        chart.setAnimated(false);
+        yAxis.setAnimated(false);
+        xAxis.setAnimated(false);
+        chart.setStyle("-fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE;");
+
+        // System.out.println("Some shit");
+        System.out.println(chart.getStyle());
+
+        // scene.getStylesheets().add("chartStyles.css");
+
+        // style = chart.getStyle();
+
+        
+
         // Display the scene
         stage.setScene(scene);
         stage.show();
@@ -80,6 +97,11 @@ public class BarChartGenerator extends Application {
         // System.exit(0);
     }
 
+    // @Override
+    // public void stop() {
+    //     System.out.println("Stage is closing");
+    // }
+
     /**
      * Saves the generated report to the given target location.
      * 
@@ -87,7 +109,7 @@ public class BarChartGenerator extends Application {
      * @param path The save location.
      * @throws IOException Thrown if an IOException occurs.
      */
-    protected void saveAsPng(Scene scene, String path) throws IOException {
+    protected void saveAsPng(Scene scene, String path) throws IOException, InterruptedException {
         WritableImage image = scene.snapshot(null);
         File file = new File(path);
         ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);

@@ -37,6 +37,11 @@ public class LineChartGenerator extends Application {
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
         final LineChart<Number,Number> chart =  new LineChart<>(xAxis,yAxis);
+
+        // Disable animations
+        xAxis.setAnimated(false); 
+        yAxis.setAnimated(false);
+
         chart.setTitle(title); // Set the title of the chart
 
         // Set the lables of the axises

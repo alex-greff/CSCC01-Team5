@@ -10,6 +10,7 @@ import com.team5.database.DatabaseDriver;
 import com.team5.report.charts.BarChartReport;
 import com.team5.report.charts.Report;
 import com.team5.report.data.Series;
+import com.team5.report.generators.BarChartGenerator;
 import com.team5.utilities.JSONLoader;
 
 import org.javatuples.Pair;

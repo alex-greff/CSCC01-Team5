@@ -38,6 +38,11 @@ public class BubbleChartGenerator extends Application {
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
         final BubbleChart<Number,Number> chart =  new BubbleChart<Number, Number>(xAxis,yAxis);
+
+        // Disable animations
+        xAxis.setAnimated(false); 
+        yAxis.setAnimated(false);
+
         chart.setTitle(title); // Set the title of the chart
 
         // Set the lables of the axises
