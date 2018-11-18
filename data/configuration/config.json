@@ -16,5 +16,18 @@
     	"test_db_saad": "mongodb://saad:ProficiousF18@ds031088.mlab.com:31088/test_db",
     	"test_db_won": "mongodb://won:ProficiousF18@ds031088.mlab.com:31088/test_db",
     	"test_db_remote": "mongodb://remote:ProficiousF18@ds031088.mlab.com:31088/test_db"
-    }
+	},
+	"database-collections":{
+		"nars":"nars",
+		"employment-services":"employment",
+		"client-profile":"client_profile",
+		"community-connections":"community_connections",
+		"info-and-orientation":"info_and_orientation",
+		"language-training-client-enroll":"lt_client_enroll",
+		"language-training-client-exit":"lt_client_exit",
+		"language-training-course-setup":"lt_course_setup"
+	},
+	"report-locations": {
+		"employment-services-demographics":"data/reports/EmploymentServicesDemographics.json"
+	}
 }

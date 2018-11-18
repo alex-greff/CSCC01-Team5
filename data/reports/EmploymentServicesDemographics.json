@@ -1,0 +1,8 @@
+{
+    "title":"Employment Services Referral Demographics",
+    "report-name":"Employment Services Referral Demographics",
+    "report-description":"Displays what percentage of people being referred to employment services are beween the ages 20-24, 25-29 and 30-34",
+    "report-width":800,
+    "report-height":800,
+    "database-collection":"employment"
+}
