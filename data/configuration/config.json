@@ -17,6 +17,10 @@
     	"test_db_won": "mongodb://won:ProficiousF18@ds031088.mlab.com:31088/test_db",
     	"test_db_remote": "mongodb://remote:ProficiousF18@ds031088.mlab.com:31088/test_db"
 	},
+	"database-names":{
+		"icare-db-name":"icare_db",
+		"test-db-name":"test_db"
+	},
 	"database-collections":{
 		"nars":"nars",
 		"employment-services":"employment",
