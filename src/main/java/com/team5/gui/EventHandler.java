@@ -140,8 +140,8 @@ public class EventHandler implements ActionListener {
 			if (noExceptionRaised) {
 				// Connect to database
 				try {
-					db = new MongoDriver(ConfigurationLoader.loadConfiguration("database-URI").get("test_db_remote").toString(),
-							"test_db", FilenameUtils.removeExtension(selectedTemplateType));
+					db = new MongoDriver(ConfigurationLoader.loadConfiguration("database-URI").get("icare_db_remote").toString(),
+							"icare_db", FilenameUtils.removeExtension(selectedTemplateType));
 				} catch (ConfigurationNotFoundException e1) {
 					// TODO Auto-generated catch block
 					noExceptionRaised = false;
@@ -163,6 +163,7 @@ public class EventHandler implements ActionListener {
 				try {
 					// Insert parsed file into database
 					db.insertMany(parsedFile);
+					db.closeConnection();
 					ICarePanel.feedbackTextFieldComponent.setText(filePath + " ICare file successfully uploaded");
 				}catch (MongoTimeoutException e1) {
 					// TODO Auto-generated catch block
