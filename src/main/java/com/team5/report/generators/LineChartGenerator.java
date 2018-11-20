@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
@@ -15,8 +14,7 @@ import org.javatuples.Pair;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.image.WritableImage;
@@ -25,22 +23,25 @@ import javafx.stage.Stage;
 /**
  * The generator for the bar chart report.
  */
-public class BarChartGenerator extends Application {
+public class LineChartGenerator extends Application {
     // Data storage
     private static String targetPath, title;
     private static Pair<String, String> axisLabels;
     private static Pair<Double, Double> dimensions;
-    private static List<Series<Pair<String, Number>>> data;
-
-    private static Scene scene;
+    private static List<Series<Pair<Number, Number>>> data;
 
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle(title); // Set the title of the chart
         // Setup the axises and the chart
-        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
-        final BarChart<String,Number> chart =  new BarChart<>(xAxis,yAxis);
+        final LineChart<Number,Number> chart =  new LineChart<>(xAxis,yAxis);
+
+        // Disable animations
+        xAxis.setAnimated(false); 
+        yAxis.setAnimated(false);
+
         chart.setTitle(title); // Set the title of the chart
 
         // Set the lables of the axises
@@ -48,17 +49,18 @@ public class BarChartGenerator extends Application {
         yAxis.setLabel(axisLabels.getValue1());
 
         // Initialize the series list container
-        List<XYChart.Series<String, Number>> seriesList = new ArrayList<>();
+        List<XYChart.Series<Number, Number>> seriesList = new ArrayList<>();
 
         // Populate the series list container with the generated information of the report
-        for (Series<Pair<String, Number>> currDataSeries : data) {
-            XYChart.Series<String, Number> chartSeries = new XYChart.Series<String, Number>();
+        for (Series<Pair<Number, Number>> currDataSeries : data) {
+            XYChart.Series<Number, Number> chartSeries = new XYChart.Series<Number, Number>();
 
             chartSeries.setName(currDataSeries.getName()); // Set the series name
 
             // Get and add each data entry
-            for (Pair<String, Number> currDataEntry : currDataSeries.getContent()) {
-                XYChart.Data<String, Number> chartDataEntry = new XYChart.Data<String, Number>(currDataEntry.getValue0(), currDataEntry.getValue1());
+            for (Pair<Number, Number> currDataEntry : currDataSeries.getContent()) {
+                XYChart.Data<Number, Number> chartDataEntry = new XYChart.Data<Number, Number>(currDataEntry.getValue0(), currDataEntry.getValue1());
+                
 
                 chartSeries.getData().add(chartDataEntry);
             }
@@ -72,20 +74,6 @@ public class BarChartGenerator extends Application {
         // Add the data to the chart
         chart.getData().addAll(seriesList);
 
-        chart.setAnimated(false);
-        yAxis.setAnimated(false);
-        xAxis.setAnimated(false);
-        chart.setStyle("-fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE;");
-
-        // System.out.println("Some shit");
-        System.out.println(chart.getStyle());
-
-        // scene.getStylesheets().add("chartStyles.css");
-
-        // style = chart.getStyle();
-
-        
-
         // Display the scene
         stage.setScene(scene);
         stage.show();
@@ -97,11 +85,6 @@ public class BarChartGenerator extends Application {
         // System.exit(0);
     }
 
-    // @Override
-    // public void stop() {
-    //     System.out.println("Stage is closing");
-    // }
-
     /**
      * Saves the generated report to the given target location.
      * 
@@ -109,7 +92,7 @@ public class BarChartGenerator extends Application {
      * @param path The save location.
      * @throws IOException Thrown if an IOException occurs.
      */
-    protected void saveAsPng(Scene scene, String path) throws IOException, InterruptedException {
+    protected void saveAsPng(Scene scene, String path) throws IOException {
         WritableImage image = scene.snapshot(null);
         File file = new File(path);
         ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
@@ -124,13 +107,13 @@ public class BarChartGenerator extends Application {
      * @param dimensions The dimensions of the report.
      * @param data The data of the report.
      */
-    public void generate(String targetPath, String title, Pair<String, String> axisLabels, Pair<Double, Double> dimensions, List<Series<Pair<String, Number>>> data) {
+    public void generate(String targetPath, String title, Pair<String, String> axisLabels, Pair<Double, Double> dimensions, List<Series<Pair<Number, Number>>> data) {
         // Setup the chart data
-        BarChartGenerator.targetPath = targetPath;
-        BarChartGenerator.title = title;
-        BarChartGenerator.axisLabels = axisLabels;
-        BarChartGenerator.dimensions = dimensions;
-        BarChartGenerator.data = data;
+        LineChartGenerator.targetPath = targetPath;
+        LineChartGenerator.title = title;
+        LineChartGenerator.axisLabels = axisLabels;
+        LineChartGenerator.dimensions = dimensions;
+        LineChartGenerator.data = data;
 
         // Generate and save the chart
         launch(new String[0]);

@@ -10,6 +10,7 @@ import com.team5.database.DatabaseDriver;
 import com.team5.report.charts.BarChartReport;
 import com.team5.report.charts.Report;
 import com.team5.report.data.Series;
+import com.team5.report.generators.BarChartGenerator;
 import com.team5.utilities.JSONLoader;
 
 import org.javatuples.Pair;
@@ -117,6 +118,16 @@ public class ClientCourseEnrollmentReport extends BarChartReport {
     @Override
     protected Pair<String, String> getAxisLabels() {
         return axisLabels;
+    }
+
+    @Override
+    public String getReportName() {
+        return "TODO: some name here";
+    }
+
+    @Override
+    public String getReportDescription() {
+        return "TODO: some report description here";
     }
 
     public static void main(String[] args) throws IOException {
