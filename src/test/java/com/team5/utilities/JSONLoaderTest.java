@@ -16,7 +16,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class JSONLoaderTest {
-  final String rootPath = "testFiles/JSONTestFiles";
+  final String rootPath = "testFiles/JSONLoaderTestFiles";
   final String file1Path = rootPath + "/testJSONFile_valid1.json";
   final String file1Contents = "{\"field1\":5,\"field3\":true,\"field2\":\"abc\"}";
   final String file2Path = rootPath + "/testJSONFile_valid2.json";
@@ -77,6 +77,7 @@ public class JSONLoaderTest {
   @DisplayName("Parse all JSON files in directory non recursive")
   void testParseAllJSONInDirNonRecursive() throws NotDirectoryException, ParseException {
     ArrayList<JSONObject> objs = JSONLoader.parseAllJSONFiles(rootPath, false);
+
     HashSet<JSONObject> objs_set = new HashSet<JSONObject>(objs);
 
     HashSet<JSONObject> parsedObjs = new HashSet<JSONObject>();
