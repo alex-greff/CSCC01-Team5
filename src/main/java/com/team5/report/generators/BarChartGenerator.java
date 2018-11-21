@@ -89,6 +89,19 @@ public class BarChartGenerator extends Application {
         // Display the scene
         stage.setScene(scene);
         stage.show();
+        
+        // Save the scene in the target path
+        stage.setOnCloseRequest(e -> {
+			try {
+				saveAsPng(scene, targetPath);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 
         // Save the scene in the target path
         saveAsPng(scene, targetPath);
