@@ -13,14 +13,15 @@ import org.javatuples.Pair;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -33,19 +34,40 @@ public class BarChartGenerator extends Application {
     private static Pair<Double, Double> dimensions;
     private static List<Series<Pair<String, Number>>> data;
 
-    private static Stage instantiated_stage = null;
+    private static boolean firstTimeInstantiated = false;
+    private static Stage mainStage;
 
     @Override
     public void start(Stage stage) throws Exception {
-        instantiated_stage = stage;
+        Platform.setImplicitExit(false);
+        mainStage = stage;
 
-        displayChart(instantiated_stage);
+        firstTimeInstantiated = true;
+
+        displayChart(stage);
     }
 
     private static void displayChart() {
         System.out.println("Got here");
 
-        displayChart(new Stage());
+        // Label secondLabel = new Label("I'm a Label on new Window");
+ 
+        // StackPane secondaryLayout = new StackPane();
+        // secondaryLayout.getChildren().add(secondLabel);
+
+        // Scene secondScene = new Scene(secondaryLayout, 230, 100);
+
+        // // New window (Stage)
+        // Stage newWindow = new Stage();
+        // newWindow.setTitle("Second Stage");
+        // newWindow.setScene(secondScene);
+        
+
+        // newWindow.show();
+
+        // Stage stage = new Stage();
+
+        displayChart(mainStage);
     }
 
     private static void displayChart(Stage stage) {
@@ -115,7 +137,10 @@ public class BarChartGenerator extends Application {
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
+            }
+            
+            Platform.exit();
+            System.exit(0);
 		});
 
         // Save the scene in the target path
@@ -161,14 +186,14 @@ public class BarChartGenerator extends Application {
         BarChartGenerator.data = data;
 
         // Generate and save the chart
-        if (instantiated_stage == null) {
+        //if (firstTimeInstantiated == false) {
             launch(new String[0]);
-        } else {
-            System.out.println("Trying to run");
+        //} else {
+            // System.out.println("Trying to run");
 
-            Platform.runLater(() -> {
-                BarChartGenerator.displayChart();
-            });
+            // Platform.runLater(() -> {
+            //     BarChartGenerator.displayChart();
+            // });
 
             // Platform.runLater(new Runnable(){
 
@@ -177,6 +202,6 @@ public class BarChartGenerator extends Application {
             //         BarChartGenerator.displayChart(BarChartGenerator.instantiated_stage);
             //     }
             // });
-        }
+        // }
     }
 }
