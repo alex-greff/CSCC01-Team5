@@ -139,8 +139,9 @@ public class BarChartGenerator extends Application {
 				e1.printStackTrace();
             }
             
-            Platform.exit();
-            System.exit(0);
+            // Doesnt work
+            // Platform.exit();
+            // System.exit(0);
 		});
 
         // Save the scene in the target path
@@ -186,14 +187,14 @@ public class BarChartGenerator extends Application {
         BarChartGenerator.data = data;
 
         // Generate and save the chart
-        //if (firstTimeInstantiated == false) {
+        if (firstTimeInstantiated == false) {
             launch(new String[0]);
-        //} else {
-            // System.out.println("Trying to run");
+        } else {
+            System.out.println("Trying to run");
 
-            // Platform.runLater(() -> {
-            //     BarChartGenerator.displayChart();
-            // });
+            Platform.runLater(() -> {
+                BarChartGenerator.displayChart();
+            });
 
             // Platform.runLater(new Runnable(){
 
@@ -202,6 +203,6 @@ public class BarChartGenerator extends Application {
             //         BarChartGenerator.displayChart(BarChartGenerator.instantiated_stage);
             //     }
             // });
-        // }
+        }
     }
 }
