@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
@@ -13,6 +12,8 @@ import com.team5.report.data.Series;
 import org.javatuples.Pair;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -32,10 +33,24 @@ public class BarChartGenerator extends Application {
     private static Pair<Double, Double> dimensions;
     private static List<Series<Pair<String, Number>>> data;
 
-    private static Scene scene;
+    private static Stage instantiated_stage = null;
 
     @Override
     public void start(Stage stage) throws Exception {
+        instantiated_stage = stage;
+
+        displayChart(instantiated_stage);
+    }
+
+    private static void displayChart() {
+        System.out.println("Got here");
+
+        displayChart(new Stage());
+    }
+
+    private static void displayChart(Stage stage) {
+        System.out.println("Got here");
+
         stage.setTitle(title); // Set the title of the chart
         // Setup the axises and the chart
         final CategoryAxis xAxis = new CategoryAxis();
@@ -104,7 +119,7 @@ public class BarChartGenerator extends Application {
 		});
 
         // Save the scene in the target path
-        saveAsPng(scene, targetPath);
+        // saveAsPng(scene, targetPath);
 
         // stage.close();
         // System.exit(0);
@@ -122,7 +137,7 @@ public class BarChartGenerator extends Application {
      * @param path The save location.
      * @throws IOException Thrown if an IOException occurs.
      */
-    protected void saveAsPng(Scene scene, String path) throws IOException, InterruptedException {
+    protected static void saveAsPng(Scene scene, String path) throws IOException, InterruptedException {
         WritableImage image = scene.snapshot(null);
         File file = new File(path);
         ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
@@ -146,6 +161,22 @@ public class BarChartGenerator extends Application {
         BarChartGenerator.data = data;
 
         // Generate and save the chart
-        launch(new String[0]);
+        if (instantiated_stage == null) {
+            launch(new String[0]);
+        } else {
+            System.out.println("Trying to run");
+
+            Platform.runLater(() -> {
+                BarChartGenerator.displayChart();
+            });
+
+            // Platform.runLater(new Runnable(){
+
+            //     @Override
+            //     public void run() {
+            //         BarChartGenerator.displayChart(BarChartGenerator.instantiated_stage);
+            //     }
+            // });
+        }
     }
 }
