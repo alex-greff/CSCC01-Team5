@@ -1,34 +1,28 @@
 package com.team5.report.generators;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 import org.javatuples.Pair;
 
-import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 
 /**
  * The generator for the bar chart report.
  */
-public class PieChartGenerator extends Application {
+public class PieChartGenerator extends Generator {
     // Data storage
     private static String targetPath, title;
     private static Pair<Double, Double> dimensions;
     private static List<Pair<String, Double>> data;
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void displayChart(Stage stage) {
         stage.setTitle(title); // Set the title of the chart
 
         // Setup the dimensions of the chart
@@ -56,24 +50,8 @@ public class PieChartGenerator extends Application {
         stage.setScene(scene);
         stage.show();
 
-        // Save the scene in the target path
-        saveAsPng(scene, targetPath);
-
-        // stage.close();
-        // System.exit(0);
-    }
-
-    /**
-     * Saves the generated report to the given target location.
-     * 
-     * @param scene The report.
-     * @param path The save location.
-     * @throws IOException Thrown if an IOException occurs.
-     */
-    protected void saveAsPng(Scene scene, String path) throws IOException {
-        WritableImage image = scene.snapshot(null);
-        File file = new File(path);
-        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+        // Setup the save hook
+        super.setupSaveHook(stage, scene, targetPath);
     }
 
     /**
@@ -92,7 +70,23 @@ public class PieChartGenerator extends Application {
         PieChartGenerator.dimensions = dimensions;
         PieChartGenerator.data = data;
 
-        // Generate and save the chart
-        launch(new String[0]);
+        // Launch the chart
+        launchChart();
+    }
+
+    /**
+     * Launches the chart.
+     */
+    private void launchChart() {
+        // If javafx hasn't been run yet
+        if (isInitialized == false) {
+            // Launch the chart
+            launch(new String[0]);
+        } else {
+            // Display the chart from the javafx thread 
+            Platform.runLater(() -> {
+                displayChart();
+            });
+        }
     }
 }

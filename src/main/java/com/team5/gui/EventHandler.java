@@ -72,10 +72,24 @@ public class EventHandler implements ActionListener {
 				e1.printStackTrace();
 			}
 			
-			Report report = null;
-			if(noExceptionRaised) {
+			String reportSaveLocation = ReportPanel.directoryTextFieldComponent.getText() + "\\" + ReportPanel.nameTextFieldComponent.getText() + ".png";
+
+			if (noExceptionRaised) {
 				try {
-					report = (Report) reportClass.newInstance();
+					// Get an instance of the report
+					final Report report = (Report) reportClass.newInstance();
+
+					// Generate the report on a new thread to prevent blocking of the Admin GUI
+					Thread t1 = new Thread(new Runnable() {
+						public void run() {
+							// Generate the report
+							report.generate(reportSaveLocation);
+						}}
+					);
+
+					// Run the thread
+					t1.start();
+
 				} catch (InstantiationException e1) {
 					// TODO Auto-generated catch block
 					noExceptionRaised = false;
@@ -86,36 +100,10 @@ public class EventHandler implements ActionListener {
 					e1.printStackTrace();
 				}
 			}
-			
-			if (noExceptionRaised) {
-
-				String reportName = ReportPanel.directoryTextFieldComponent.getText() + "\\" + ReportPanel.nameTextFieldComponent.getText() + ".png";
-
-				try {
-					final Report r = (Report) reportClass.newInstance();
-					Thread t1 = new Thread(new Runnable() {
-						public void run()
-						{
-							
-							System.out.println("Generating report on new thread");
-							// code goes here.
-							r.generate(reportName);
-						}}
-					);  
-					t1.start();
-				} catch (InstantiationException e1) {
-					// TODO Auto-generated catch block
-					// noExceptionRaised = false;
-					e1.printStackTrace();
-				} catch (IllegalAccessException e1) {
-					// TODO Auto-generated catch block
-					// noExceptionRaised = false;
-					e1.printStackTrace();
-				}
 
 				// r.generate(reportName);
-
-				ReportPanel.feedbackTextFieldComponent.setText(reportName + " file successfully generated.");
+			if (noExceptionRaised) {
+				ReportPanel.feedbackTextFieldComponent.setText(reportSaveLocation + " file successfully generated.");
 			}
 		}
 		else if (command == "Select Template") {
