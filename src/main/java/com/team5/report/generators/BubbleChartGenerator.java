@@ -8,7 +8,7 @@ import com.team5.report.data.Series;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
 
-import javafx.application.Platform;
+import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.chart.BubbleChart;
 import javafx.scene.chart.NumberAxis;
@@ -33,11 +33,10 @@ public class BubbleChartGenerator extends Generator {
         final NumberAxis yAxis = new NumberAxis();
         final BubbleChart<Number,Number> chart =  new BubbleChart<Number, Number>(xAxis,yAxis);
 
-        // Disable animations
-        xAxis.setAnimated(false); 
-        yAxis.setAnimated(false);
-
         chart.setTitle(title); // Set the title of the chart
+
+        // Anchor the legend to the right
+        chart.setLegendSide(Side.RIGHT);
 
         // Set the lables of the axises
         xAxis.setLabel(axisLabels.getValue0());       
@@ -93,23 +92,12 @@ public class BubbleChartGenerator extends Generator {
         BubbleChartGenerator.dimensions = dimensions;
         BubbleChartGenerator.data = data;
 
-        // Launch the chart
-        launchChart();
+        // Generate the chart
+        super.generate();
     }
 
-    /**
-     * Launches the chart.
-     */
-    private void launchChart() {
-        // If javafx hasn't been run yet
-        if (isInitialized == false) {
-            // Launch the chart
-            launch(new String[0]);
-        } else {
-            // Display the chart from the javafx thread 
-            Platform.runLater(() -> {
-                displayChart();
-            });
-        }
+    @Override
+    protected void launchSelf() {
+        launch(new String[0]);
     }
 }

@@ -79,4 +79,25 @@ public abstract class Generator extends Application {
         File file = new File(path);
         ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
     }
+
+    /**
+     * Generates the chart.
+     */
+    protected void generate() {
+        // If javafx hasn't been run yet
+        if (isInitialized == false) {
+            // Launch the chart
+            launchSelf();
+        } else {
+            // Display the chart from the javafx thread 
+            Platform.runLater(() -> {
+                displayChart();
+            });
+        }
+    }
+
+    /**
+     * Launches the javafx chart.
+     */
+    protected abstract void launchSelf();
 }

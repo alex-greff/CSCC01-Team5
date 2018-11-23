@@ -7,7 +7,7 @@ import com.team5.report.data.Series;
 
 import org.javatuples.Pair;
 
-import javafx.application.Platform;
+import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -32,11 +32,10 @@ public class LineChartGenerator extends Generator {
         final NumberAxis yAxis = new NumberAxis();
         final LineChart<Number,Number> chart =  new LineChart<>(xAxis,yAxis);
 
-        // Disable animations
-        xAxis.setAnimated(false); 
-        yAxis.setAnimated(false);
-
         chart.setTitle(title); // Set the title of the chart
+
+        // Anchor the legend to the right
+        chart.setLegendSide(Side.RIGHT);
 
         // Set the lables of the axises
         xAxis.setLabel(axisLabels.getValue0());       
@@ -92,23 +91,12 @@ public class LineChartGenerator extends Generator {
         LineChartGenerator.dimensions = dimensions;
         LineChartGenerator.data = data;
 
-        // Launch the chart
-        launchChart();
+        // Generate the chart
+        super.generate();
     }
 
-    /**
-     * Launches the chart.
-     */
-    private void launchChart() {
-        // If javafx hasn't been run yet
-        if (isInitialized == false) {
-            // Launch the chart
-            launch(new String[0]);
-        } else {
-            // Display the chart from the javafx thread 
-            Platform.runLater(() -> {
-                displayChart();
-            });
-        }
+    @Override
+    protected void launchSelf() {
+        launch(new String[0]);
     }
 }
