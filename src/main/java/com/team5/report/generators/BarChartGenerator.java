@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
@@ -13,29 +12,30 @@ import com.team5.report.data.Series;
 import org.javatuples.Pair;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
  * The generator for the bar chart report.
  */
-public class BarChartGenerator extends Application {
+public class BarChartGenerator extends Generator {
     // Data storage
     private static String targetPath, title;
     private static Pair<String, String> axisLabels;
     private static Pair<Double, Double> dimensions;
     private static List<Series<Pair<String, Number>>> data;
 
-    private static Scene scene;
-
     @Override
-    public void start(Stage stage) throws Exception {
+    protected void displayChart(Stage stage) {
         stage.setTitle(title); // Set the title of the chart
         // Setup the axises and the chart
         final CategoryAxis xAxis = new CategoryAxis();
@@ -72,48 +72,14 @@ public class BarChartGenerator extends Application {
         // Add the data to the chart
         chart.getData().addAll(seriesList);
 
-        chart.setAnimated(false);
-        yAxis.setAnimated(false);
-        xAxis.setAnimated(false);
-        chart.setStyle("-fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE;");
-
-        // System.out.println("Some shit");
-        System.out.println(chart.getStyle());
-
-        // scene.getStylesheets().add("chartStyles.css");
-
-        // style = chart.getStyle();
-
-        
-
-        // Display the scene
+        // Display the chart
         stage.setScene(scene);
         stage.show();
 
-        // Save the scene in the target path
-        saveAsPng(scene, targetPath);
-
-        // stage.close();
-        // System.exit(0);
+        // Setup the save hook
+        super.setupSaveHook(stage, scene, targetPath);
     }
 
-    // @Override
-    // public void stop() {
-    //     System.out.println("Stage is closing");
-    // }
-
-    /**
-     * Saves the generated report to the given target location.
-     * 
-     * @param scene The report.
-     * @param path The save location.
-     * @throws IOException Thrown if an IOException occurs.
-     */
-    protected void saveAsPng(Scene scene, String path) throws IOException, InterruptedException {
-        WritableImage image = scene.snapshot(null);
-        File file = new File(path);
-        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
-    }
 
     /**
      * Generates the report with the given information.
@@ -132,7 +98,23 @@ public class BarChartGenerator extends Application {
         BarChartGenerator.dimensions = dimensions;
         BarChartGenerator.data = data;
 
-        // Generate and save the chart
-        launch(new String[0]);
+        // Launch the chart
+        launchChart();
+    }
+
+    /**
+     * Launches the chart.
+     */
+    private void launchChart() {
+        // If javafx hasn't been run yet
+        if (isInitialized == false) {
+            // Launch the chart
+            launch(new String[0]);
+        } else {
+            // Display the chart from the javafx thread 
+            Platform.runLater(() -> {
+                displayChart();
+            });
+        }
     }
 }

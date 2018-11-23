@@ -1,30 +1,24 @@
 package com.team5.report.generators;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 import com.team5.report.data.Series;
 
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
 
-import javafx.application.Application;
-import javafx.embed.swing.SwingFXUtils;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.chart.BubbleChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 
 /**
  * The generator for the bar chart report.
  */
-public class BubbleChartGenerator extends Application {
+public class BubbleChartGenerator extends Generator {
     // Data storage
     private static String targetPath, title;
     private static Pair<String, String> axisLabels;
@@ -32,7 +26,7 @@ public class BubbleChartGenerator extends Application {
     private static List<Series<Triplet<Number, Number, Number>>> data;
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void displayChart(Stage stage) {
         stage.setTitle(title); // Set the title of the chart
         // Setup the axises and the chart
         final NumberAxis xAxis = new NumberAxis();
@@ -78,24 +72,8 @@ public class BubbleChartGenerator extends Application {
         stage.setScene(scene);
         stage.show();
 
-        // Save the scene in the target path
-        saveAsPng(scene, targetPath);
-
-        // stage.close();
-        // System.exit(0);
-    }
-
-    /**
-     * Saves the generated report to the given target location.
-     * 
-     * @param scene The report.
-     * @param path The save location.
-     * @throws IOException Thrown if an IOException occurs.
-     */
-    protected void saveAsPng(Scene scene, String path) throws IOException {
-        WritableImage image = scene.snapshot(null);
-        File file = new File(path);
-        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+        // Setup the save hook
+        super.setupSaveHook(stage, scene, targetPath);
     }
 
     /**
@@ -115,7 +93,23 @@ public class BubbleChartGenerator extends Application {
         BubbleChartGenerator.dimensions = dimensions;
         BubbleChartGenerator.data = data;
 
-        // Generate and save the chart
-        launch(new String[0]);
+        // Launch the chart
+        launchChart();
+    }
+
+    /**
+     * Launches the chart.
+     */
+    private void launchChart() {
+        // If javafx hasn't been run yet
+        if (isInitialized == false) {
+            // Launch the chart
+            launch(new String[0]);
+        } else {
+            // Display the chart from the javafx thread 
+            Platform.runLater(() -> {
+                displayChart();
+            });
+        }
     }
 }
