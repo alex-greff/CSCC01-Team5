@@ -88,8 +88,33 @@ public class EventHandler implements ActionListener {
 			}
 			
 			if (noExceptionRaised) {
+
 				String reportName = ReportPanel.directoryTextFieldComponent.getText() + "\\" + ReportPanel.nameTextFieldComponent.getText() + ".png";
-				report.generate(reportName);
+
+				try {
+					final Report r = (Report) reportClass.newInstance();
+					Thread t1 = new Thread(new Runnable() {
+						public void run()
+						{
+							
+							System.out.println("Generating report on new thread");
+							// code goes here.
+							r.generate(reportName);
+						}}
+					);  
+					t1.start();
+				} catch (InstantiationException e1) {
+					// TODO Auto-generated catch block
+					// noExceptionRaised = false;
+					e1.printStackTrace();
+				} catch (IllegalAccessException e1) {
+					// TODO Auto-generated catch block
+					// noExceptionRaised = false;
+					e1.printStackTrace();
+				}
+
+				// r.generate(reportName);
+
 				ReportPanel.feedbackTextFieldComponent.setText(reportName + " file successfully generated.");
 			}
 		}
