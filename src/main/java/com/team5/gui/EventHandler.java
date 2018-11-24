@@ -183,6 +183,11 @@ public class EventHandler implements ActionListener {
 		
 		ArrayList<JSONObject> parsedFile = null;
 		
+		if(!new File(filePath).exists()) {
+			ICarePanel.feedbackTextFieldComponent.setText("File does not exist");
+			return;
+		}
+		
 		// Parse the selected ICare file using the selected template type
 		try {
 			parsedFile = TemplateParser.GetJsonArray(filePath, selectedTemplateType+".json", "iCare-template-system");
