@@ -36,8 +36,8 @@
 	},
 	"gui": {
 		"admin-panel-desc":"Description for admin panel. Do not make longer than one line.",
-		"iCare-panel-desc":"Description for iCare panel. Do not make longer than one line.",
-		"report-panel-desc":"Description for report panel. Do not make longer than one line."
+		"iCare-panel-desc":"Select an iCare template file to upload to the database",
+		"report-panel-desc":"Select a report type, and generate a new report file"
 		"select-file-image":"images/addfile.png"
 	}
 }
