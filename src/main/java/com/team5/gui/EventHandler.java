@@ -148,7 +148,7 @@ public class EventHandler implements ActionListener {
 
 					@Override
 					public void uncaughtException(Thread t, Throwable e) {
-						ReportPanel.feedbackTextFieldComponent.setText("Unknown error occured");
+						ReportPanel.feedbackTextFieldComponent.setText("An error occured");
 					}
 						
 				});
