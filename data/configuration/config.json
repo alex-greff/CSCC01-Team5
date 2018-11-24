@@ -34,6 +34,7 @@
 	"report-locations": {
 		"client-course-enrollment":"data/reports/ClientCourseEnrollment.json",
 		"employment-services-demographics":"data/reports/EmploymentServicesDemographics.json",
-		"client-population-summary":"data/reports/ClientPopulationSummary.json"
+		"client-population-summary":"data/reports/ClientPopulationSummary.json",
+		"service-access-trend": "data/reports/ServiceAccessTrend.json"
 	}
 }
