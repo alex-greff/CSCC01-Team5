@@ -96,11 +96,11 @@ public class EventHandler implements ActionListener {
 			directoryTextField.setText(reportFC.getSelectedFile().getAbsolutePath());
 		}	
 	}
-	
-	
-	private void Generate() {
-		String reportClassName = ReportPanel.reportFileNames[ReportPanel.reportDropDownComponent.getSelectedIndex()];
-		String reportClassPath = "com.team5.report.implementations." + FilenameUtils.removeExtension(reportClassName);
+
+
+	private Class getSelectedReportClass() {
+	String reportClassName = ReportPanel.reportFileNames[ReportPanel.reportDropDownComponent.getSelectedIndex()];
+	String reportClassPath = "com.team5.report.implementations." + FilenameUtils.removeExtension(reportClassName);
 		Class reportClass = null;
 		
 		try {
@@ -111,6 +111,26 @@ public class EventHandler implements ActionListener {
 			ReportPanel.feedbackTextFieldComponent.setText("Report type not found");
 			e1.printStackTrace();
 		}
+		
+		return reportClass;
+	}
+	
+	private void Description() {
+		Report report = null;
+		try {
+			report = (Report) getSelectedReportClass().newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		JOptionPane.showMessageDialog(null,
+				report.getReportDescription()
+				);
+	}
+	
+	private void Generate() {
+		Class reportClass = getSelectedReportClass();
 		
 		String reportSaveDirectory = ReportPanel.directoryTextFieldComponent.getText().trim();
 		if(!new File(reportSaveDirectory).isDirectory()) {

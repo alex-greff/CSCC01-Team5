@@ -39,5 +39,6 @@
 		"iCare-panel-desc":"Description for iCare panel. Do not make longer than one line.",
 		"report-panel-desc":"Description for report panel. Do not make longer than one line."
 		"select-file-image":"images/addfile.png"
+		"report-description-image":"images/descriptionIcon.png"
 	}
 }
