@@ -1,12 +1,13 @@
 package com.team5.gui;
 
 import java.awt.Label;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class ICarePanel extends SuperPanel {
@@ -23,8 +24,11 @@ public class ICarePanel extends SuperPanel {
 	private JComboBox<String> templateDropDown = new JComboBox<String>(templates);
 	protected static JComboBox<String> templateDropDownComponent;
 	
-	private JTextField feedbackText = new JTextField();
-	protected static JTextField feedbackTextFieldComponent;
+	private JTextArea feedbackText = new JTextArea();
+	private JScrollPane feedbackScrollPane = new JScrollPane(
+			feedbackText,
+			JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+	protected static JTextArea feedbackTextFieldComponent;
 	
 	private JButton uploadButton = new JButton("Upload");
 	
@@ -63,9 +67,10 @@ public class ICarePanel extends SuperPanel {
 		
 		descriptionConstraint.gridy = 4;
 		descriptionConstraint.gridx = 0;
+		feedbackText.setLineWrap(true);
 		feedbackText.setEditable(false);
-		add(feedbackText, descriptionConstraint);
 		feedbackTextFieldComponent = feedbackText;
+		add(feedbackScrollPane, descriptionConstraint);
 		
 		defaultConstraint.gridy = 5;
 		defaultConstraint.gridx = 2;

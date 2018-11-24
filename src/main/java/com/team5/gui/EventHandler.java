@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.apache.commons.io.FilenameUtils;
@@ -24,7 +25,6 @@ import com.team5.parser.TemplateParser;
 import com.team5.utilities.ConfigurationLoader;
 import com.team5.utilities.ConfigurationNotFoundException;
 import com.team5.report.charts.Report;
-import com.team5.report.implementations.*;
 
 public class EventHandler implements ActionListener {
 	
@@ -119,7 +119,7 @@ public class EventHandler implements ActionListener {
 		else if (command == "Upload") {
 			String filePath = ICarePanel.directoryTextFieldComponent.getText(); // Inputted filepath to ICare file TODO: check that the file is actually an ICare file
 			String selectedTemplateType = (String) ICarePanel.templateDropDownComponent.getSelectedItem(); // Selected template type
-			JTextField feedbackTextField = ICarePanel.feedbackTextFieldComponent; // Component for inserting feedback
+			JTextArea feedbackTextField = ICarePanel.feedbackTextFieldComponent; // Component for inserting feedback
 			
 			ArrayList<JSONObject> parsedFile = null;
 			

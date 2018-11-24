@@ -1,7 +1,6 @@
 package com.team5.gui;
 
 import java.awt.Label;
-import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
