@@ -38,7 +38,7 @@ public class SuperPanel extends JPanel {
 			feedbackText,
 			JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	
-	public static int defaultSize = 40;
+	public static int defaultSize = 30;
 
 	SuperPanel(JPanel content, String panelConfig){
 		// Setting EventHandler ---
