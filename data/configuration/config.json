@@ -32,6 +32,7 @@
 		"language-training-course-setup":"lt_course_setup"
 	},
 	"report-locations": {
+		"client-course-enrollment":"data/reports/ClientCourseEnrollment.json",
 		"employment-services-demographics":"data/reports/EmploymentServicesDemographics.json",
 		"client-population-summary":"data/reports/ClientPopulationSummary.json"
 	}
