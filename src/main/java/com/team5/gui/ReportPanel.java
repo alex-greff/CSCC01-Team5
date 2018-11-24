@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 
 public class ReportPanel extends SuperPanel {
 	
+	private JTextField descriptionLabel = new JTextField("test"); //TODO: Add description text in config
+	
 	private JLabel reportLabel = new JLabel("Report:", Label.RIGHT);
 	private String[] reports = getFileNames("src\\main\\java\\com\\team5\\report\\implementations", ".java");
 	private JComboBox<String> reportDropDown = new JComboBox<String>(reports);
@@ -43,38 +45,40 @@ public class ReportPanel extends SuperPanel {
 		generateButton.addActionListener(eventHandler);
 		
 		// Adding buttons and labels
+		descriptionLabel.setEditable(false);
+		add(descriptionLabel, descriptionConstraint);
+		
+		defaultConstraint.gridy = 1;
+		textFieldConstraint.gridy = 1;
 		add(reportLabel, defaultConstraint);
 		add(reportDropDown, textFieldConstraint);
 		reportDropDownComponent = reportDropDown;
 		
-		defaultConstraint.gridy = 1;
-		textFieldConstraint.gridy = 1;
+		defaultConstraint.gridy = 2;
+		textFieldConstraint.gridy = 2;
 		add(saveLabel, defaultConstraint);
 		add(directoryTextField, textFieldConstraint);
 		directoryTextFieldComponent = directoryTextField;
 		add(selectFileButton, defaultConstraint);
 		
-		defaultConstraint.gridy = 2;
-		textFieldConstraint.gridy = 2;
+		defaultConstraint.gridy = 3;
+		textFieldConstraint.gridy = 3;
 		add(nameLabel, defaultConstraint);
 		add(nameTextField, textFieldConstraint);
 		nameTextFieldComponent = nameTextField;
 		
-		defaultConstraint.gridy = 3;
+		defaultConstraint.gridy = 4;
 		defaultConstraint.gridx = 1;
 		add(generateButton, defaultConstraint);
 		
-		textFieldConstraint.gridy = 4;
-		textFieldConstraint.gridx = 0;
-		textFieldConstraint.gridwidth = 4;
-		textFieldConstraint.ipady = 100;
-		textFieldConstraint.ipadx = 800;
+		descriptionConstraint.gridy = 5;
+		descriptionConstraint.gridx = 0;
 		feedbackText.setEditable(false);
-		add(feedbackText, textFieldConstraint);
+		add(feedbackText, descriptionConstraint);
 		feedbackTextFieldComponent = feedbackText;
 		
-		defaultConstraint.gridy = 4;
-		defaultConstraint.gridx = 2;
+		defaultConstraint.gridy = 6;
+		defaultConstraint.gridx = descriptionConstraint.gridwidth+1; // Place 'back' button to the right of feedback box
 		add(back, defaultConstraint);
 	}
 	

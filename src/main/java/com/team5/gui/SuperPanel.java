@@ -15,6 +15,7 @@ public class SuperPanel extends JPanel {
 	EventHandler eventHandler;
 	GridBagConstraints defaultConstraint;
 	GridBagConstraints textFieldConstraint;
+	GridBagConstraints descriptionConstraint;
 	
 	public static int defaultSize = 40;
 
@@ -36,6 +37,12 @@ public class SuperPanel extends JPanel {
 		// Customizing TextField layout ---
 		textFieldConstraint = (GridBagConstraints) defaultConstraint.clone();
 		textFieldConstraint.ipadx = 500;
+		
+		// Customizing description layout ---
+		descriptionConstraint =  (GridBagConstraints) defaultConstraint.clone();
+		descriptionConstraint.gridwidth = 6;
+		descriptionConstraint.ipady = 200;
+		descriptionConstraint.ipadx = 1000;
 	}
 	
 	protected static String[] getFileNames(String filePath, String extension) {
