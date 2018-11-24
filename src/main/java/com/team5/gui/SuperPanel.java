@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import org.apache.commons.io.FilenameUtils;
+
 public class SuperPanel extends JPanel {
 	
 	EventHandler eventHandler;
@@ -45,7 +47,7 @@ public class SuperPanel extends JPanel {
 		for(File file : fileList) {
 			
 			if (file.getName().endsWith(extension)) {
-				fileNameList.add(file.getName());
+				fileNameList.add(FilenameUtils.removeExtension(file.getName()));
 			}
 		}
 		return fileNameList.toArray(new String[0]);

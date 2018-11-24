@@ -125,7 +125,7 @@ public class EventHandler implements ActionListener {
 			
 			// Parse the selected ICare file using the selected template type
 			try {
-				parsedFile = TemplateParser.GetJsonArray(filePath, selectedTemplateType, "iCare-template-system");
+				parsedFile = TemplateParser.GetJsonArray(filePath, selectedTemplateType+".json", "iCare-template-system");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				noExceptionRaised = false;
