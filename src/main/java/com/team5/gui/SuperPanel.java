@@ -51,10 +51,10 @@ public class SuperPanel extends JPanel {
 		
 		// Internal button padding
 		defaultConstraint.ipadx = defaultSize;
-		defaultConstraint.ipady = defaultSize;
+		defaultConstraint.ipady = defaultSize/4;
 		
 		// External button padding
-		defaultConstraint.insets = new Insets(60, 0, 0, 0);
+		defaultConstraint.insets = new Insets(10, 0, 0, 0);
 		
 		// Customizing TextField layout ---
 		textFieldConstraint = (GridBagConstraints) defaultConstraint.clone();
