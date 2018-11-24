@@ -113,7 +113,7 @@ public class EventHandler implements ActionListener {
 		}
 		
 		String reportSaveDirectory = ReportPanel.directoryTextFieldComponent.getText().trim();
-		if(!new File(reportSaveDirectory).exists()) {
+		if(!new File(reportSaveDirectory).isDirectory()) {
 			noExceptionRaised = false;
 			ReportPanel.feedbackTextFieldComponent.setText("Directory not found");
 		}
