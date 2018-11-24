@@ -27,8 +27,8 @@ public class GUIManager extends JFrame {
 	 */
 	public GUIManager(String title) {
 		super(title);
-		int size = SuperPanel.defaultSize*30;
-		setSize(size, size/2);
+		int size = SuperPanel.defaultSize*27;
+		setSize(size, size-300);
 		setResizable(false);
 		setLocationRelativeTo(null); // Starts interface at center of screen
 		
