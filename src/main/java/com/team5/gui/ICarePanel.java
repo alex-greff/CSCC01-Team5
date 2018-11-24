@@ -23,7 +23,8 @@ public class ICarePanel extends SuperPanel {
 	protected static JTextField directoryTextFieldComponent;
 	
 	private JLabel templateTypeLabel = new JLabel("Template Type:", Label.RIGHT);
-	File[] templates = getFiles("data\\templates\\iCare-templates", ".json");
+	static File[] templates = getFiles("data\\templates\\iCare-templates", ".json");
+	static String[] templateFileNames = getFileNames(templates);
 	private JComboBox<String> templateDropDown = new JComboBox<String>(getDisplayNames(templates));
 	protected static JComboBox<String> templateDropDownComponent;
 	

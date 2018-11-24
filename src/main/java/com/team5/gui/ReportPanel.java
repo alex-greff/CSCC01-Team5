@@ -18,7 +18,8 @@ import com.team5.report.charts.Report;
 public class ReportPanel extends SuperPanel {
 
 	private JLabel reportLabel = new JLabel("Report:", Label.RIGHT);
-	private File[] reports = getFiles("src\\main\\java\\com\\team5\\report\\implementations", ".java");
+	private static File[] reports = getFiles("src\\main\\java\\com\\team5\\report\\implementations", ".java");
+	public static String[] reportFileNames = getFileNames(reports);
 	private JComboBox<String> reportDropDown = new JComboBox<String>(getDisplayNames(reports));
 	protected static JComboBox<String> reportDropDownComponent;
 	

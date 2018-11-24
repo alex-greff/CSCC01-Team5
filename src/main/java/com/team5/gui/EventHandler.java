@@ -99,11 +99,12 @@ public class EventHandler implements ActionListener {
 	
 	
 	private void Generate() {
-		String reportClassName = "com.team5.report.implementations." + FilenameUtils.removeExtension(ReportPanel.reportDropDownComponent.getSelectedItem().toString());
+		String reportClassName = ReportPanel.reportFileNames[ReportPanel.reportDropDownComponent.getSelectedIndex()];
+		String reportClassPath = "com.team5.report.implementations." + FilenameUtils.removeExtension(reportClassName);
 		Class reportClass = null;
 		
 		try {
-			reportClass = Class.forName(reportClassName);
+			reportClass = Class.forName(reportClassPath);
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block. Selected report type does not exist
 			noExceptionRaised = false;
@@ -183,7 +184,7 @@ public class EventHandler implements ActionListener {
 
 	private void Upload() {
 		String filePath = ICarePanel.directoryTextFieldComponent.getText(); // Inputted filepath to ICare file TODO: check that the file is actually an ICare file
-		String selectedTemplateType = (String) ICarePanel.templateDropDownComponent.getSelectedItem(); // Selected template type
+		String selectedTemplateType = ICarePanel.templateFileNames[ICarePanel.templateDropDownComponent.getSelectedIndex()]; // Selected template type
 		JTextArea feedbackTextField = ICarePanel.feedbackTextFieldComponent; // Component for inserting feedback
 		
 		ArrayList<JSONObject> parsedFile = null;
@@ -195,7 +196,7 @@ public class EventHandler implements ActionListener {
 		
 		// Parse the selected ICare file using the selected template type
 		try {
-			parsedFile = TemplateParser.GetJsonArray(filePath, selectedTemplateType+".json", "iCare-template-system");
+			parsedFile = TemplateParser.GetJsonArray(filePath, selectedTemplateType, "iCare-template-system");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			noExceptionRaised = false;
