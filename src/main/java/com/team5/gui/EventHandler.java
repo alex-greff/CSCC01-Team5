@@ -3,6 +3,7 @@ package com.team5.gui;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -110,8 +112,23 @@ public class EventHandler implements ActionListener {
 			e1.printStackTrace();
 		}
 		
-		String reportSaveDirectory = ReportPanel.directoryTextFieldComponent.getText();
-		String reportSaveLocation = reportSaveDirectory + "\\" + ReportPanel.nameTextFieldComponent.getText() + ".png";
+		String reportSaveDirectory = ReportPanel.directoryTextFieldComponent.getText().trim();
+		if(!new File(reportSaveDirectory).exists()) {
+			noExceptionRaised = false;
+			ReportPanel.feedbackTextFieldComponent.setText("Directory not found");
+		}
+		
+		String reportSaveLocation = reportSaveDirectory + "\\" + ReportPanel.nameTextFieldComponent.getText().trim() + ".png";
+		if(new File(reportSaveLocation).exists()) {
+			int confirm = JOptionPane.showConfirmDialog(null,
+					"This file already exists. Are you sure you want to replace it?",
+					"Warning",
+					JOptionPane.YES_NO_OPTION);
+			if(confirm == 1) {
+				ReportPanel.feedbackTextFieldComponent.setText("File " + reportSaveLocation + " already exists");
+				return;
+			}
+		}
 
 		if (noExceptionRaised) {
 			try {
