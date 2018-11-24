@@ -69,6 +69,7 @@ public class EventHandler implements ActionListener {
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block. Selected report type does not exist
 				noExceptionRaised = false;
+				ReportPanel.feedbackTextFieldComponent.setText("Report type not found");
 				e1.printStackTrace();
 			}
 			
