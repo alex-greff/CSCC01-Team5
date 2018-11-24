@@ -45,7 +45,6 @@ public class EventHandler implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand().replaceAll("\\s+","");
 		noExceptionRaised = true;
-		Class a = getClass();
 		
 		Method method = null;
 		try {
