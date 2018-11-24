@@ -1,5 +1,6 @@
 package com.team5.gui;
 
+import java.awt.Color;
 import java.awt.Label;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,7 +38,7 @@ public class ICarePanel extends SuperPanel {
 		super(content, "iCare-panel-desc");
 		
 		EventHandler eventHandler = new EventHandler(content);
-				
+		setBackground(Color.WHITE);
 		// Adding Action Listener to buttons
 		selectFileButton.addActionListener(eventHandler);
 		back.addActionListener(eventHandler);
