@@ -10,13 +10,17 @@ public class AdminPanel extends SuperPanel {
 	private JButton generate = new JButton("Generate Report");
 	
 	AdminPanel(JPanel content){
-		super(content);
+		super(content, "admin-panel-desc");
 		
 		// Adding Action Listener to buttons
 		upload.addActionListener(eventHandler);
 		generate.addActionListener(eventHandler);
 		
+		// Adding description
+		add(descriptionLabel, descriptionConstraint);
+		
 		// Adding buttons
+		defaultConstraint.gridy = 1;
 		add(upload, defaultConstraint);
 		add(generate, defaultConstraint);
 	}

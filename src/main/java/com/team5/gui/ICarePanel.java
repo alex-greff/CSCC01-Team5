@@ -1,33 +1,23 @@
 package com.team5.gui;
 
 import java.awt.Label;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class ICarePanel extends SuperPanel {
-	
-	private JTextField descriptionLabel = new JTextField("test"); //TODO: Add description text in config
-	
 	private JLabel iCareLabel = new JLabel("iCare File:", Label.RIGHT);
 	private JTextField iCareNameTextField = new JTextField();
 	protected static JTextField directoryTextFieldComponent;
 	
 	private JLabel templateTypeLabel = new JLabel("Template Type:", Label.RIGHT);
-	private JButton selectFileButton = new JButton("Select Template");
 	String[] templates = getFileNames("data\\templates\\iCare-templates", ".json");
 	private JComboBox<String> templateDropDown = new JComboBox<String>(templates);
 	protected static JComboBox<String> templateDropDownComponent;
 	
-	private JTextArea feedbackText = new JTextArea();
-	private JScrollPane feedbackScrollPane = new JScrollPane(
-			feedbackText,
-			JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	protected static JTextArea feedbackTextFieldComponent;
 	
 	private JButton uploadButton = new JButton("Upload");
@@ -35,17 +25,16 @@ public class ICarePanel extends SuperPanel {
 	private JButton back = new JButton("Back");
 	
 	ICarePanel(JPanel content){
-		super(content);
+		super(content, "iCare-panel-desc");
 		
 		EventHandler eventHandler = new EventHandler(content);
-		
+				
 		// Adding Action Listener to buttons
 		selectFileButton.addActionListener(eventHandler);
 		back.addActionListener(eventHandler);
 		uploadButton.addActionListener(eventHandler);
 
 		// Adding buttons and labels
-		descriptionLabel.setEditable(false);
 		add(descriptionLabel, descriptionConstraint);
 		
 		defaultConstraint.gridy = 1;
@@ -53,6 +42,7 @@ public class ICarePanel extends SuperPanel {
 		add(iCareLabel, defaultConstraint);
 		add(iCareNameTextField, textFieldConstraint);
 		directoryTextFieldComponent = iCareNameTextField;
+		selectFileButton.setText("Select Template");
 		add(selectFileButton, defaultConstraint);
 
 		defaultConstraint.gridy = 2;
@@ -65,12 +55,9 @@ public class ICarePanel extends SuperPanel {
 		defaultConstraint.gridx = 1;
 		add(uploadButton, defaultConstraint);
 		
-		descriptionConstraint.gridy = 4;
-		descriptionConstraint.gridx = 0;
-		feedbackText.setLineWrap(true);
-		feedbackText.setEditable(false);
+		feedbackConstraint.gridy = 4;
 		feedbackTextFieldComponent = feedbackText;
-		add(feedbackScrollPane, descriptionConstraint);
+		add(feedbackScrollPane, feedbackConstraint);
 		
 		defaultConstraint.gridy = 5;
 		defaultConstraint.gridx = 2;

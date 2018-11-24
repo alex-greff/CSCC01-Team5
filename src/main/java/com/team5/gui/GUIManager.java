@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class GUIManager extends JFrame {
 	
+	
 	final static String ADMIN = "Admin";
 	final static String ICARE = "Upload iCare File";
 	final static String REPORT = "Generate Report";
