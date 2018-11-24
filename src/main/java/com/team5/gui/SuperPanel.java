@@ -38,7 +38,7 @@ public class SuperPanel extends JPanel {
 			feedbackText,
 			JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	
-	public static int defaultSize = 40;
+	public static int defaultSize = 30;
 
 	SuperPanel(JPanel content, String panelConfig){
 		// Setting EventHandler ---
@@ -51,14 +51,14 @@ public class SuperPanel extends JPanel {
 		
 		// Internal button padding
 		defaultConstraint.ipadx = defaultSize;
-		defaultConstraint.ipady = defaultSize/4;
+		defaultConstraint.ipady = defaultSize;
 		
 		// External button padding
-		defaultConstraint.insets = new Insets(10, 0, 0, 0);
+		defaultConstraint.insets = new Insets(0, 0, 0, 0);
 		
 		// Customizing TextField layout ---
 		textFieldConstraint = (GridBagConstraints) defaultConstraint.clone();
-		textFieldConstraint.ipadx = 600;
+		textFieldConstraint.ipadx = 300;
 		
 		// Customizing description layout ---
 		descriptionConstraint =  (GridBagConstraints) defaultConstraint.clone();
@@ -66,8 +66,8 @@ public class SuperPanel extends JPanel {
 		
 		// Customizing feedback field layout ---
 		feedbackConstraint = (GridBagConstraints) descriptionConstraint.clone();
-		feedbackConstraint.ipady = 200;
-		feedbackConstraint.ipadx = 1000;
+		feedbackConstraint.ipady = 100;
+		feedbackConstraint.ipadx = 800;
 		
 		// Set up buttons and panels
 		BufferedImage selectButtonIcon;
@@ -98,18 +98,18 @@ public class SuperPanel extends JPanel {
 		feedbackText.setEditable(false);
 	}
 	
-	protected static String[] getFileNames(String filePath, String extension) {
+	protected static File[] getFiles(String filePath, String extension) {
 		File directory = new File(".\\"+filePath);
 		File[] fileList = directory.listFiles();
-		ArrayList<String> fileNameList = new ArrayList<String>();
+		ArrayList<File> selectiveFileList = new ArrayList<File>();
 
 		// Add all the .json files into the list
 		for(File file : fileList) {
 			
 			if (file.getName().endsWith(extension)) {
-				fileNameList.add(FilenameUtils.removeExtension(file.getName()));
+				selectiveFileList.add(file);
 			}
 		}
-		return fileNameList.toArray(new String[0]);
+		return selectiveFileList.toArray(new File[0]);
 	}
 }

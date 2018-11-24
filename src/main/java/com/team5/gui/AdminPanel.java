@@ -51,6 +51,7 @@ public class AdminPanel extends SuperPanel {
 		lblNewLabel_2.setBounds(293, 34, 533, 102);
 		add(lblNewLabel_2);
 		
+		
 	
 	}
 

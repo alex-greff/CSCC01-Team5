@@ -1,6 +1,11 @@
 package com.team5.gui;
 
+import java.awt.Color;
 import java.awt.Label;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -8,14 +13,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.apache.commons.io.FilenameUtils;
+import org.json.simple.parser.ParseException;
+
+import com.team5.utilities.JSONLoader;
+
 public class ICarePanel extends SuperPanel {
 	private JLabel iCareLabel = new JLabel("iCare File:", Label.RIGHT);
 	private JTextField iCareNameTextField = new JTextField();
 	protected static JTextField directoryTextFieldComponent;
 	
 	private JLabel templateTypeLabel = new JLabel("Template Type:", Label.RIGHT);
-	String[] templates = getFileNames("data\\templates\\iCare-templates", ".json");
-	private JComboBox<String> templateDropDown = new JComboBox<String>(templates);
+	File[] templates = getFiles("data\\templates\\iCare-templates", ".json");
+	private JComboBox<String> templateDropDown = new JComboBox<String>(getDisplayNames(templates));
 	protected static JComboBox<String> templateDropDownComponent;
 	
 	protected static JTextArea feedbackTextFieldComponent;
@@ -28,7 +38,7 @@ public class ICarePanel extends SuperPanel {
 		super(content, "iCare-panel-desc");
 		
 		EventHandler eventHandler = new EventHandler(content);
-				
+		setBackground(Color.WHITE);
 		// Adding Action Listener to buttons
 		selectFileButton.addActionListener(eventHandler);
 		back.addActionListener(eventHandler);
@@ -56,12 +66,27 @@ public class ICarePanel extends SuperPanel {
 		add(uploadButton, defaultConstraint);
 		
 		feedbackConstraint.gridy = 4;
+		feedbackConstraint.gridwidth = 3;
 		feedbackTextFieldComponent = feedbackText;
 		add(feedbackScrollPane, feedbackConstraint);
 		
 		defaultConstraint.gridy = 5;
 		defaultConstraint.gridx = 2;
 		add(back, defaultConstraint);
+	}
+	
+	private static String[] getDisplayNames(File[] files){
+		int i;
+		String[] displayNames = new String[files.length];
+		for(i=0; i<files.length; i++) {
+			try {
+				displayNames[i] = (String) JSONLoader.parseJSONFile(files[i]).get("display-name");
+			}catch(Exception e) {
+				displayNames[i] = FilenameUtils.removeExtension(files[i].getName()); // If cannot get display name, use file name
+			}
+		}
+		
+		return displayNames;
 	}
 	
 	// DEMO

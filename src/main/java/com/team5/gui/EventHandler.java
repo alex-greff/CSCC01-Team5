@@ -45,7 +45,6 @@ public class EventHandler implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand().replaceAll("\\s+","");
 		noExceptionRaised = true;
-		Class a = getClass();
 		
 		Method method = null;
 		try {
@@ -143,7 +142,18 @@ public class EventHandler implements ActionListener {
 					}}
 				);
 
+				// Add exception handler to thread
+				t1.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+
+					@Override
+					public void uncaughtException(Thread t, Throwable e) {
+						ReportPanel.feedbackTextFieldComponent.setText("An error occured");
+					}
+						
+				});
+				
 				// Run the thread
+				ReportPanel.feedbackTextFieldComponent.setText("Generating report...");
 				t1.start();
 
 			} catch (InstantiationException e1) {
@@ -155,11 +165,6 @@ public class EventHandler implements ActionListener {
 				noExceptionRaised = false;
 				e1.printStackTrace();
 			}
-		}
-
-			// r.generate(reportName);
-		if (noExceptionRaised) {
-			ReportPanel.feedbackTextFieldComponent.setText(reportSaveLocation + " file successfully generated.");
 		}
 	}
 
