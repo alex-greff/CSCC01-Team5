@@ -33,7 +33,7 @@ public class ParserTest {
 		assertThrows(MissingFieldException.class, () -> {
 			TemplateParser.GetJsonArray(excelFilePath3, "client_profile.json", "iCare-template-system");
 		}, "exception was thrown");
-
+		
 	}
 
 	@Test

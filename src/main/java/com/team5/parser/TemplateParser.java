@@ -123,11 +123,11 @@ public class TemplateParser {
 			if (missingvalues.get(key) == null) {
 				ArrayList<String> missingKeyArray = new ArrayList<String>();
 				missingKeyArray.add(array.get(0) + rowString);
-				missingvalues.put(key, missingKeyArray);
+				missingvalues.put(key, array.get(0) + rowString);
 			} else {
 				ArrayList<String> missingKeyArray = (ArrayList<String>) missingvalues.get(key);
 				missingKeyArray.add(array.get(0) + rowString);
-				missingvalues.put(key, missingKeyArray);
+				missingvalues.put(key, array.get(0) + rowString);
 			}
 
 		}
@@ -313,6 +313,7 @@ public class TemplateParser {
 	
 		missingValuesArray.add(missingvalues);
 		if (!missingvaluesarray.isEmpty()) {
+			
 			throw new MissingFieldException(missingvaluesarray);
 		}
 		
@@ -323,12 +324,12 @@ public class TemplateParser {
 	public static void main(String[] args)
 			throws IOException, ParseException, ConfigurationNotFoundException, MissingFieldException {
 		String excelFilePath4 = "testFiles/SampleTestFilesReport/narsRandomFilled.xlsx";
-		String excelFilePath = "testFiles/reportGeneratorTests/client.xlsx";
+		String excelFilePath = "testFiles/ParseTestFiles/client_profile.xlsx";
 		String excelFilePath2 = "testFiles/reportGeneratorTests/enroll.xlsx";
 
 		System.out.println("This is the Parser Test, This parse the excel file and puts it into a Json Object");
 		System.out.println("Client Profile");
-		System.out.println(TemplateParser.GetJsonArray(excelFilePath4, "nars.json", "iCare-template-system"));
+		System.out.println(TemplateParser.GetJsonArray(excelFilePath, "client_profile.json", "iCare-template-system"));
 
 	}
 
