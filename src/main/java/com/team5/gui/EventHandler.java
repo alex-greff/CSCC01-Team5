@@ -227,18 +227,21 @@ public class EventHandler implements ActionListener {
 			e1.printStackTrace();
 		} catch (MissingFieldException e1) {
 			// Get all the missing fields and format them into a readable string
-			String Missing = "";
+			String missing = "";
 			ArrayList<JSONObject> missingarray = e1.getMissingField();
 			for (int i = 0; i < missingarray.size(); i++) {
 				JSONObject inputobject = (JSONObject) missingarray.get(i);
 				for (Iterator nestediterator = inputobject.keySet().iterator(); nestediterator.hasNext();) {
 					String nestedkey = (String) nestediterator.next();
-					Missing = Missing + ", " + inputobject.get(nestedkey);
+					missing = missing + ", " + inputobject.get(nestedkey);
 				}
 			}
 		
+			if (missing.length() >= 3)
+				missing = missing.substring(2);
+
 			// Display the missing fields
-			feedbackTextField.setText(String.format("Error, The following required items are missing: %s", Missing));
+			feedbackTextField.setText(String.format("Error, The following required items are missing: %s", missing));
 			noExceptionRaised = false;
 			e1.printStackTrace();
 		} catch (Exception e1) {
