@@ -313,7 +313,6 @@ public class TemplateParser {
 	
 		missingValuesArray.add(missingvalues);
 		if (!missingvaluesarray.isEmpty()) {
-			System.out.println(missingvaluesarray);
 			throw new MissingFieldException(missingvaluesarray);
 		}
 		
