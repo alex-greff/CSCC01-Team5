@@ -36,21 +36,39 @@
 
 ### Production
 
-Run these commands from the project root:
+  * Package the project
 
-Compile the project with ``` $ mvn compile ```
+    ``` $ mvn package ```
 
-* **Admin Panel**
+  * Run the executable jar file
+
+    ``` $ java -jar .\target\CSCC01-team5-jar-with-dependencies.jar ```
+
+### Accessing Entry Points
+
+  * Accessing entry points (i.e. individual pages) can be done with the following steps:
+
+  * Compile the project
+
+    ``` $ mvn compile ```
+
+  * **Main Entry Point**
+
+    ``` $ mvn exec:java ```
+
+  * **Secondary Entry Points**
+
+    * **Admin Panel**
   
-  ``` $ mvn exec:java@admin-panel ```
+      ``` $ mvn exec:java@admin-panel ```
 
-* **Report Panel**
+    * **Report Panel**
   
-  ``` $ mvn exec:java@report-panel ```
+      ``` $ mvn exec:java@report-panel ```
 
-* **Upload Panel**
+    * **Upload Panel**
   
-  ``` $ mvn exec:java@uploader-panel ```
+      ``` $ mvn exec:java@uploader-panel ```
 
 ### Development Environment
 - Java 1.8.0 or above installed
