@@ -61,6 +61,15 @@ public class Series<A> {
     }
 
     /**
+     * Gets the mutable contents of the series.
+     * 
+     * @return Returns a list of mutable contents.
+     */
+    public List<A> getContentMutable() {
+        return this.content;
+    }
+
+    /**
      * Adds an element to the series.
      * 
      * @param element The element.
