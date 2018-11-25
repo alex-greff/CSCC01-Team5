@@ -38,7 +38,7 @@ public class SuperPanel extends JPanel {
 			feedbackText,
 			JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	
-	public static int defaultSize = 40;
+	public static int defaultSize = 30;
 
 	SuperPanel(JPanel content, String panelConfig){
 		// Setting EventHandler ---
@@ -51,10 +51,10 @@ public class SuperPanel extends JPanel {
 		
 		// Internal button padding
 		defaultConstraint.ipadx = defaultSize;
-		defaultConstraint.ipady = defaultSize/4;
+		defaultConstraint.ipady = defaultSize;
 		
 		// External button padding
-		defaultConstraint.insets = new Insets(10, 0, 0, 0);
+		defaultConstraint.insets = new Insets(0, 0, 0, 0);
 		
 		// Customizing TextField layout ---
 		textFieldConstraint = (GridBagConstraints) defaultConstraint.clone();

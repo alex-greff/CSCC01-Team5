@@ -1,12 +1,17 @@
 package com.team5.gui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Label;
+import java.awt.SystemColor;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -35,7 +40,7 @@ public class ICarePanel extends SuperPanel {
 	private JButton back = new JButton("Back");
 	
 	ICarePanel(JPanel content){
-		super(content, "iCare-panel-desc");
+super(content, "iCare-panel-desc");
 		
 		EventHandler eventHandler = new EventHandler(content);
 				
