@@ -39,5 +39,6 @@
 		"iCare-panel-desc":"Select an iCare template file to upload to the database",
 		"report-panel-desc":"Select a report type, and generate a new report file"
 		"select-file-image":"images/addfile.png"
+		"report-description-image":"images/descriptionIcon.png"
 	}
 }

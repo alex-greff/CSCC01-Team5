@@ -28,7 +28,8 @@ public class ICarePanel extends SuperPanel {
 	protected static JTextField directoryTextFieldComponent;
 	
 	private JLabel templateTypeLabel = new JLabel("Template Type:", Label.RIGHT);
-	File[] templates = getFiles("data\\templates\\iCare-templates", ".json");
+	static File[] templates = getFiles("data\\templates\\iCare-templates", ".json");
+	static String[] templateFileNames = getFileNames(templates);
 	private JComboBox<String> templateDropDown = new JComboBox<String>(getDisplayNames(templates));
 	protected static JComboBox<String> templateDropDownComponent;
 	
@@ -39,66 +40,44 @@ public class ICarePanel extends SuperPanel {
 	private JButton back = new JButton("Back");
 	
 	ICarePanel(JPanel content){
-		super(content, "iCare-panel-desc");
+super(content, "iCare-panel-desc");
 		
 		EventHandler eventHandler = new EventHandler(content);
+				
 		// Adding Action Listener to buttons
 		selectFileButton.addActionListener(eventHandler);
 		back.addActionListener(eventHandler);
 		uploadButton.addActionListener(eventHandler);
-	
+
 		// Adding buttons and labels
-	
+		add(descriptionLabel, descriptionConstraint);
+		
+		defaultConstraint.gridy = 1;
+		textFieldConstraint.gridy = 1;
+		add(iCareLabel, defaultConstraint);
+		add(iCareNameTextField, textFieldConstraint);
+		directoryTextFieldComponent = iCareNameTextField;
+		selectFileButton.setText("Select Template");
+		add(selectFileButton, defaultConstraint);
 
-	
-		
-		back.setBounds(666, 505, 113, 33);
-		add(back);
-		
-		setLayout(null);
-		
-		JLabel lblFileUpload = new JLabel("ICARE FILE UPLOAD");
-		lblFileUpload.setFont(new Font("SansSerif", Font.BOLD, 33));
-		lblFileUpload.setBounds(398, 86, 326, 51);
-		add(lblFileUpload);
-		
-		JLabel lblUploadFileTo = new JLabel("Upload File to the Database for Report Generation\r\n");
-		lblUploadFileTo.setFont(new Font("SansSerif", Font.PLAIN, 16));
-		lblUploadFileTo.setBounds(386, 126, 385, 51);
-		add(lblUploadFileTo);
-
-		feedbackScrollPane.setBackground(Color.WHITE);
-		feedbackScrollPane.setForeground(Color.BLACK);
-		feedbackScrollPane.setBounds(339, 248, 296, 40);
-		add(feedbackScrollPane);
-		
-	
-		selectFileButton.setBounds(645, 246, 113, 42);
-		add(selectFileButton);
-		
-		templateDropDown.setForeground(Color.BLACK);
-		templateDropDown.setBounds(155, 261, 295, 43);
-		add(templateDropDown);
+		defaultConstraint.gridy = 2;
+		textFieldConstraint.gridy = 2;
+		add(templateTypeLabel, defaultConstraint);
+		add(templateDropDown, textFieldConstraint);
 		templateDropDownComponent = templateDropDown;
-
-		uploadButton.setBounds(326, 340, 113, 43);
-		add(uploadButton);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("images/uploadsign.png"));
-		lblNewLabel.setBounds(245, 325, 74, 73);
-		add(lblNewLabel);
-	
-		iCareNameTextField.setBounds(136, 409, 437, 92);
-		add(iCareNameTextField);
-		iCareNameTextField.setColumns(10);
+		defaultConstraint.gridy = 3;
+		defaultConstraint.gridx = 1;
+		add(uploadButton, defaultConstraint);
 		
-		JLabel lblSelectTemplateType = new JLabel("Select Template Type");
-		lblSelectTemplateType.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		lblSelectTemplateType.setBounds(700, 255, 147, 51);
-		add(lblSelectTemplateType);
-		setLayout(null);
-		setBackground(Color.WHITE);
+		feedbackConstraint.gridy = 4;
+		feedbackConstraint.gridwidth = 3;
+		feedbackTextFieldComponent = feedbackText;
+		add(feedbackScrollPane, feedbackConstraint);
+		
+		defaultConstraint.gridy = 5;
+		defaultConstraint.gridx = 2;
+		add(back, defaultConstraint);
 	}
 	
 	private static String[] getDisplayNames(File[] files){

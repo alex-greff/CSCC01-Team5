@@ -112,4 +112,13 @@ public class SuperPanel extends JPanel {
 		}
 		return selectiveFileList.toArray(new File[0]);
 	}
+	
+	protected static String[] getFileNames(File[] files) {
+		String[] fileNames = new String[files.length];
+		int i;
+		for (i=0; i<fileNames.length; i++) {
+			fileNames[i] = files[i].getName();
+		}
+		return fileNames;
+	}
 }

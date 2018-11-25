@@ -1,9 +1,13 @@
 package com.team5.gui;
 
 import java.awt.Label;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -14,13 +18,18 @@ import javax.swing.JTextField;
 import org.apache.commons.io.FilenameUtils;
 
 import com.team5.report.charts.Report;
+import com.team5.utilities.ConfigurationLoader;
+import com.team5.utilities.ConfigurationNotFoundException;
 
 public class ReportPanel extends SuperPanel {
 
 	private JLabel reportLabel = new JLabel("Report:", Label.RIGHT);
-	private File[] reports = getFiles("src\\main\\java\\com\\team5\\report\\implementations", ".java");
+	private static File[] reports = getFiles("src\\main\\java\\com\\team5\\report\\implementations", ".java");
+	public static String[] reportFileNames = getFileNames(reports);
 	private JComboBox<String> reportDropDown = new JComboBox<String>(getDisplayNames(reports));
 	protected static JComboBox<String> reportDropDownComponent;
+	private BufferedImage reportDescriptionIcon;
+	private JButton reportDescriptionButton;
 	
 	private JLabel saveLabel = new JLabel("Report Save Location:", Label.RIGHT);
 	private JTextField directoryTextField = new JTextField();
@@ -54,6 +63,23 @@ public class ReportPanel extends SuperPanel {
 		add(reportLabel, defaultConstraint);
 		add(reportDropDown, textFieldConstraint);
 		reportDropDownComponent = reportDropDown;
+		
+		// Adding description button icon;
+		try {
+			reportDescriptionIcon = ImageIO.read(new File(ConfigurationLoader.loadConfiguration(config).get("report-description-image").toString()));
+			reportDescriptionButton = new JButton(new ImageIcon(reportDescriptionIcon));
+			reportDescriptionButton.setBorderPainted(false);
+			reportDescriptionButton.setContentAreaFilled(false);
+		} catch (IOException e) {
+			reportDescriptionIcon = null;
+			e.printStackTrace();
+		} catch (ConfigurationNotFoundException e) {
+			reportDescriptionButton = new JButton();
+			e.printStackTrace();
+		}
+		reportDescriptionButton.addActionListener(eventHandler);
+		reportDescriptionButton.setText("Description");
+		add(reportDescriptionButton, defaultConstraint);
 		
 		defaultConstraint.gridy = 2;
 		textFieldConstraint.gridy = 2;
