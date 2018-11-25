@@ -115,7 +115,7 @@ public class TemplateParser {
 
 	private static void addMissingVal(String key, JSONArray array) {
 		boolean requiredfield = (boolean) array.get(1);
-		String rowString = Integer.toString(row_cur);
+		String rowString = Integer.toString(row_cur + 1);
 		
 		// checks if the row is a required row and if the cell value is a required field
 		if (requiredfield) {
@@ -313,7 +313,7 @@ public class TemplateParser {
 	
 		missingValuesArray.add(missingvalues);
 		if (!missingvaluesarray.isEmpty()) {
-			
+			System.out.println(missingvaluesarray);
 			throw new MissingFieldException(missingvaluesarray);
 		}
 		
@@ -324,7 +324,7 @@ public class TemplateParser {
 	public static void main(String[] args)
 			throws IOException, ParseException, ConfigurationNotFoundException, MissingFieldException {
 		String excelFilePath4 = "testFiles/SampleTestFilesReport/narsRandomFilled.xlsx";
-		String excelFilePath = "testFiles/ParseTestFiles/client_profile.xlsx";
+		String excelFilePath = "testFiles/ParseTestFiles/client_profileMissing.xlsx";
 		String excelFilePath2 = "testFiles/reportGeneratorTests/enroll.xlsx";
 
 		System.out.println("This is the Parser Test, This parse the excel file and puts it into a Json Object");
