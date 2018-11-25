@@ -25,32 +25,50 @@
   - [Sprint 5](#Sprint-5)
   - [Sprint 6](#Sprint-6)
 - [Deliverables](#Deliverables)
-  - [Deliverable 1: Team Setup](#Deliverable-1:-Team-Setup)
-  - [Deliverable 2: Project Requirements](#Deliverable-2:-Project-Requirements)
-  - [Deliverable 3: Project Planning and Execution](#Deliverable-3:-Project-Planning-and-Execution)
-  - [Deliverable 4: Product Validation](#Deliverable-4:-Product-Validation)
-  - [Deliverable 5: Final Deliverable](#Deliverable-5:-Final-Deliverable)
+  - [Deliverable 1: Team Setup](#Deliverable-1-Team-Setup)
+  - [Deliverable 2: Project Requirements](#Deliverable-2-Project-Requirements)
+  - [Deliverable 3: Project Planning and Execution](#Deliverable-3-Project-Planning-and-Execution)
+  - [Deliverable 4: Product Validation](#Deliverable-4-Product-Validation)
+  - [Deliverable 5: Final Deliverable](#Deliverable-5-Final-Deliverable)
 
 
 ## Setting Up
 
 ### Production
 
-Run these commands from the project root:
+  * Package the project
 
-Compile the project with ``` $ mvn compile ```
+    ``` $ mvn package ```
 
-* **Admin Panel**
+  * Run the executable jar file
+
+    ``` $ java -jar .\target\CSCC01-team5-jar-with-dependencies.jar ```
+
+### Accessing Entry Points
+
+  * Accessing entry points (i.e. individual pages) can be done with the following steps:
+
+  * Compile the project
+
+    ``` $ mvn compile ```
+
+  * **Main Entry Point**
+
+    ``` $ mvn exec:java ```
+
+  * **Secondary Entry Points**
+
+    * **Admin Panel**
   
-  ``` $ mvn exec:java@admin-panel ```
+      ``` $ mvn exec:java@admin-panel ```
 
-* **Report Panel**
+    * **Report Panel**
   
-  ``` $ mvn exec:java@report-panel ```
+      ``` $ mvn exec:java@report-panel ```
 
-* **Upload Panel**
+    * **Upload Panel**
   
-  ``` $ mvn exec:java@uploader-panel ```
+      ``` $ mvn exec:java@uploader-panel ```
 
 ### Development Environment
 - Java 1.8.0 or above installed
@@ -140,44 +158,48 @@ Run these commands from the project root:
 
 ## Deliverables
 
-### Deliverable 1: Team Setup
+### Deliverable 1 Team Setup
 * [Setup Report](team_setup/Team_Information.pdf)
 * [Team Expectation Agreement](team_setup/Team_Expectation_Agreement.pdf)
 
-### Deliverable 2: Project Requirements
+### Deliverable 2 Project Requirements
 * [Product Backlog v0](#Version-0)
 
-### Deliverable 3: Project Planning and Execution
+### Deliverable 3 Project Planning and Execution
 * [Product Backlog v1](#Version-1)
 * [Sprint 1](#Sprint-1)
 * [Sprint 2](#Sprint-2)
 
-##### Trello Board
-<p align="left">
-    <img src="product_backlog/trello_screenshot.png" width="1000" title="Trello Screenshot">
-</p>
+  ##### Trello Board
+  <p align="left">
+      <img src="product_backlog/trello_screenshot.png" width="1000" title="Trello Screenshot">
+  </p>
 
-#### Running the Code
+  #### Running the Code
 
-As of sprint 2 our systems are still indepentent of each other so they must all be compiled separately.
+  As of sprint 2 our systems are still indepentent of each other so they must all be compiled separately.
 
-For the convenience of the grader we have compiled small demos of each system in their respective main functions. 
+  For the convenience of the grader we have compiled small demos of each system in their respective main functions. 
 
-Click [here](#System-Demos) for instructions on running the demos.
+  Click [here](#System-Demos) for instructions on running the demos.
 
 
-### Deliverable 4: Product Verification and Code Review
+### Deliverable 4 Product Verification and Code Review
 * [Product Backlog v2](#Version-2)
 * [Sprint 3](#Sprint-3)
 * [Sprint 4](#Sprint-4)
 
-#### Deliverables
-* [Acceptance Tests](acceptance_tests/v1/acceptance_tests.pdf)
-* [Code Review 1 Report](code_reviews/code_review_1/code_review_1_report.pdf)
-* [Code Review 1 Debriefing Meeting](https://youtu.be/ttGEu-ViChk)
+  #### Deliverables
+  * [Acceptance Tests](acceptance_tests/v1/acceptance_tests.pdf)
+  * [Code Review 1 Report](code_reviews/code_review_1/code_review_1_report.pdf)
+  * [Code Review 1 Debriefing Meeting](https://youtu.be/ttGEu-ViChk)
 
 
-### Deliverable 5: Final Deliverable
+### Deliverable 5 Final Deliverable
+* [Product Backlog v3](#Version-3)
 * [Sprint 5](#Sprint-5)
 * [Sprint 6](#Sprint-6)
-* [Code Review 2 Report](code_reviews/code_review_2/code_review_2_report.pdf)
+
+  #### Deliverables
+  * [Code Review 2 Report](code_reviews/code_review_2/code_review_2_report.pdf)
+  * [Project Presentation Video](TODO)
