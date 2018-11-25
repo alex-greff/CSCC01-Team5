@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>${model.version}</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>${team-id}</groupId>
-	<artifactId>${team-name}</artifactId>
-	<version>${project-version}</version>
+	<groupId>com.team5</groupId>
+	<artifactId>CSCC01-team5</artifactId>
+	<version>1.0-SNAPSHOT</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- Project properties -->
-		<team-id>com.team5</team-id>
-		<project-version>1.0-SNAPSHOT</project-version>
 		<team-name>CSCC01-team5</team-name>
-
-		<!-- Model version -->
-		<model.version>4.0.0</model.version>
 
 		<!-- Dependency and plugin versions -->
 		<jdk.version>1.8</jdk.version>
