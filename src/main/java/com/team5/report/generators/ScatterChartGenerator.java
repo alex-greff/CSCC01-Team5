@@ -2,6 +2,7 @@ package com.team5.report.generators;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale.Category;
 
 import com.team5.report.data.Series;
 
@@ -9,6 +10,7 @@ import org.javatuples.Pair;
 
 import javafx.geometry.Side;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
@@ -22,15 +24,15 @@ public class ScatterChartGenerator extends Generator {
     private static String targetPath, title;
     private static Pair<String, String> axisLabels;
     private static Pair<Double, Double> dimensions;
-    private static List<Series<Pair<Number, Number>>> data;
+    private static List<Series<Pair<String, Number>>> data;
 
     @Override
     public void displayChart(Stage stage) {
         stage.setTitle(title); // Set the title of the chart
         // Setup the axises and the chart
-        final NumberAxis xAxis = new NumberAxis();
+        final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
-        final ScatterChart<Number,Number> chart =  new ScatterChart<>(xAxis,yAxis);
+        final ScatterChart<String,Number> chart =  new ScatterChart<>(xAxis,yAxis);
 
         // Disable animations
         xAxis.setAnimated(false); 
@@ -46,17 +48,17 @@ public class ScatterChartGenerator extends Generator {
         yAxis.setLabel(axisLabels.getValue1());
 
         // Initialize the series list container
-        List<XYChart.Series<Number, Number>> seriesList = new ArrayList<>();
+        List<XYChart.Series<String, Number>> seriesList = new ArrayList<>();
 
         // Populate the series list container with the generated information of the report
-        for (Series<Pair<Number, Number>> currDataSeries : data) {
-            XYChart.Series<Number, Number> chartSeries = new XYChart.Series<Number, Number>();
+        for (Series<Pair<String, Number>> currDataSeries : data) {
+            XYChart.Series<String, Number> chartSeries = new XYChart.Series<String, Number>();
 
             chartSeries.setName(currDataSeries.getName()); // Set the series name
 
             // Get and add each data entry
-            for (Pair<Number, Number> currDataEntry : currDataSeries.getContent()) {
-                XYChart.Data<Number, Number> chartDataEntry = new XYChart.Data<Number, Number>(currDataEntry.getValue0(), currDataEntry.getValue1());
+            for (Pair<String, Number> currDataEntry : currDataSeries.getContent()) {
+                XYChart.Data<String, Number> chartDataEntry = new XYChart.Data<String, Number>(currDataEntry.getValue0(), currDataEntry.getValue1());
                 
                 chartSeries.getData().add(chartDataEntry);
             }
@@ -87,7 +89,7 @@ public class ScatterChartGenerator extends Generator {
      * @param dimensions The dimensions of the report.
      * @param data The data of the report.
      */
-    public void generate(String targetPath, String title, Pair<String, String> axisLabels, Pair<Double, Double> dimensions, List<Series<Pair<Number, Number>>> data) {
+    public void generate(String targetPath, String title, Pair<String, String> axisLabels, Pair<Double, Double> dimensions, List<Series<Pair<String, Number>>> data) {
         // Setup the chart data
         ScatterChartGenerator.targetPath = targetPath;
         ScatterChartGenerator.title = title;

@@ -1,23 +1,17 @@
 package com.team5.report.implementations;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.team5.database.DatabaseDriver;
 import com.team5.database.MongoDriver;
-import com.team5.report.charts.BarChartReport;
-import com.team5.report.charts.PieChartReport;
 import com.team5.report.charts.Report;
+import com.team5.report.charts.BarChartReport;
 import com.team5.report.data.Series;
 import com.team5.utilities.ConfigurationLoader;
-import com.team5.utilities.DateUtils;
 import com.team5.utilities.JSONLoader;
-
 import org.javatuples.Pair;
 import org.json.simple.JSONObject;
 
@@ -56,7 +50,7 @@ public class ServiceAccessTrend extends BarChartReport {
             // Get database information
             db_URI = ConfigurationLoader.loadConfiguration("database-URI").get("icare_db_remote").toString();
             db_name = ConfigurationLoader.loadConfiguration("database-names").get("icare-db-name").toString();
-            db_collection = ConfigurationLoader.loadConfiguration("database-collections").get("nars").toString();
+            db_collection = ConfigurationLoader.loadConfiguration("database-collections").get("info-and-orientation").toString();
 
         } catch (Exception e) {
             // Warn if an exception happens while setting up
@@ -91,7 +85,8 @@ public class ServiceAccessTrend extends BarChartReport {
 		return new Pair<String, String>(xAxisLabel, yAxisLabel);
 	}
     
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
 	protected List<Series<Pair<String, Number>>> getPairData() {
     	// Get connection to the database
         DatabaseDriver db = new MongoDriver(db_URI, db_name, db_collection);
@@ -102,28 +97,86 @@ public class ServiceAccessTrend extends BarChartReport {
 
         // Initialize data list
         List<Series<Pair<String, Number>>> data = new ArrayList<>();
-
-        int totalItems = 0;
-        Map<String, Integer> age_to_amount = new HashMap<>();
-        age_to_amount.put("20-24 years", 0);
-        age_to_amount.put("25-29 years", 0);
-        age_to_amount.put("30-34 years", 0);
-        age_to_amount.put("< 20 years", 0);
-        age_to_amount.put("> 34 years", 0);
+        
+        // Initialize List of target groups
+        List<String> targetNames = new ArrayList<>();
+        
+        // Look for target groups in services-received
+        JSONObject targetGroups = (JSONObject) documents.get(0).get("services-received");
+        targetGroups = (JSONObject) targetGroups.get("target-group");
+        targetNames.addAll(targetGroups.keySet()); // Add the names to the list
+        
+        // Initialize data pairings
+        Map<String, Map<String, Integer>> seriesToData = new HashMap<>();
+        
+        // Represent each series of the chart
+        for (String targetName : targetNames) {
+        	Map<String, Integer> serviceToAmount = new HashMap<>();
+        	
+        	// Initialize the x and y value pairs of the chart
+        	serviceToAmount.put("education", 0);
+        	serviceToAmount.put("housing", 0);
+        	serviceToAmount.put("health", 0);
+        	serviceToAmount.put("transportation", 0);
+        	serviceToAmount.put("employment-and-income", 0);
+        	
+        	// Map each target name to the pairings
+        	seriesToData.put(targetName, serviceToAmount);
+        }
 
         // Iterate through each document
         for (JSONObject doc : documents) {
-        	// TODO Go through the document to get the require fields
+        	// Get the value for each target group field
+        	if (doc.containsKey("services-received")) {
+	        	doc = (JSONObject) doc.get("services-received");
+	        	JSONObject targets = (JSONObject) doc.get("target-group");
+	        	
+	        	// Go through each target group and increment their value if they are using the service
+	        	for (String target : targetNames) {
+	        	
+		        	String targetValue = targets.get(target).toString();
+		        	
+		        	// Check if value is required value
+		        	if (targetValue.equalsIgnoreCase("yes")) {
+		        		Map<String, Integer> targetData = seriesToData.get(target);
+		        		// Go through all the services
+		        		for (String service : targetData.keySet()) {
+			        		String serviceField = doc.get(service).toString(); // Get the service field
+			        		
+			        		// Increment the field if the target group has accessed the service
+			        		if (serviceField.equalsIgnoreCase("yes")) {
+			        			int newValue = targetData.get(service) + 1; // Increment
+			        			targetData.replace(service, newValue);
+			        		}
+		        		}
+		        	}
+	        	}
+        	}
         }
 
-        // TODO Add to data list
+        // Plot the value for each service based on the target group
+        for (String targetName : targetNames) {
+        	Series<Pair<String, Number>> targetSeries = new Series<>(targetName, new ArrayList<Pair<String, Number>>());
+        
+        	Map<String, Integer> targetData = seriesToData.get(targetName);
+        	
+		    // Get the x-value (service) and y-value (number of clients) from each mapping pair
+		    for (Map.Entry<String, Integer> entry : targetData.entrySet()) {
+		    	String service = entry.getKey();
+		        Integer amount = new Integer(entry.getValue());
+		
+		        targetSeries.addItem(new Pair<String, Number>(service, amount)); // Plot for the target group in the chart
+		    }
+
+	        data.add(targetSeries); // Add to the data list
+        }
         
         // Return the computed data
         return data;
 	}
 
 	public static void main(String[] args) {
-        Report r = new ClientPopulationSummary();
+        Report r = new ServiceAccessTrend();
 
         r.generate("testFiles/reportTests/ServiceAccessTrend.png");
     }
