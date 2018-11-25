@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.javatuples.Pair;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Side;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -29,9 +30,6 @@ public class PieChartGenerator extends Generator {
         stage.setWidth(dimensions.getValue0());
         stage.setHeight(dimensions.getValue1());;
 
-        // Initialize the scene
-        Scene scene = new Scene(new Group());
-
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
 
         // Populate the pie chart data with the inputted data
@@ -43,8 +41,14 @@ public class PieChartGenerator extends Generator {
         final PieChart chart = new PieChart(pieChartData);
         chart.setTitle(title); // Set the title of the chart 
 
-        // Set the scene to display the pie chart
-        ((Group) scene.getRoot()).getChildren().add(chart);
+        // Anchor the legend to the right
+        chart.setLegendSide(Side.RIGHT);
+
+        // Setup the root
+        StackPane root = new StackPane(chart);
+
+        // Initialize the scene
+        Scene scene = new Scene(root, dimensions.getValue0(), dimensions.getValue1());
 
         // Show the scene
         stage.setScene(scene);
@@ -70,23 +74,12 @@ public class PieChartGenerator extends Generator {
         PieChartGenerator.dimensions = dimensions;
         PieChartGenerator.data = data;
 
-        // Launch the chart
-        launchChart();
+        // Generate the chart
+        super.generate();
     }
 
-    /**
-     * Launches the chart.
-     */
-    private void launchChart() {
-        // If javafx hasn't been run yet
-        if (isInitialized == false) {
-            // Launch the chart
-            launch(new String[0]);
-        } else {
-            // Display the chart from the javafx thread 
-            Platform.runLater(() -> {
-                displayChart();
-            });
-        }
+    @Override
+    protected void launchSelf() {
+        launch(new String[0]);
     }
 }

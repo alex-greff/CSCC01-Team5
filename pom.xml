@@ -144,7 +144,7 @@
 					<execution>
 						<id>uploader-interface-demo</id>
 						<configuration>
-							<mainClass>com.team5.gui_user.UserInterface</mainClass>
+							<mainClass>com.team5.gui.ICarePanel</mainClass>
 						</configuration>
 					</execution>
 					<execution>

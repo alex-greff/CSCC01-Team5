@@ -1,0 +1,8 @@
+{
+    "title":"Client Population Age Summary",
+    "report-name":"Client Population Summary",
+    "report-description":"Displays the age distribution of the clients.",
+    "report-width":800,
+    "report-height":800,
+    "database-collection":"nars"
+}

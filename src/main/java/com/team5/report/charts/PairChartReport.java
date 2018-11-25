@@ -18,5 +18,5 @@ public abstract class PairChartReport<X, Y> extends SeriesChartReport<X, Y> {
      * 
      * @return Returns the pair report data.
      */
-    protected abstract List<Series<Pair<X,Y>>> getPairData();
+    protected abstract List<Series<Pair<X, Y>>> getPairData();
 }

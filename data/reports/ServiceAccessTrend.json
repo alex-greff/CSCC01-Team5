@@ -1,0 +1,11 @@
+{
+    "title":"Service Access Trend Based On Target Groups",
+    "xAxisLabel":"Services",
+    "yAxisLabel":"Number of Clients",
+    "report-name":"Service Access Trend",
+    "report-description":"Displays how much people from each target group are using a specific service",
+    "report-width":800,
+    "report-height":800,
+    "database-collection":"info_and_orientation",
+	"series-name":"Target Groups"
+}
