@@ -51,23 +51,18 @@ public class EventHandler implements ActionListener {
 		try {
 			method = getClass().getDeclaredMethod(command);
 		} catch (NoSuchMethodException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		} catch (SecurityException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		
 		try {
 			method.invoke(this);
 		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IllegalArgumentException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (InvocationTargetException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -100,16 +95,15 @@ public class EventHandler implements ActionListener {
 
 
 	private Class getSelectedReportClass() {
-	String reportClassName = ReportPanel.reportFileNames[ReportPanel.reportDropDownComponent.getSelectedIndex()];
-	String reportClassPath = "com.team5.report.implementations." + FilenameUtils.removeExtension(reportClassName);
+		String reportClassName = ReportPanel.reportFileNames[ReportPanel.reportDropDownComponent.getSelectedIndex()];
+		String reportClassPath = "com.team5.report.implementations." + FilenameUtils.removeExtension(reportClassName);
 		Class reportClass = null;
 		
 		try {
 			reportClass = Class.forName(reportClassPath);
 		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block. Selected report type does not exist
 			noExceptionRaised = false;
-			ReportPanel.feedbackTextFieldComponent.setText("Report type not found");
+			ReportPanel.feedbackTextFieldComponent.setText("Error, report type not found");
 			e1.printStackTrace();
 		}
 		
@@ -120,17 +114,16 @@ public class EventHandler implements ActionListener {
 		Report report = null;
 		try {
 			report = (Report) getSelectedReportClass().newInstance();
+			JOptionPane.showMessageDialog(null, report.getReportDescription());
 		} catch (InstantiationException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
+			ReportPanel.feedbackTextFieldComponent.setText("Unable to show report description, report type not found");
 			e.printStackTrace();
 		}
-		
-		JOptionPane.showMessageDialog(null,
-				report.getReportDescription()
-				);
 	}
 	
 	private void Generate() {
+		ReportPanel.feedbackTextFieldComponent.setText(""); // Clear feedback text field
+
 		Class reportClass = getSelectedReportClass();
 		
 		String reportSaveDirectory = ReportPanel.directoryTextFieldComponent.getText().trim();
@@ -169,7 +162,7 @@ public class EventHandler implements ActionListener {
 
 					@Override
 					public void uncaughtException(Thread t, Throwable e) {
-						ReportPanel.feedbackTextFieldComponent.setText("An error occured");
+						ReportPanel.feedbackTextFieldComponent.setText("An error occured while generating the report.");
 					}
 						
 				});
@@ -179,11 +172,11 @@ public class EventHandler implements ActionListener {
 				t1.start();
 
 			} catch (InstantiationException e1) {
-				// TODO Auto-generated catch block
+				ReportPanel.feedbackTextFieldComponent.setText("Erorr, report not found");
 				noExceptionRaised = false;
 				e1.printStackTrace();
 			} catch (IllegalAccessException e1) {
-				// TODO Auto-generated catch block
+				ReportPanel.feedbackTextFieldComponent.setText("Error, unable to access report file.");
 				noExceptionRaised = false;
 				e1.printStackTrace();
 			}
@@ -207,11 +200,13 @@ public class EventHandler implements ActionListener {
 		String filePath = ICarePanel.directoryTextFieldComponent.getText(); // Inputted filepath to ICare file TODO: check that the file is actually an ICare file
 		String selectedTemplateType = ICarePanel.templateFileNames[ICarePanel.templateDropDownComponent.getSelectedIndex()]; // Selected template type
 		JTextArea feedbackTextField = ICarePanel.feedbackTextFieldComponent; // Component for inserting feedback
+
+		feedbackTextField.setText(""); // Reset the feedback text field
 		
 		ArrayList<JSONObject> parsedFile = null;
 		
 		if(!new File(filePath).exists()) {
-			ICarePanel.feedbackTextFieldComponent.setText("File does not exist");
+			feedbackTextField.setText("Error, File does not exist");
 			return;
 		}
 		
@@ -219,18 +214,19 @@ public class EventHandler implements ActionListener {
 		try {
 			parsedFile = TemplateParser.GetJsonArray(filePath, selectedTemplateType, "iCare-template-system");
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+			feedbackTextField.setText("Unable to upload file, an IO exception occured.");
 			noExceptionRaised = false;
 			e1.printStackTrace();
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			feedbackTextField.setText("Unable to upload file, the excel file is invalid and cannot be parsed.");
 			noExceptionRaised = false;
 			e1.printStackTrace();
 		} catch (ConfigurationNotFoundException e1) {
-			// TODO Auto-generated catch block
+			feedbackTextField.setText("Unable to upload file, a configuration file is missing.");
 			noExceptionRaised = false;
 			e1.printStackTrace();
 		} catch (MissingFieldException e1) {
+			// Get all the missing fields and format them into a readable string
 			String Missing = "";
 			ArrayList<JSONObject> missingarray = e1.getMissingField();
 			for (int i = 0; i < missingarray.size(); i++) {
@@ -239,16 +235,14 @@ public class EventHandler implements ActionListener {
 					String nestedkey = (String) nestediterator.next();
 					Missing = Missing + ", " + inputobject.get(nestedkey);
 				}
-				
-				
 			}
 		
-			feedbackTextField.setText(String.format("The following required items are missing: %s", Missing));
+			// Display the missing fields
+			feedbackTextField.setText(String.format("Error, The following required items are missing: %s", Missing));
 			noExceptionRaised = false;
 			e1.printStackTrace();
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			System.out.println("RANDOM!");
+			feedbackTextField.setText("Unable to upload file, an internal error occurrred");
 			noExceptionRaised = false;
 			e1.printStackTrace();
 		}
@@ -260,17 +254,15 @@ public class EventHandler implements ActionListener {
 				db = new MongoDriver(ConfigurationLoader.loadConfiguration("database-URI").get("icare_db_remote").toString(),
 						"icare_db", FilenameUtils.removeExtension(selectedTemplateType));
 			} catch (ConfigurationNotFoundException e1) {
-				// TODO Auto-generated catch block
+				feedbackTextField.setText("Unable to connect to the database, a configuration file is missing.");
 				noExceptionRaised = false;
 				e1.printStackTrace();
 			} catch (MongoClientException e1) {
-				// TODO Auto-generated catch block
-				System.out.println("MONGO");
+				feedbackTextField.setText("Unable to connect to the database, an exception occured while attempting to connect.");
 				noExceptionRaised = false;
 				e1.printStackTrace();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				System.out.println("RANDOM!");
+				feedbackTextField.setText("Unable to connect to the database, an internal error occurred.");
 				noExceptionRaised = false;
 				e1.printStackTrace();
 			}
@@ -281,13 +273,12 @@ public class EventHandler implements ActionListener {
 				// Insert parsed file into database
 				db.insertMany(parsedFile);
 				db.closeConnection();
-				ICarePanel.feedbackTextFieldComponent.setText(filePath + " ICare file successfully uploaded");
+				feedbackTextField.setText(filePath + " ICare file successfully uploaded");
 			}catch (MongoTimeoutException e1) {
-				// TODO Auto-generated catch block
-				System.out.println("CAN'T CONNECT!");
-					noExceptionRaised = false;
-					e1.printStackTrace();
-				}
+				feedbackTextField.setText("Unable to connect to the database, connection timed out.");
+				noExceptionRaised = false;
+				e1.printStackTrace();
 			}
 		}
+	}
 }
