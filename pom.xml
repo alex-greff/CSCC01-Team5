@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+	<modelVersion>${model.version}</modelVersion>
 
-	<groupId>com.team5.driver</groupId>
-	<artifactId>CSCC01-team5</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<groupId>${team-id}</groupId>
+	<artifactId>${team-name}</artifactId>
+	<version>${project-version}</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
 
+		<!-- Project properties -->
+		<team-id>com.team5</team-id>
+		<project-version>1.0-SNAPSHOT</project-version>
+		<team-name>CSCC01-team5</team-name>
+
+		<!-- Model version -->
+		<model.version>4.0.0</model.version>
+
+		<!-- Dependency and plugin versions -->
+		<jdk.version>1.8</jdk.version>
 		<junit.jupiter.version>5.2.0</junit.jupiter.version>
 		<junit.platform.version>1.2.0</junit.platform.version>
 		<apache.poi.version>3.7</apache.poi.version>
@@ -19,6 +27,9 @@
 		<apache-commons-io-version>2.6</apache-commons-io-version>
 		<mongo-java-driver-version>3.4.3</mongo-java-driver-version>
 		<javatuples-version>1.2</javatuples-version>
+		<maven-surefire-plugin-version>2.22.0</maven-surefire-plugin-version>
+		<maven-compiler-plugin-version>2.3.2</maven-compiler-plugin-version>
+		<maven-assembly-plugin-version>2.4.1</maven-assembly-plugin-version>
 	</properties>
 
 	<dependencies>
@@ -44,12 +55,6 @@
 
 		<!-- Apache POI -->
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>4.0.0</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
@@ -99,6 +104,8 @@
 	</dependencies>
 
 	<build>
+		<finalName>${team-name}</finalName>
+
 		<plugins>
 			<!-- Maven Exec Plugin -->
 			<plugin>
@@ -114,11 +121,18 @@
 					<execution>
 						<id>default-cli</id>
 						<configuration>
-							<mainClass>com.team5.gui.AdminPanel</mainClass>
+							<mainClass>com.team5.driver.Driver</mainClass>
 						</configuration>
 					</execution>
 
 					<!-- Entry points -->
+					<execution>
+						<id>driver</id>
+						<configuration>
+							<mainClass>com.team5.driver.Driver</mainClass>
+						</configuration>
+					</execution>
+
 					<execution>
 						<id>admin-panel</id>
 						<configuration>
@@ -172,17 +186,59 @@
 						</configuration>
 					</execution>
 				</executions>
-				<!-- <configuration>
-					<mainClass>com.team5.driver.Driver</mainClass>
-				</configuration> -->
 			</plugin>
 
 			<!-- JUnit 5 requires Surefire version 2.22.0 or higher -->
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.0</version>
+				<version>${maven-surefire-plugin-version}</version>
 			</plugin>
+
+			<!-- Set a compiler level -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin-version}</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+
+			<!-- Maven Assembly Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${maven-assembly-plugin-version}</version>
+
+				<configuration>
+					<!-- get all project dependencies -->
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<!-- MainClass in mainfest make a executable jar -->
+					<archive>
+					  <manifest>
+						<mainClass>com.team5.driver.Driver</mainClass>
+					  </manifest>
+					</archive>
+				</configuration>
+
+				<executions>
+				  <execution>
+					<id>make-assembly</id>
+                    <!-- bind to the packaging phase -->
+					<phase>package</phase> 
+					<goals>
+						<goal>single</goal>
+					</goals>
+				  </execution>
+				</executions>
+
+			</plugin>
+
 		</plugins>
+
 	</build>
 
 </project>
