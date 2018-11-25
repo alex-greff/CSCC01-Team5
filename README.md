@@ -22,6 +22,8 @@
   - [Sprint 2](#Sprint-2)
   - [Sprint 3](#Sprint-3)
   - [Sprint 4](#Sprint-4)
+  - [Sprint 5](#Sprint-5)
+  - [Sprint 6](#Sprint-6)
 - [Deliverables](#Deliverables)
   - [Deliverable 1: Team Setup](#Deliverable-1:-Team-Setup)
   - [Deliverable 2: Project Requirements](#Deliverable-2:-Project-Requirements)
@@ -130,6 +132,12 @@ Run these commands from the project root:
 ### Sprint 4
 * [Sprint 4 Report](sprint_backlog/sprint4/sprint4_report.pdf)
 
+### Sprint 5
+* [Sprint 5 Report](sprint_backlog/sprint5/sprint5_report.pdf)
+
+### Sprint 6
+* [Sprint 6 Report](sprint_backlog/sprint6/sprint6_report.pdf)
+
 ## Deliverables
 
 ### Deliverable 1: Team Setup
@@ -165,9 +173,11 @@ Click [here](#System-Demos) for instructions on running the demos.
 
 #### Deliverables
 * [Acceptance Tests](acceptance_tests/v1/acceptance_tests.pdf)
-* [Code Review Report](code_reviews/code_review_1/code_review_report.pdf)
-* [Code Review Debriefing Meeting](https://youtu.be/ttGEu-ViChk)
+* [Code Review 1 Report](code_reviews/code_review_1/code_review_1_report.pdf)
+* [Code Review 1 Debriefing Meeting](https://youtu.be/ttGEu-ViChk)
 
 
 ### Deliverable 5: Final Deliverable
-(In-Progress...)
+* [Sprint 5](#Sprint-5)
+* [Sprint 6](#Sprint-6)
+* [Code Review 2 Report](code_reviews/code_review_2/code_review_2_report.pdf)

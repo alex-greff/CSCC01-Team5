@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class GUIManager extends JFrame {
 	
+	
 	final static String ADMIN = "Admin";
 	final static String ICARE = "Upload iCare File";
 	final static String REPORT = "Generate Report";
@@ -27,7 +28,7 @@ public class GUIManager extends JFrame {
 	public GUIManager(String title) {
 		super(title);
 		int size = SuperPanel.defaultSize*30;
-		setSize(size, size);
+		setSize(size, size/2);
 		setResizable(false);
 		setLocationRelativeTo(null); // Starts interface at center of screen
 		
