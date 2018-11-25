@@ -85,7 +85,6 @@ public class ServiceAccessTrend extends BarChartReport {
 		return new Pair<String, String>(xAxisLabel, yAxisLabel);
 	}
     
-    @SuppressWarnings("unchecked")
 	@Override
 	protected List<Series<Pair<String, Number>>> getPairData() {
     	// Get connection to the database
@@ -100,11 +99,13 @@ public class ServiceAccessTrend extends BarChartReport {
         
         // Initialize List of target groups
         List<String> targetNames = new ArrayList<>();
-        
-        // Look for target groups in services-received
-        JSONObject targetGroups = (JSONObject) documents.get(0).get("services-received");
-        targetGroups = (JSONObject) targetGroups.get("target-group");
-        targetNames.addAll(targetGroups.keySet()); // Add the names to the list
+        // Add required target groups to list of target group names
+        targetNames.add("refugees");
+        targetNames.add("seniors");
+        targetNames.add("lgbtq");
+        targetNames.add("youth");
+        targetNames.add("children");
+        targetNames.add("deaf-or-hard-of-hearing");
         
         // Initialize data pairings
         Map<String, Map<String, Integer>> seriesToData = new HashMap<>();
